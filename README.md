@@ -1,1 +1,1 @@
-# greatthoughtstreasury.com
+# Greatthoughtstreasury.com

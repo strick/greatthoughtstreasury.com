@@ -3,7 +3,28 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('You are at the authors listing');
+
+  var authors = [
+    {
+      firstName: "Bob",
+      lastName: "White",
+      birth: "1999",
+      death: "1993",
+      bio: "This is a bio"
+    },
+    {
+      firstName: "Bob232",
+      lastName: "White",
+      birth: "1999",
+      death: "1993",
+      bio: "This is a biodddd"
+    },
+  ];
+
+  res.render('authors/index', { 
+    title: 'Author Listing',
+    authors: authors
+  });
 });
 
 module.exports = router;

@@ -1,3 +1,8 @@
+const dotenv = require('dotenv');
+dotenv.config(); 
+
+console.log(process.env);
+
 var url = `${process.env.DBHOST}/${process.env.DBNAME}`;
   
   // create a client to mongodb

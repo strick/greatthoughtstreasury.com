@@ -1,3 +1,5 @@
+*.migrate
+
 # Logs
 logs
 *.log

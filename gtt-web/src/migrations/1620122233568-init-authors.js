@@ -17,17 +17,7 @@ module.exports.up = next => {
 
       console.log("Switched to "+db.databaseName+" database");      
 
-      return db.createCollection("authors")
-      .then(collection => {
-
-        let authors = [
-          { firstName: "Abaye", bio: "Rabbi of the Jewish Talmu", death: 339, image: "abaye[1].gif", nid: 186690},
-          { firstName: "Francis", lastName: "Ellington", bio: "Abbot	Theologian, Unitarian Minister", birth: 1836, death: 1903, nid: 186691},
-          { firstName: "John", lastName: "Abbott, fully John Stevens Cabot Abbott", bio: "American Historian, Pastor and Pedagogical Writer", birth: 1805, death: 1877, image: "JohnStevens-CabotAbbott-68-s[1].jpg", nid: 186692},
-        ];
-
-        return db.collection("authors").insertMany(authors);
-      })
+      return db.createCollection("authors")      
       .then(() => {
          
         console.log("Collection is created!");

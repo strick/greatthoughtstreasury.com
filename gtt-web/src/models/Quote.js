@@ -2,9 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const quoteSchema = new Schema({
-    quote: String,
-    author: Number,  
-    id: Number
+    quote: {
+        type: String,
+        required: true
+    },
+    authorId: {
+        type: Schema.Types.ObjectId,
+        required: true
+    }
 });
 
-module.exports = mongoose.model('Quote', quoteSchema);
+module.exports = mongoose.model('Quote', quoteSchema, 'quotes');

@@ -12,8 +12,11 @@ services:
     image: gtt-web
     build: 
       context: ./gtt-web
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-dev
     container_name: gtt-web
+    volumes: 
+        - /tmp/gtt-web/npm-cache:/root/.npm:z
+        - ./gtt-web/src:/usr/src/app/src:z
     ports:
      - "3000:80"
     environment:

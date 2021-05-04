@@ -18,10 +18,12 @@ module.exports = {
         });
     },
 
-    getById: function (req, res, next) {
-        Author.findById(req.params.id, function (err, author) {
+    getByNid: function (req, res, next) {
+        db.connect();
+        Author.findOne({nid: req.params.id}, function (err, author) {
             if (err)
                 return next(err);
+            db.close();
 
             res.render('authors/single', { 
                 title: 'Author',

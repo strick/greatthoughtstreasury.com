@@ -20,7 +20,7 @@ module.exports = {
 
     getByNid: function (req, res, next) {
         db.connect();
-        Author.findOne({nid: req.params.id}, function (err, author) {
+        Author.findOne({_id: req.params.id}, function (err, author) {
             if (err)
                 return next(err);
             db.close();

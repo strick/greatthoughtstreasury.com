@@ -1,0 +1,9 @@
+{
+  "lastRun": "1620122233568-init-authors.js",
+  "migrations": [
+    {
+      "title": "1620122233568-init-authors.js",
+      "timestamp": 1620122665816
+    }
+  ]
+}

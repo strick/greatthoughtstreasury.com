@@ -22,7 +22,11 @@ module.exports = {
         Author.findById(req.params.id, function (err, author) {
             if (err)
                 return next(err);
-            res.json(author)
+
+            res.render('authors/single', { 
+                title: 'Author',
+                author: author
+            });
         });
     }
 }

@@ -4,18 +4,6 @@ var router = express.Router();
 
 
 router.route('/').get(controller.listAll);
-
-
-router.get('/:id', function(req, res, next) {
-
-  let id = req.params.id;
-
-  let author = authors.find(author => author.id == id);
-
-  res.render('authors/single', { 
-    title: 'Author',
-    author: author
-  });
-});
+router.route('/:id').get(controller.listAll);
 
 module.exports = router;

@@ -1,11 +1,16 @@
 
-<h1><%= title %></h1>
-<p>Welcome to Authors Listing</p>
+<div class="col-lg-12"><h1>Author Listing</h1></div>
 <% authors.forEach(function(author){ %>
-    <div class="row">
-        <div class="col-lg">
-        <h3><%= author.firstName %> <%= author.lastName %> (<%= author.birth - author.death %></h3>
-        <p><%= author.bio %></p>
-        </div>         
-    </div>
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+          <div class="card-body">
+            <h4 class="card-title"><%= author.firstName %> <%= author.lastName %></h4>            
+            <p class="card-text"><%= author.bio %></p>
+          </div>
+          <div class="card-footer">
+            <a href="/authors/<%= author.id %>" class="btn btn-primary">View Quotes</a>
+          </div>
+        </div>
+      </div> 
     <% }) %>

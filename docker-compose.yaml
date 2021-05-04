@@ -18,7 +18,7 @@ services:
      - "3000:80"
     environment:
       - PORT=80
-      - DBHOST=mongodb://db:27017
+      - DBHOST=mongodb://gtt-db:27017
       - DBNAME=gtt
     depends_on:
       - gtt-db

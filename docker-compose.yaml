@@ -1,0 +1,28 @@
+version: '3'
+services:
+
+  gtt-db:
+    image: mongo:4.2.8
+    container_name: gtt-db
+    ports:
+     - "3001:27017"
+    restart: always
+
+  gtt-web:
+    image: gtt-web
+    build: 
+      context: ./gtt-web
+      dockerfile: Dockerfile-dev
+    container_name: gtt-web
+    volumes: 
+        - /tmp/gtt-web/npm-cache:/root/.npm:z
+        - ./gtt-web/src:/usr/src/app/src:z
+    ports:
+     - "3000:80"
+    environment:
+      - PORT=80
+      - DBHOST=mongodb://gtt-db:27017
+      - DBNAME=gtt
+    depends_on:
+      - gtt-db
+    restart: "no"

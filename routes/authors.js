@@ -20,12 +20,24 @@ var authors = [
   },
 ];
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
 
   res.render('authors/index', { 
     title: 'Author Listing',
     authors: authors
+  });
+});
+
+
+router.get('/:id', function(req, res, next) {
+
+  let id = req.params.id;
+
+  let author = authors.find(author => author.id == id);
+
+  res.render('authors/single', { 
+    title: 'Author',
+    author: author
   });
 });
 

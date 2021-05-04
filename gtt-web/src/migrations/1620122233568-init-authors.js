@@ -1,8 +1,6 @@
 const dotenv = require('dotenv');
 dotenv.config(); 
 
-console.log(process.env);
-
 var url = `${process.env.DBHOST}/${process.env.DBNAME}`;
   
   // create a client to mongodb
@@ -23,8 +21,8 @@ module.exports.up = next => {
       .then(collection => {
 
         let authors = [
-          { firstName: "Abaye", lastName: NULL, bio: "Rabbi of the Jewish Talmu", birth: NULL, death: 339, image: "abaye[1].gif", nid: 186690},
-          { firstName: "Francis", lastName: "Ellington", bio: "Abbot	Theologian, Unitarian Minister", birth: 1836, death: 1903, image: NULL, nid: 186691},
+          { firstName: "Abaye", bio: "Rabbi of the Jewish Talmu", death: 339, image: "abaye[1].gif", nid: 186690},
+          { firstName: "Francis", lastName: "Ellington", bio: "Abbot	Theologian, Unitarian Minister", birth: 1836, death: 1903, nid: 186691},
           { firstName: "John", lastName: "Abbott, fully John Stevens Cabot Abbott", bio: "American Historian, Pastor and Pedagogical Writer", birth: 1805, death: 1877, image: "JohnStevens-CabotAbbott-68-s[1].jpg", nid: 186692},
         ];
 

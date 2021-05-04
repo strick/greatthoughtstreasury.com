@@ -21,7 +21,7 @@ module.exports.up = function (next) {
     .then(results => {
       console.log("Added Authors... Attaching quotes...");      
 
-      console.log(results);
+      //console.log(results);
 
       let quotes = [
         {authorId: results[0]._id, quote: 'A mind conscious of integrity scorns to say more than it means to perform'},

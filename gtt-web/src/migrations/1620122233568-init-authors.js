@@ -14,13 +14,10 @@ module.exports.up = next => {
     .then(client => {
       
       let db = client.db();
-
-      console.log("Switched to "+db.databaseName+" database");      
-
       return db.createCollection("authors")      
       .then(() => {
          
-        console.log("Collection is created!");
+        console.log("authors collection is created!");
         client.close();
 
       });
@@ -42,13 +39,10 @@ module.exports.down = next => {
       
       let db = client.db();
 
-      // db pointing to newdb
-      console.log("Switched to "+db.databaseName+" database");
-
       // create 'users' collection in newdb database
       return db.dropCollection("authors")
       .then(() => {
-        console.log("Collection is Deleted!");
+        console.log("authors collection is deleted!");
         client.close();
       });
 s            

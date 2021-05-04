@@ -1,32 +1,9 @@
 var express = require('express');
+var controller = require('../controllers/author');
 var router = express.Router();
 
-var authors = [
-  {
-    id: 1,
-    firstName: "Bob",
-    lastName: "White",
-    birth: "1999",
-    death: "1993",
-    bio: "This is a bio"
-  },
-  {
-    id: 2,
-    firstName: "Bob232",
-    lastName: "White",
-    birth: "1999",
-    death: "1993",
-    bio: "This is a biodddd"
-  },
-];
 
-router.get('/', function(req, res, next) {
-
-  res.render('authors/index', { 
-    title: 'Author Listing',
-    authors: authors
-  });
-});
+router.route('/').get(controller.listAll);
 
 
 router.get('/:id', function(req, res, next) {

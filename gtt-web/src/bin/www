@@ -29,13 +29,6 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-/**
- * Connect to DB
- */
-// Include mongoose in the server file
-const mongoose = require('mongoose');
-const db = `${process.env.DBHOST}/${process.env.DBNAME}`;
-mongoose.connect(db, {useNewUrlParser: true });
 
 /**
  * Normalize a port into a number, string, or false.

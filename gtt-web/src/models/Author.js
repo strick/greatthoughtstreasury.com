@@ -8,7 +8,7 @@ const authorSchema = new Schema({
     birth: String,
     death: String,
     image: String,
-    nid: Int
+    nid: Number
 });
 
-const Author = mongoose.model('Author', authorSchema);
+module.exports = mongoose.model('Author', authorSchema);

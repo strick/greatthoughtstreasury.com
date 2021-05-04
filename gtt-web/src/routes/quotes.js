@@ -1,5 +1,5 @@
 var express = require('express');
-var controller = require('../controllers/author');
+var controller = require('../controllers/quote');
 var router = express.Router();
 
 

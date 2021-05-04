@@ -1,18 +1,18 @@
-var Author = require('../models/Author');
+var Quote = require('../models/Quote');
 var db = require('../db');
 
 module.exports = {
     
     listAll: function (req, res, next) {
         db.connect();
-        Author.find({}, function (err, authors) {
+        Quote.find({}, function (err, quotes) {
             if (err)
                 return next(err);
             db.close();
              
-            res.render('authors/index', { 
-                title: 'Author Listing',
-                authors: authors
+            res.render('quotes/index', { 
+                title: 'Quote Listing',
+                quotes: quotes
             });
 
         });
@@ -20,14 +20,14 @@ module.exports = {
 
     getByNid: function (req, res, next) {
         db.connect();
-        Author.findOne({nid: req.params.id}, function (err, author) {
+        Quote.findOne({nid: req.params.id}, function (err, quote) {
             if (err)
                 return next(err);
             db.close();
 
-            res.render('authors/single', { 
-                title: 'Author',
-                author: author
+            res.render('quotes/single', { 
+                title: 'Quote',
+                quote: quote
             });
         });
     }

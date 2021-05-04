@@ -9,4 +9,4 @@ RUN npm install
 
 COPY ./src ./src
 
-CMD npm start:dev
+CMD npm run start:dev

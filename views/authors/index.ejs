@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to Authors Listing</p>
-        <% authors.forEach(function(author){ %>
-            <div class="row">
-                <div class="col-lg">
-                <h3><%= author.firstName %> <%= author.lastName %> (<%= author.birth - author.death %></h3>
-                <p><%= author.bio %></p>
-                </div>         
-            </div>
-          <% }) %>
-        </div>
-  </body>
-</html>
+
+<h1><%= title %></h1>
+<p>Welcome to Authors Listing</p>
+<% authors.forEach(function(author){ %>
+    <div class="row">
+        <div class="col-lg">
+        <h3><%= author.firstName %> <%= author.lastName %> (<%= author.birth - author.death %></h3>
+        <p><%= author.bio %></p>
+        </div>         
+    </div>
+    <% }) %>

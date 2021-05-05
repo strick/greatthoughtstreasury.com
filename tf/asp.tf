@@ -26,7 +26,7 @@ resource "null_resource" "docker_build" {
     }
 
     provisioner "local-exec" {
-        command = "docker build ${local.image_tag} --file ../${local.service_name}/Dockerfile-prod ../${local.service_name}"
+        command = "docker build -t ${local.image_tag} --file ../${local.service_name}/Dockerfile-prod ../${local.service_name}"
     }
 }
 

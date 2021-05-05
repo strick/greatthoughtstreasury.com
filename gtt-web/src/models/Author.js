@@ -8,7 +8,18 @@ const authorSchema = new Schema({
     birth: String,
     death: String,
     image: String,
-    nid: Number
+    nid: Number,
+    quotes: [{type: mongoose.Schema.Types.ObjectId, ref: 'Quote'}]
 });
 
-module.exports = mongoose.model('Author', authorSchema);
+/*
+// https://mongoosejs.com/docs/populate.html#populate-virtuals
+authorSchema.virtual('quotes', {
+    ref: 'Quote',
+    localField: '_id',
+    foreignField: 'authorId',
+    justOne: false
+})
+*/
+
+module.exports = mongoose.model('Author', authorSchema, "authors");

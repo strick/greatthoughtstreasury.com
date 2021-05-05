@@ -1,4 +1,5 @@
 var Author = require('../models/Author');
+var Quote = require('../models/Quote');
 var db = require('../db');
 
 module.exports = {
@@ -20,10 +21,20 @@ module.exports = {
 
     getByNid: function (req, res, next) {
         db.connect();
-        Author.findOne({nid: req.params.id}, function (err, author) {
+
+        
+        Author.findOne({_id: req.params.id}).
+            populate({
+                path: 'quotes',
+                model: 'Quote'
+            }).
+            exec(function (err, author) {
             if (err)
                 return next(err);
-            db.close();
+               
+           // console.log(author);
+
+           db.close();
 
             res.render('authors/single', { 
                 title: 'Author',

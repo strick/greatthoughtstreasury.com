@@ -14,10 +14,11 @@ module.exports.up = next => {
     .then(client => {
       
       let db = client.db();
-      return db.createCollection("authors")      
+      
+      return db.createCollection("quotes")
       .then(() => {
          
-        console.log("authors collection is created!");
+        console.log("quotes collection is created!");
         client.close();
 
       });
@@ -40,9 +41,9 @@ module.exports.down = next => {
       let db = client.db();
 
       // create 'users' collection in newdb database
-      return db.dropCollection("authors")
+      return db.dropCollection("quotes")
       .then(() => {
-        console.log("authors collection is deleted!");
+        console.log("quotes collection is Deleted!");
         client.close();
       });
 s            

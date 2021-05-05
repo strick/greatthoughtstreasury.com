@@ -24,8 +24,8 @@ resource "azurerm_app_service" "asp" {
 
   app_settings = {
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false",
-    "DOCKER_REGISTRY_SERVER_USERNAME" = var.docker_registry_username,
-    "DOCKER_REGISTRY_SERVER_URL" = var.docker_registry_url,
-    "DOCKER_REGISTRY_SERVER_PASSWORD" = var.docker_registry_password
+    "DOCKER_REGISTRY_SERVER_USERNAME" = azurerm_container_registry.container_registry.admin_username,
+    "DOCKER_REGISTRY_SERVER_URL" = azurerm_container_registry.container_registry.login_server,
+    "DOCKER_REGISTRY_SERVER_PASSWORD" = azurerm_container_registry.container_registry.admin_password
   }
 }

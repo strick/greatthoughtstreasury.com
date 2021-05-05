@@ -9,7 +9,7 @@ services:
     restart: always
 
   gtt-web:
-    image: greatthoughtstreasury.azurecr.io/gtt-web
+    image: greatthoughtstreasury.azurecr.io/gtt-web:latest
     build: 
       context: ./gtt-web
       dockerfile: Dockerfile-prod

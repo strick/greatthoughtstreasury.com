@@ -10,6 +10,9 @@ variable admin_username {
   default = "linux_admin"
 }
 
+variable app_version { # Can't be called version! That's a reserved word.
+}
+
 #variable "docker_registry_password" {
   
 #}

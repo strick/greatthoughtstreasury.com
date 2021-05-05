@@ -1,0 +1,29 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+variables:
+  #VERSION: 1.0.11
+  Version.MajorMinor: 1.0
+  Version.Revision: $[counter(variables['Version.MajorMinor'], 12)]
+  VERSION: $(Version.MajorMinor).$(Version.Revision)
+
+steps:
+- task: DockerInstaller@0
+  inputs:
+    dockerVersion: '20.10.5'
+  displayName: 'Install Docker'  
+
+- task: TerraformInstaller@0
+  inputs:
+    terraformVersion: '0.15.1'
+  displayName: 'Install Terraform'
+- task: Bash@3
+  displayName: 'Bash Script'
+  inputs:
+    targetType: filePath
+    filePath: ./scripts/deploy.sh

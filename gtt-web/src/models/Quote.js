@@ -7,8 +7,9 @@ const quoteSchema = new Schema({
         required: true
     },
     authorId: {
-        type: Schema.Types.ObjectId,
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Author'
     }
 });
 

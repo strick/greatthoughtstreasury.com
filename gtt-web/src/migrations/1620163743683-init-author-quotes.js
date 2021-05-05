@@ -3,7 +3,7 @@
 const Author = require('../models/Author');
 var Quote = require('../models/Quote');
 var db = require('../db');
-
+var t = 1;
   // create a client to mongodb
 var MongoClient = require('mongodb').MongoClient;
 
@@ -33,13 +33,27 @@ module.exports.up = function (next) {
         {authorId: results[2]._id, quote: "Temperance is a bridle of gold."}
       ];
 
-      return Quote.insertMany(quotes);
-    })    
+      return Quote.insertMany(quotes).
+      then(results => {
+
+        return Promise.all((results).map(function(quote) {
+
+            return Author.findOne({_id: quote.authorId}, function(err, author){
+                author.quotes.push(quote._id);
+                author.save();
+              
+            })
+        }))
+      
+    })
+
     .catch(err => {
       console.error(err);
     });
 
-  next()
+    db.close();
+    next()
+})
 }
 
 function _buildAuthor(authorObj)

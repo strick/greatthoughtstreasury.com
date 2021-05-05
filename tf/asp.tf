@@ -4,6 +4,7 @@ locals {
     username = azurerm_container_registry.container_registry.admin_username
     password = azurerm_container_registry.container_registry.admin_password
     image_tag = "${local.login_server}/${local.service_name}:${var.app_version}"
+    latest_image_tag = "${local.login_server}/${local.service_name}:latest"
 }
 
 resource "azurerm_app_service_plan" "asp" {
@@ -19,14 +20,28 @@ resource "azurerm_app_service_plan" "asp" {
  }
 }
 
-resource "null_resource" "docker_build" {
+resource "null_resource" "docker_build_latest" {
 
     triggers = {
         always_run = timestamp()
     }
 
     provisioner "local-exec" {
-        command = "docker build ${local.image_tag} --file ../${local.service_name}/Dockerfile-prod ../${local.service_name}"
+        command = "docker build -t ${local.latest_image_tag} --file ../${local.service_name}/Dockerfile-prod ../${local.service_name}"
+    }
+}
+
+
+resource "null_resource" "docker_build" {
+
+    depends_on = [ null_resource.docker_build_latest ]
+
+    triggers = {
+        always_run = timestamp()
+    }
+
+    provisioner "local-exec" {
+        command = "docker build -t ${local.image_tag} --file ../${local.service_name}/Dockerfile-prod ../${local.service_name}"
     }
 }
 
@@ -53,6 +68,19 @@ resource "null_resource" "docker_push" {
 
     provisioner "local-exec" {
         command = "docker push ${local.image_tag}"
+    }
+}
+
+resource "null_resource" "docker_push_latest" {
+
+    depends_on = [ null_resource.docker_login ]
+
+    triggers = {
+        always_run = timestamp()
+    }
+
+    provisioner "local-exec" {
+        command = "docker push ${local.latest_image_tag}"
     }
 }
 

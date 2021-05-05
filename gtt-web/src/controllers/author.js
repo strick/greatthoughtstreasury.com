@@ -32,7 +32,7 @@ module.exports = {
             if (err)
                 return next(err);
                
-            console.log(author);
+           // console.log(author);
 
            db.close();
 

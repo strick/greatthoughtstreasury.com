@@ -9,10 +9,10 @@ services:
     restart: always
 
   gtt-web:
-    image: gtt-web
+    image: greatthoughtstreasury.azurecr.io/gtt-web
     build: 
       context: ./gtt-web
-      dockerfile: Dockerfile-dev
+      dockerfile: Dockerfile-prod
     container_name: gtt-web
     volumes: 
         - /tmp/gtt-web/npm-cache:/root/.npm:z

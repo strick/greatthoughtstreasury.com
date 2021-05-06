@@ -7,7 +7,6 @@ trigger:
 - main
 
 variables:
-  #VERSION: 1.0.11
   Version.MajorMinor: 1.0
   Version.Revision: $[counter(variables['Version.MajorMinor'], 12)]
   VERSION: $(Version.MajorMinor).$(Version.Revision)
@@ -22,7 +21,7 @@ steps:
   inputs:
     terraformVersion: '0.15.1'
   displayName: 'Install Terraform'
-  
+
 - task: Bash@3
   displayName: 'terrafrom apply'
   inputs:

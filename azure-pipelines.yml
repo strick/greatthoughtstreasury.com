@@ -23,7 +23,13 @@ steps:
     terraformVersion: '0.15.1'
   displayName: 'Install Terraform'
 - task: Bash@3
-  displayName: 'Bash Script'
+  displayName: 'terrafrom apply'
   inputs:
     targetType: filePath
     filePath: ./scripts/deploy.sh
+
+- task: Bash@3
+  displayName: 'migrate up'
+  inputs:
+    targetType: filePath
+    filePath: ./scripts/migrate.sh

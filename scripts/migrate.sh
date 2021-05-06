@@ -1,4 +1,4 @@
 echo "Running the migration scripts"
 
-cd src/migration
-mirgrate up
+cd ../src/migration
+migrate up

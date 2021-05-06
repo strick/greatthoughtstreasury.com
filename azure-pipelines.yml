@@ -22,6 +22,7 @@ steps:
   inputs:
     terraformVersion: '0.15.1'
   displayName: 'Install Terraform'
+  
 - task: Bash@3
   displayName: 'terrafrom apply'
   inputs:

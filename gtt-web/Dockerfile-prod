@@ -8,4 +8,8 @@ RUN npm install --only=production
 
 COPY ./src ./src
 
-CMD npm start
+RUN npm install -g migrate
+CMD cd src && \
+    migrate down && \
+    migrate up && \
+    npm start 

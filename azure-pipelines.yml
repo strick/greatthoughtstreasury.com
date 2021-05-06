@@ -27,9 +27,3 @@ steps:
   inputs:
     targetType: filePath
     filePath: ./scripts/deploy.sh
-
-- task: Bash@3
-  displayName: 'migrate up'
-  inputs:
-    targetType: filePath
-    filePath: ./scripts/migrate.sh

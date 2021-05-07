@@ -2,7 +2,7 @@ version: '3'
 services:
 
   gtt-db:
-    image: mongo:4.2.8
+    image: mongo:MY_VERSION.2.8
     container_name: gtt-db
     volumes: 
       - mongodb:/mount/mongdb
@@ -12,7 +12,7 @@ services:
     restart: always
 
   gtt-web:
-    image: "greatthoughtstreasury.azurecr.io/gtt-web:MY_VERSION"   # MY_VERION is replaced in terraform asp.tf script
+    image: "greatthoughtstreasury.azurecr.io/gtt-web:"   # MY_VERION is replaced in terraform asp.tf script
     #image: "greatthoughtstreasury.azurecr.io/gtt-web:latest"
     build: 
       context: ./gtt-web

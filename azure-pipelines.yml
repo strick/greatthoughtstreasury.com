@@ -16,6 +16,9 @@ steps:
   inputs:
     dockerVersion: '20.10.5'
   displayName: 'Install Docker'  
+- task: Docker@2
+  inputs:
+    command: 'login'
 
 - task: TerraformInstaller@0
   inputs:

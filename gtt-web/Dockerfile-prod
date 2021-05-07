@@ -10,6 +10,6 @@ COPY ./src ./src
 
 RUN npm install -g migrate
 CMD cd src && \
-    migrate down && \
+#    migrate down && \
     migrate up && \
     npm start 

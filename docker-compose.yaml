@@ -37,5 +37,6 @@ volumes:
     driver: azure_file
     driver_opts:
      share_name: GTT_FS_SHARE
-     accountname: GTT_FS_ACCOUNT
-      accountkey: GTT_FS_KEYe
+     storage_account_name: GTT_FS_ACCOUNT
+     #accountname: GTT_FS_ACCOUNT
+     #accountkey: GTT_FS_KEYe

@@ -94,7 +94,7 @@ resource "azurerm_app_service" "asp" {
   app_service_plan_id = "${azurerm_app_service_plan.asp.id}"
 
   site_config {
-    app_command_line = "export VERSION=12344"
+    app_command_line = ""
     linux_fx_version = "COMPOSE|${filebase64("../docker-compose.yaml")}"
   }
 

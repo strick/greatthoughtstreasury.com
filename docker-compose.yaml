@@ -12,7 +12,7 @@ services:
     restart: always
 
   gtt-web:
-    image: "greatthoughtstreasury.azurecr.io/gtt-web:"   # MY_VERION is replaced in terraform asp.tf script
+    image: "greatthoughtstreasury.azurecr.io/gtt-web:MY_VERSION"   # MY_VERION is replaced in terraform asp.tf script
     #image: "greatthoughtstreasury.azurecr.io/gtt-web:latest"
     build: 
       context: ./gtt-web

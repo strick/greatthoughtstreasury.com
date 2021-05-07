@@ -14,8 +14,6 @@ services:
     restart: always
 
   gtt-web:
-    env_file: 
-      - .env
     image: "greatthoughtstreasury.azurecr.io/gtt-web:${VERSION}"
     #image: "greatthoughtstreasury.azurecr.io/gtt-web:latest"
     build: 

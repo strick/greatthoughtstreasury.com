@@ -5,9 +5,7 @@ echo "terraform apply -auto-approve\"
     -var \"client_id=$ARM_CLIENT_ID\" 
     -var \"client_secret=$ARM_CLIENT_SECRET\""
 
-cat ../docker-compose.yaml
-
-sed 's/MY_VERSION/$VERSION' ../docker-compose.yaml
+eval "sed -i 's/MY_VERSION/$VERSION/' ../docker-compose.yaml"
 
 cat ../docker-compose.yaml
 
@@ -19,4 +17,4 @@ terraform apply -auto-approve \
     -var "tenant_id=$ARM_TENANT_ID" \
     -var "subscription_id=$ARM_SUBSCRIPTION_ID"
 
-#sed "s/$VERSION/MY_VERSION" ../dockedr-compose.yaml
+eval "sed -i 's/$VERSION/MY_VERSION/' ../docker-compose.yaml"

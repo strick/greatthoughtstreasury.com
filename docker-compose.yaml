@@ -4,13 +4,18 @@ services:
   gtt-db:
     image: mongo:4.2.8
     container_name: gtt-db
+    #volumes: 
+    #  - name: mongodata
+    #  azurefile:
+    #    sharename: gttmongodb
+
     ports:
-     - "3001:27017"
+      - "3001:27017"
     restart: always
 
   gtt-web:
-    #image: "greatthoughtstreasury.azurecr.io/gtt-web:${VERSION}"
-    image: "greatthoughtstreasury.azurecr.io/gtt-web:latest"
+    image: "greatthoughtstreasury.azurecr.io/gtt-web:${VERSION}"
+    #image: "greatthoughtstreasury.azurecr.io/gtt-web:latest"
     build: 
       context: ./gtt-web
       dockerfile: Dockerfile-prod
@@ -19,7 +24,7 @@ services:
         - /tmp/gtt-web/npm-cache:/root/.npm:z
         - ./gtt-web/src:/usr/src/app/src:z
     ports:
-     - "3000:80"
+      - "3000:80"
     environment:
       - PORT=80
       - DBHOST=mongodb://gtt-db:27017

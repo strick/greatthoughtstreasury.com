@@ -95,7 +95,7 @@ resource "azurerm_app_service" "asp" {
 
   site_config {
     app_command_line = "export"
-    linux_fx_version = "VERSION=3333|COMPOSE|${filebase64("../docker-compose.yaml")}"
+    linux_fx_version = "COMPOSE|${filebase64("../docker-compose.yaml")}"
   }
 
   app_settings = {

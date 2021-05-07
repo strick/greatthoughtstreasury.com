@@ -17,12 +17,6 @@ steps:
     dockerVersion: '20.10.5'
   displayName: 'Install Docker'  
 
-- task: Docker@2
-  inputs:
-    containerRegistry: 'Brian Docker'
-    command: 'login'
-  displayName: 'Docker Login'
-
 - task: TerraformInstaller@0
   inputs:
     terraformVersion: '0.15.1'
@@ -33,9 +27,3 @@ steps:
   inputs:
     targetType: filePath
     filePath: ./scripts/deploy.sh
-
-- task: Docker@2
-  displayName: 'Docker Logout'
-  inputs:
-    containerRegistry: 'Brian Docker'
-    command: 'logout'

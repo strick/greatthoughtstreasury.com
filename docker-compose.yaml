@@ -3,10 +3,10 @@ services:
 
   # MOVE THE PROD DATABASE to its own area.   Then create a d-compose dev and prod file
   gtt-db:
-    image: mongo:MY_VERSION.2.8
+    image: mongo:4.2.8
     container_name: gtt-db    
-    #volumes: 
-    #  - mongodb:/mount/mongdb
+    volumes: 
+      - mongodb:/mount/mongdb
 
     ports:
       - "3001:27017"
@@ -32,10 +32,10 @@ services:
       - gtt-db
     restart: "no"
 
-#volumes:
-#  mongodb:
-#    driver: azure_file
-#    driver_opts:
-#     share_name: GTT_FS_SHARE
-#     accountname: GTT_FS_ACCOUNT
-#      accountkey: GTT_FS_KEYe
+volumes:
+  mongodb:
+    driver: azure_file
+    driver_opts:
+     share_name: GTT_FS_SHARE
+     accountname: GTT_FS_ACCOUNT
+      accountkey: GTT_FS_KEYe

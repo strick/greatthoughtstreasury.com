@@ -99,7 +99,7 @@ resource "azurerm_app_service" "asp" {
   }
 
   app_settings = {
-    "VERSION"   = ${var.app_version},
+    "VERSION"   = "${var.app_version}",
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false",
     "DOCKER_REGISTRY_SERVER_USERNAME" = azurerm_container_registry.container_registry.admin_username,
     "DOCKER_REGISTRY_SERVER_URL" = azurerm_container_registry.container_registry.login_server,

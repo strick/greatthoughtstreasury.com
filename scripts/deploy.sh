@@ -7,7 +7,7 @@ echo "terraform apply -auto-approve\"
 
 cat ../docker-compose.yaml
 
-sed "s/MY_VERSION/$VERSION" ../docker-compose.yaml
+sed 's/MY_VERSION/$VERSION' ../docker-compose.yaml
 
 cat ../docker-compose.yaml
 

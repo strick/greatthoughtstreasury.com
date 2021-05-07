@@ -5,8 +5,8 @@ services:
   gtt-db:
     image: mongo:4.2.8
     container_name: gtt-db    
-    volumes: 
-      - mongodb:/mount/mongdb
+    #volumes: 
+    #  - mongodb:/mount/mongdb
 
     ports:
       - "3001:27017"
@@ -32,11 +32,11 @@ services:
       - gtt-db
     restart: "no"
 
-volumes:
-  mongodb:
-    driver: azure_file
-    driver_opts:
-     share_name: GTT_FS_SHARE
-     storage_account_name: GTT_FS_ACCOUNT
+#volumes:
+  #mongodb:
+    #driver: azure_file
+    #driver_opts:
+     #share_name: GTT_FS_SHARE
+     #storage_account_name: GTT_FS_ACCOUNT
      #accountname: GTT_FS_ACCOUNT
-     #accountkey: GTT_FS_KEYe
+     #accountkey: GTT_FS_KEY

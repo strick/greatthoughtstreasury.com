@@ -1,5 +1,5 @@
 # Ignore import files from previous database
-data/import-files
+import-files
 
 # Local .terraform directories
 **/.terraform/*

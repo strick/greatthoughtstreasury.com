@@ -1,4 +1,4 @@
-'use strict'
+/*'use strict'
 
 const Author = require('../models/Author');
 var Quote = require('../models/Quote');
@@ -71,3 +71,4 @@ function _buildAuthor(authorObj)
 module.exports.down = function (next) {
   next()
 }
+*/

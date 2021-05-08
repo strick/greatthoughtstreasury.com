@@ -15,12 +15,28 @@ try {
 
     const lines = data.split(/\r?\n/);
 
+    var authors = [];
     var count = 0;
     lines.forEach((line) => {
         //console.log(line);
+        let parts = line.split('\t');
+
+        if(count > 0){
+            authors.push({
+                firstName: parts[0],
+                lastName: parts[1],
+                bio: parts[2],
+                birth: parts[3],
+                death: parts[4],
+                image: parts[5]
+            });
+        }
         count++;
+        
     });
     console.log("Author count: " + count);
+    console.log(authors);
+    //Author.insertMany(authors);
 }
 catch(err){
     console.error(err);

@@ -152,7 +152,7 @@ function buildQuotes(authors)
                 authorNid: row.field_author_target_id,
                 authorId: new mongo.ObjectID,
                 topicId: new mongo.ObjectID,
-                nid: row.entity_id
+                entity_id: row.entity_id
             });
 
             count++;

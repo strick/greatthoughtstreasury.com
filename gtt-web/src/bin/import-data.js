@@ -134,7 +134,7 @@ function buildQuotes(authors)
         var count = 0; 
         var quotes = [];
 
-        var data = fs.readFileSync(__dirname + '/import-files/quotes_test.json');
+        var data = fs.readFileSync(__dirname + '/import-files/quotes.json');
 
         var jsonData = data;
 

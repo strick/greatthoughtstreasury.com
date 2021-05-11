@@ -1,7 +1,14 @@
 const dotenv = require('dotenv');
 dotenv.config(); 
 
-var url = `${process.env.DBHOST}/${process.env.DBNAME}`;
+var url = "";
+
+if(process.env.ENV == "dev"){
+  url = `${process.env.DBTYPE}://${process.env.DBHOST}/${process.env.DBNAME}`;//?retryWrites=true&w=majority`
+}
+else {
+  url = `${process.env.DBTYPE}://${process.env.DBUSER}:${process.env.DBPASS}@${process.env.DBHOST}/${process.env.DBNAME}`;//?retryWrites=true&w=majority`
+}
   
   // create a client to mongodb
 var MongoClient = require('mongodb').MongoClient;

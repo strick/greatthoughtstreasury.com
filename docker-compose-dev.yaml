@@ -27,8 +27,11 @@ services:
       - "3000:80"
     environment:
       - PORT=80
-      - DBHOST=mongodb://gtt-db:27017
-      - DBNAME=gtt
+      - DBHOST=$DBHOST
+      - DBNAME=$DBNAME
+      - DBPASS=$DBPASS
+      - DBUSER=$DBUSER
+      - DBTYPE=$DBTYPE
     depends_on:
       - gtt-db
     restart: "no"

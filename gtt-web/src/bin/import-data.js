@@ -151,6 +151,7 @@ function buildQuotes(authors)
                 quote: row.field_quot_value,
                 authorNid: row.field_author_target_id,
                 authorId: new mongo.ObjectID,
+                topicId: new mongo.ObjectID,
                 nid: row.entity_id
             });
 

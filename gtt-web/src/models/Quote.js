@@ -10,7 +10,13 @@ const quoteSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Author'
+    },    
+    topicId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'Topic'
     }
 });
+
 
 module.exports = mongoose.model('Quote', quoteSchema, 'quotes');

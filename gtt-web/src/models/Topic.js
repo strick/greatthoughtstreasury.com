@@ -13,7 +13,8 @@ const topicSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Quote'
-    }
+    },
+    quotes: [{type: mongoose.Schema.Types.ObjectId, ref: 'Quote'}]
 });
 
 module.exports = mongoose.model('Topic', topicSchema, "topics");

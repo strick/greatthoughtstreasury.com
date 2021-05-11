@@ -22,6 +22,8 @@ function buildTopics() {
         var topics = [];
         var count = 0;
         lines.forEach((line) => {
+
+            line = line.toLocaleLowerCase();
             console.log(line);
             let parts = line.split('\t');
 /*

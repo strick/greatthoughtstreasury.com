@@ -131,8 +131,6 @@ function buildAuthors() {
 function buildQuotes(authors)
 {
 
-        // TODO Santaize this.
-        //const data = fs.readFileSync(__dirname + '/import-files/quotes_test.json', 'UTF-8');
         var count = 0; 
         var quotes = [];
 
@@ -148,8 +146,7 @@ function buildQuotes(authors)
                 count++;
                 return;
             }
-            //console.log(row);
-            
+
             quotes.push({
                 quote: row.field_quot_value,
                 authorNid: row.field_author_target_id,

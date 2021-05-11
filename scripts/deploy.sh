@@ -8,7 +8,12 @@ echo "terraform apply -auto-approve\"
 eval "sed -i 's/MY_VERSION/$VERSION/' ../docker-compose.yaml"
 eval "sed -i 's/GTT_FS_SHARE/$GTT_FS_SHARE/' ../docker-compose.yaml"
 eval "sed -i 's/GTT_FS_ACCOUNT/$GTT_FS_ACCOUNT/' ../docker-compose.yaml"
-eval "sed -i 's,GTT_FS_KEY,$GTT_FS_KEY,' ../docker-compose.yaml"  # escapse the / in keys
+eval "sed -i 's,GTT_FS_KEY,$GTT_FS_KEY,' ../docker-compose.yaml"  # escapse the / in keys 
+
+eval "sed -i 's/MONGODB_HOST/$MONGODB_HOST/' ../docker-compose.yaml"
+eval "sed -i 's/MONGODB_USER/$MONGODB_USER/' ../docker-compose.yaml"
+eval "sed -i 's/MONGODB_PASSWORD/$MONGODB_PASSWORD/' ../docker-compose.yaml"
+eval "sed -i 's,MONGODB_TYPE,$MONGODB_TYPE,' ../docker-compose.yaml"  # escapse the / in keys
 
 cat ../docker-compose.yaml
 echo  

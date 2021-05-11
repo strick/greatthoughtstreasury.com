@@ -39,8 +39,9 @@ function buildTopics() {
 
         var topics = [];
         var count = 0;
-        jsonData.forEach((obj) => {
-
+        jsonParsed.forEach((obj) => {
+         //   if(count > 10000) return;
+        //    console.log(obj);
             if(count > 0){
                 topics.push({
                     topic: obj.topic.toLocaleLowerCase(),
@@ -50,6 +51,7 @@ function buildTopics() {
             }
             
             count++;
+            if(count > 10000) return;
             
         });
         console.log("Topic count: " + count);

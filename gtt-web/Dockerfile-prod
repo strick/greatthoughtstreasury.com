@@ -12,5 +12,5 @@ RUN npm install -g migrate
 CMD cd src && \
 #    migrate down && \
  ##   migrate up && \
-    node bin/import-data.js && \ 
+ ##   node bin/import-data.js && \ 
     npm start 

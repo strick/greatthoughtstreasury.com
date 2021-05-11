@@ -32,6 +32,7 @@ services:
       - DBPASS=$DBPASS
       - DBUSER=$DBUSER
       - DBTYPE=$DBTYPE
+      - ENV=dev
     depends_on:
       - gtt-db
     restart: "no"

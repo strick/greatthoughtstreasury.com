@@ -41,6 +41,27 @@ function buildTopics() {
         var count = 0;
         jsonParsed.forEach((obj) => {
 
+            if(count == 0){
+                count++;
+                return;
+            }
+
+            let topicName = obj.topic.toLocaleLowerCase().trim();
+            // If it is a new topic, then create it
+            if(!topics.find(function(t){
+                //console.log(topicName);
+                return t.topic === topicName;
+            })){
+                topics.push({
+                    topic: topicName,
+                    oldQuoteId: obj.quote_id,
+                    quoteId: new mongo.ObjectID
+                });
+            }
+            // it's not new so just add the reference
+            /*
+
+            // Find the quote reference and add it to the exising list
             if(count > 0){
                 topics.push({
                     topic: obj.topic.toLocaleLowerCase().trim(),
@@ -48,7 +69,7 @@ function buildTopics() {
                     quoteId: new mongo.ObjectID
                 });
             }
-            
+            */
             count++;
             if(count > 10000) return;
             

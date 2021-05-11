@@ -14,11 +14,11 @@ services:
     restart: always
 
   gtt-web:
-    image: "greatthoughtstreasury.azurecr.io/gtt-web:MY_VERSION"   # MY_VERION is replaced in terraform asp.tf script
+    image: "greatthoughtstreasury.azurecr.io/gtt-web:latest"   # MY_VERION is replaced in terraform asp.tf script
     #image: "greatthoughtstreasury.azurecr.io/gtt-web:latest"
     build: 
       context: ./gtt-web
-      dockerfile: Dockerfile-prod
+      dockerfile: Dockerfile-dev
     container_name: gtt-web
     volumes: 
         - /tmp/gtt-web/npm-cache:/root/.npm:z

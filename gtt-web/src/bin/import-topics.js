@@ -1,0 +1,45 @@
+'use strict'
+
+const dotenv = require('dotenv');
+dotenv.config(); 
+const mongo = require('mongodb');
+var db = require('../db');
+
+  // create a client to mongodb
+var MongoClient = require('mongodb').MongoClient;
+
+var fs = require("fs");
+
+var topics = buildTopics();
+
+function buildTopics() {
+    // Open a new file with name input.txt and write Simply Easy Learning! to it.
+    try {
+        const data = fs.readFileSync(__dirname + '/import-files/topics.txt', 'UTF-8');
+
+        const lines = data.split(/\r?\n/);
+
+        var topics = [];
+        var count = 0;
+        lines.forEach((line) => {
+            console.log(line);
+            let parts = line.split('\t');
+/*
+            if(count > 0){
+                topics.push({
+                    topic: parts[0],
+                    oldQuoteId: parts[1],
+                    quoteId: new mongo.ObjectID
+                });
+            }
+            */
+            count++;
+            
+        });
+        console.log("Topic count: " + count);
+    }
+    catch(err){
+        console.error(err);
+    }
+    return topics;
+}

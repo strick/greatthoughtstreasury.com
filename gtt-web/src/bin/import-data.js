@@ -153,7 +153,6 @@ function buildQuotes(authors)
             quotes.push({
                 quote: row.field_quot_value,
                 authorNid: row.field_author_target_id,
-                //quoteNid: row[2],
                 authorId: new mongo.ObjectID
             });
 

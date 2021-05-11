@@ -44,7 +44,7 @@ function buildTopics() {
         //    console.log(obj);
             if(count > 0){
                 topics.push({
-                    topic: obj.topic.toLocaleLowerCase(),
+                    topic: obj.topic.toLocaleLowerCase().trim(),
                     oldQuoteId: obj.quote_id,
                     quoteId: new mongo.ObjectID
                 });

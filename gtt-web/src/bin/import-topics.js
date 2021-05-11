@@ -24,28 +24,27 @@ var topics = buildTopics();
         console.log("Adding topic error");
         console.log(e);
     });
+    console.log("Closing");
     db.close();
 })();
 
 function buildTopics() {
     // Open a new file with name input.txt and write Simply Easy Learning! to it.
     try {
-        const data = fs.readFileSync(__dirname + '/import-files/topics.txt', 'UTF-8');
+        var data = fs.readFileSync(__dirname + '/import-files/topics.json');
 
-        const lines = data.split(/\r?\n/);
+        var jsonData = data;
+
+        var jsonParsed = JSON.parse(jsonData);
 
         var topics = [];
         var count = 0;
-        lines.forEach((line) => {
-
-            line = line.toLocaleLowerCase();
-            console.log(line);
-            let parts = line.split('\t');
+        jsonData.forEach((obj) => {
 
             if(count > 0){
                 topics.push({
-                    topic: parts[0],
-                    oldQuoteId: parts[1],
+                    topic: obj.topic.toLocaleLowerCase(),
+                    oldQuoteId: obj.quote_id,
                     quoteId: new mongo.ObjectID
                 });
             }

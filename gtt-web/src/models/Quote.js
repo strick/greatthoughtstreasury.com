@@ -14,11 +14,10 @@ const quoteSchema = new Schema({
         required: true,
         ref: 'Author'
     },    
-    topicId: {
+    topics: [{
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
         ref: 'Topic'
-    }
+    }]
 });
 
 

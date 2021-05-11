@@ -14,6 +14,7 @@ eval "sed -i 's/MONGODB_HOST/$MONGODB_HOST/' ../docker-compose.yaml"
 eval "sed -i 's/MONGODB_USER/$MONGODB_USER/' ../docker-compose.yaml"
 eval "sed -i 's/MONGODB_PASSWORD/$MONGODB_PASSWORD/' ../docker-compose.yaml"
 eval "sed -i 's,MONGODB_TYPE,$MONGODB_TYPE,' ../docker-compose.yaml"  # escapse the / in keys
+#
 
 cat ../docker-compose.yaml
 echo  

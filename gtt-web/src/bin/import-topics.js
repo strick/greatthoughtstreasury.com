@@ -14,8 +14,6 @@ var MongoClient = require('mongodb').MongoClient;
 
 var fs = require("fs");
 
-
-
 const createTopic = function(topic){
     return Topic.create(topic);
 }
@@ -39,126 +37,80 @@ const addQuoteToTopic = function (quote, topic){
 }
 var count = 0;
 
+const saveFinished = function(c){
+    console.log("C is " + c);
+    c--;
+    if(c < 1){
+       console.log("Closing connection");
+       db.close();
+   }
+   
+   return c;
+
+ }
+
+ const generateTopic = function(obj){
+    let topicObj = {
+        topic: obj.topic,
+        oldQuoteId: obj.quote_id,
+        quoteId: new mongo.ObjectID
+    };
+
+    return topicObj;
+ }
 
         
 const buildTopics = async function() {
     // Open a new file with name input.txt and write Simply Easy Learning! to it.
-  
-    try {
-        var data = fs.readFileSync(__dirname + '/import-files/topics_small.json');
 
-        var jsonData = data;
+    var data = fs.readFileSync(__dirname + '/import-files/topics_small.json');
 
-        var jsonParsed = JSON.parse(jsonData); 
+    var jsonData = data;
 
-        var topics = [];
+    var jsonParsed = JSON.parse(jsonData); 
+    console.log(jsonParsed.length);
+    var topics = [];
 
-        //jsonParsed.forEach(doIt);
-        jsonParsed.map(function(obj){
-            obj.topic = obj.topic.toLocaleLowerCase().trim();
-        })
+    var c = jsonParsed.length;
 
-        jsonParsed.forEach(function(obj){
-   
-            return Promise.all((jsonParsed).map(function(obj) {
-                // If it is a new topic, then create it
-                return Topic.findOne({topic: obj.topic}, function(err, topic){
+    console.log("Pasing out " + c );
 
-                   //console.log(topic);
-                   if(topic != null) {
-                        console.log(topic);
-                        return;
-                    }
-                
-                    console.log('Creating');
-                    let o = {
-                        topic: obj.topic,
-                        oldQuoteId: obj.quote_id,
-                        quoteId: new mongo.ObjectID
-                    };
-                    return createTopic(o).
-                    then(topic => {                      
-                       return addTopicToQuote(topic).
-                        then(q => {
-                            return addQuoteToTopic(q, topic);
-                        })
-                    }).
-                    catch(e => {
-                        console.log(e);
-                    });
-                
-                }).
-                catch(e => {
-                    console.log(e);
-                });
-            })).
+    jsonParsed.map(function(obj){
+        obj.topic = obj.topic.toLocaleLowerCase().trim();
+    });
+
+    return Promise.all((jsonParsed).map(function(obj) {
+
+        // If it is a new topic, then create it
+        return Topic.findOne({topic: obj.topic}, function(err, topic){
+
+            //console.log(topic);
+            if(topic != null) {
+                console.log(topic);
+                return;
+            }
+
+            return createTopic(generateTopic(obj)).
+            then(topic => {                      
+                //return addTopicToQuote(topic).
+                return addTopicToQuote(topic).
+                then(q => {
+                    return addQuoteToTopic(q, topic).
+                    then(t =>{
+                        c = saveFinished(c);
+                    })                                                
+                })                    
+            }).
             catch(e => {
                 console.log(e);
-            })
+            });                
         });
-    }
-    catch(e){
-        console.log(e);
-    }
-
-        console.log("Topic count: " + count);
-  
-    return topics;
-}
-
-async function doIt(obj){
-
-    //console.log(obj);
-  //  console.log(topics);
-    if(count == 0 || count > 10){
-        count++;
-        return;
-    }
-
-    let topicName = obj.topic.toLocaleLowerCase().trim();
-
-    console.log("Testing)");
-
-    // If it is a new topic, then create it
-    return Topic.find({topic: topicName}).
-    then(topic => {
-
-        console.log(topic);
-        if(topic != null) {
-            console.log(topic);
-            return;
-        }
-    
-        console.log('Creating');
-        return createTopic({
-            topic: topicName,
-            oldQuoteId: obj.quote_id,
-            quoteId: new mongo.ObjectID
-        });     
-    }).
+    })).
     catch(e => {
-              console.log(e);
+        console.log(e);
     });
-    
-
-    // Reference the topic
-    var topicRef = topics.find(function(t){
-                        
-        if(t.topic === topicName)
-            return t;
-    });
-
-    // Attach the quote
-    addTopicToQuote(topicRef);
-          
-    count++;
-
-    if(count > 10000) {
-        return;// topics;
-    }
-    //return topics;
-    
 }
+
 
 db.connect();
 buildTopics();

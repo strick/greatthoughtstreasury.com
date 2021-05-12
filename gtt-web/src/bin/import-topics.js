@@ -100,13 +100,13 @@ const buildTopics = async function() {
     });
 
     // BUG FIX NEEDED:   Save quote is added to pics
-
+    db.connect();
     for (const obj of jsonParsed){
         c--;
         var myPromise = () => {
             return new Promise(async (resolve, reject) => {
 
-                db.connect();
+                
                 await Topic.findOne({topic: obj.topic}, async function(err, topic){
                    
                     // Not a new topic, just do the topic and qutoe mapping

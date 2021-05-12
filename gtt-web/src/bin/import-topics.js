@@ -35,6 +35,17 @@ const addQuoteToTopic = function (quote, topic){
       return topic.save(topic);  
     })
 }
+
+const createTopicQuoteChain = function(topic){
+
+    // Append the topic to qutoes topic list
+    return addTopicToQuote(topic).
+    then(q => {
+        // Append quote to topics quote list
+        return addQuoteToTopic(q, topic);                                              
+    });
+}
+
 var count = 0;
 
 const saveFinished = function(c){
@@ -84,29 +95,25 @@ const buildTopics = async function() {
         // If it is a new topic, then create it
         return Topic.findOne({topic: obj.topic}, function(err, topic){
 
-            //console.log(topic);
+            // Not a new topic, just do the topic and qutoe mapping
             if(topic != null) {
-                console.log(topic);
-                return;
+                console.log(topic);                
+                return createTopic(generateTopic(obj)).
+                then(t =>{
+                    c = saveFinished(c);
+                }); 
             }
 
-            // Create the topic in the database
             return createTopic(generateTopic(obj)).
             then(topic => {                      
-                // Append the topic to qutoes topic list
-                return addTopicToQuote(topic).
-                then(q => {
-                    // Append quote to topics quote list
-                    return addQuoteToTopic(q, topic).
-                    // See if we're done and close connection.
-                    then(t =>{
-                        c = saveFinished(c);
-                    })                                                
-                })                    
+                return createTopicQuoteChain(topic).
+                then(t =>{
+                    c = saveFinished(c);
+                });
             }).
             catch(e => {
                 console.log(e);
-            });                
+            });     
         });
     })).
     catch(e => {

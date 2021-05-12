@@ -4,9 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config(); 
 const mongo = require('mongodb');
 var db = require('../db');
-
 var Topic = require('../models/Topic');
-
 var Quote = require('../models/Quote');
 
   // create a client to mongodb
@@ -22,14 +20,10 @@ const createTopic = function(topic){
         if(t == null)
             return Topic.create(topic)
     })
-    return Topic.create(topic);
 }
 
 const addTopicToQuote = function(topic){
 
-    // Get the qutoe _id
-    ///console.log("Looking at ");
-    //console.log(topic);
     return Quote.findOne({entity_id: topic.oldQuoteId}).
     then(quote => {
         quote.topics.push(topic._id);

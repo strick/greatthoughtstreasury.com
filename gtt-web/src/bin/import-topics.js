@@ -15,12 +15,21 @@ var MongoClient = require('mongodb').MongoClient;
 var fs = require("fs");
 
 const createTopic = function(topic){
+
+    // If the topic already exists, then just return that one for refere
+    return Topic.findOne({_id: topic._id}).
+    then(t => {
+        if(t == null)
+            return Topic.create(topic)
+    })
     return Topic.create(topic);
 }
 
 const addTopicToQuote = function(topic){
 
     // Get the qutoe _id
+    console.log("Looking at ");
+    console.log(topic);
     return Quote.findOne({entity_id: topic.oldQuoteId}).
     then(quote => {
         quote.topics.push(topic._id);
@@ -47,6 +56,16 @@ const createTopicQuoteChain = function(topic){
 }
 
 var count = 0;
+
+var topicList = [];
+const getTopicList = function(){
+    return topicList;
+}
+
+const updateTopicList = function(t){
+    topicList.push(t);
+    return topicList;
+}
 
 const saveFinished = function(c){
     console.log("C is " + c);
@@ -90,38 +109,49 @@ const buildTopics = async function() {
         obj.topic = obj.topic.toLocaleLowerCase().trim();
     });
 
-    return Promise.all((jsonParsed).map(function(obj) {
+    //eturn Promise.all((jsonParsed).map(await function(obj) {
+//jsonParsed.forEach(async function(obj){
+    for (const obj of jsonParsed){
+        c--;
+        var myPromise = () => {
+            return new Promise(async (resolve, reject) => {
 
-        // If it is a new topic, then create it
-        return Topic.findOne({topic: obj.topic}, function(err, topic){
+                db.connect();
+                await Topic.findOne({topic: obj.topic}, async function(err, topic){
+                   
+                    // Not a new topic, just do the topic and qutoe mapping
+                    if(topic != null){
+             
+                        return createTopicQuoteChain(topic).
+                        then(t =>{
+                            resolve(t);
+                        });
+                    }
 
-            // Not a new topic, just do the topic and qutoe mapping
-            if(topic != null) {
-                console.log(topic);                
-                return createTopic(generateTopic(obj)).
-                then(t =>{
-                    c = saveFinished(c);
-                }); 
-            }
+                    // Create the new topic in the database and build relations
+                    var myPromise2 = () => {
+                        return new Promise(async (resolve, reject) => {
+                            console.log("Adding " + obj.quote_id);
+                            let t = await createTopicQuoteChain(await createTopic(generateTopic(obj)));
+                            console.log("Completed " + obj.quote_id);
 
-            return createTopic(generateTopic(obj)).
-            then(topic => {                      
-                return createTopicQuoteChain(topic).
-                then(t =>{
-                    c = saveFinished(c);
+                            resolve(t);
+                        })
+                    }
+                
+                    var t = await myPromise2();
+                    
+                    resolve(t);
                 });
-            }).
-            catch(e => {
-                console.log(e);
-            });     
-        });
-    })).
-    catch(e => {
-        console.log(e);
-    });
+            })
+        }
+  
+        console.log(obj);
+        var r = await myPromise();
+        if(c == 0) db.close();
+
+    }
+
 }
 
-
-db.connect();
 buildTopics();
-//db.close();

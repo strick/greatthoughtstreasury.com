@@ -28,8 +28,8 @@ const createTopic = function(topic){
 const addTopicToQuote = function(topic){
 
     // Get the qutoe _id
-    console.log("Looking at ");
-    console.log(topic);
+    ///console.log("Looking at ");
+    //console.log(topic);
     return Quote.findOne({entity_id: topic.oldQuoteId}).
     then(quote => {
         quote.topics.push(topic._id);
@@ -112,6 +112,11 @@ const buildTopics = async function() {
                     // Not a new topic, just do the topic and qutoe mapping
                     if(topic != null){
              
+                        //console.log(topic);
+
+                        topic.oldQuoteId = obj.quote_id;
+                        //console.log(topic);
+                        // Update the topic Quote id t the new one                        
                         return createTopicQuoteChain(topic).
                         then(t =>{
                             resolve(t);
@@ -121,9 +126,9 @@ const buildTopics = async function() {
                     // Create the new topic in the database and build relations
                     var myPromise2 = () => {
                         return new Promise(async (resolve, reject) => {
-                            console.log("Adding " + obj.quote_id);
+                            //console.log("Adding " + obj.quote_id);
                             let t = await createTopicQuoteChain(await createTopic(generateTopic(obj)));
-                            console.log("Completed " + obj.quote_id);
+                            //console.log("Completed " + obj.quote_id);
 
                             resolve(t);
                         })
@@ -136,7 +141,7 @@ const buildTopics = async function() {
             })
         }
   
-        console.log(obj);
+        //console.log(obj);
         var r = await myPromise();
         if(c == 0) db.close();
 

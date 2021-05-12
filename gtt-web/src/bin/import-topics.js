@@ -57,18 +57,6 @@ const createTopicQuoteChain = function(topic){
 
 var count = 0;
 
-const saveFinished = function(c){
-    console.log("C is " + c);
-    c--;
-    if(c < 1){
-       console.log("Closing connection");
-       db.close();
-   }
-   
-   return c;
-
- }
-
  const generateTopic = function(obj){
     let topicObj = {
         topic: obj.topic,

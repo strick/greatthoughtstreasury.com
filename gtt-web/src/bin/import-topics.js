@@ -57,16 +57,6 @@ const createTopicQuoteChain = function(topic){
 
 var count = 0;
 
-var topicList = [];
-const getTopicList = function(){
-    return topicList;
-}
-
-const updateTopicList = function(t){
-    topicList.push(t);
-    return topicList;
-}
-
 const saveFinished = function(c){
     console.log("C is " + c);
     c--;
@@ -109,8 +99,8 @@ const buildTopics = async function() {
         obj.topic = obj.topic.toLocaleLowerCase().trim();
     });
 
-    //eturn Promise.all((jsonParsed).map(await function(obj) {
-//jsonParsed.forEach(async function(obj){
+    // BUG FIX NEEDED:   Save quote is added to pics
+
     for (const obj of jsonParsed){
         c--;
         var myPromise = () => {

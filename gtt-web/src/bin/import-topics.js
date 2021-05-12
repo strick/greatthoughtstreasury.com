@@ -23,17 +23,19 @@ const createTopic = function(topic){
 const addTopicToQuote = function(topic){
 
     // Get the qutoe _id
-    console.log("Searching: " + topic.oldQuoteId);
     return Quote.findOne({entity_id: topic.oldQuoteId}).
     then(quote => {
-        if(quote == undefined) return;
-        console.log("Tpoc: " + topic.oldQuoteId);
-        console.log("The id is: " + topic._id);
-        console.log(quote);
         quote.topics.push(topic._id);
-        console.log(quote);
         return quote.save(quote);
     });
+}
+
+const addQuoteToTopic = function (quote, topic){
+    return Topic.findOne({_id: topic._id}).
+    then(topic => {
+      topic.quotes.push(quote._id);
+      return topic.save(topic);  
+    })
 }
 var count = 0;
 
@@ -76,7 +78,10 @@ const buildTopics = async function() {
                     };
                     return createTopic(o).
                     then(topic => {                      
-                       return addTopicToQuote(topic);
+                       return addTopicToQuote(topic).
+                        then(q => {
+                            return addQuoteToTopic(q, topic);
+                        })
                     }).
                     catch(e => {
                         console.log(e);

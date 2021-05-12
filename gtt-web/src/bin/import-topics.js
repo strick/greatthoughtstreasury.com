@@ -90,12 +90,15 @@ const buildTopics = async function() {
                 return;
             }
 
+            // Create the topic in the database
             return createTopic(generateTopic(obj)).
             then(topic => {                      
-                //return addTopicToQuote(topic).
+                // Append the topic to qutoes topic list
                 return addTopicToQuote(topic).
                 then(q => {
+                    // Append quote to topics quote list
                     return addQuoteToTopic(q, topic).
+                    // See if we're done and close connection.
                     then(t =>{
                         c = saveFinished(c);
                     })                                                

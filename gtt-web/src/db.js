@@ -15,7 +15,7 @@ else {
 }
 
 const DB_URL = URL;
-//console.log(DB_URL);
+console.log(DB_URL);
 module.exports = {
     
     connect: () => {

@@ -9,7 +9,7 @@ if(process.env.ENV == "dev"){
 else {
   url = `${process.env.DBTYPE}://${process.env.DBUSER}:${process.env.DBPASS}@${process.env.DBHOST}/${process.env.DBNAME}`;//?retryWrites=true&w=majority`
 }
-  
+ console.log(url); 
   // create a client to mongodb
 var MongoClient = require('mongodb').MongoClient;
 

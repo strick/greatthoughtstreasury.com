@@ -35,7 +35,7 @@ const addTopicToQuote = function(topic){
 
         if(quote == null) {
             missedQuotes++;
-            return null;
+            return;
         }
         quote.topics.push(topic._id);
         return quote.save(quote);
@@ -159,6 +159,9 @@ const buildTopics = async function() {
   
         //console.log(obj);
         var r = await myPromise();
+        if(c % 1000 == 0){
+            console.log(c + " topics remaning");
+        }
         if(c == 0) db.close();
 
     }

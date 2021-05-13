@@ -4,6 +4,6 @@ var router = express.Router();
 
 
 router.route('/').get(controller.listAll);
-//router.route('/:id').get(controller.getByNid);
+router.route('/:id').get(controller.getById);
 
 module.exports = router;

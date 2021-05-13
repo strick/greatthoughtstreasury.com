@@ -11,6 +11,7 @@ var Quote = require('../models/Quote');
 var MongoClient = require('mongodb').MongoClient;
 
 var fs = require("fs");
+const { nextTick } = require('process');
 
 const createTopic = function(topic){
 
@@ -19,15 +20,30 @@ const createTopic = function(topic){
     then(t => {
         if(t == null)
             return Topic.create(topic)
-    })
+    }).
+    catch(e => {
+        console.log("createTopic: Failure: topic:");
+        console.log(topic);
+        console.log(e);
+    });
 }
-
+var missedQuotes = 0;
 const addTopicToQuote = function(topic){
 
     return Quote.findOne({entity_id: topic.oldQuoteId}).
     then(quote => {
+
+        if(quote == null) {
+            missedQuotes++;
+            return null;
+        }
         quote.topics.push(topic._id);
         return quote.save(quote);
+    }).
+    catch(e => {
+        console.log("addTopicToQuote: Failure: topic: ");
+        console.log(topic);
+        console.log(e);
     });
 }
 
@@ -36,7 +52,14 @@ const addQuoteToTopic = function (quote, topic){
     then(topic => {
       topic.quotes.push(quote._id);
       return topic.save(topic);  
-    })
+    }).
+    catch(e => {
+        console.log("addQuoteToTopic: Failure: topic: ");
+        console.log(topic);
+        console.log("Quote: ");
+        console.log(quote);
+        console.log(e);
+    });
 }
 
 const createTopicQuoteChain = function(topic){
@@ -44,8 +67,14 @@ const createTopicQuoteChain = function(topic){
     // Append the topic to qutoes topic list
     return addTopicToQuote(topic).
     then(q => {
+        if(q == null) return;
         // Append quote to topics quote list
         return addQuoteToTopic(q, topic);                                              
+    }).
+    catch(e => {
+        console.log("createTopicQuoteChain: Failure: topic: ");
+        console.log(topic);
+        console.log(e);
     });
 }
 
@@ -65,7 +94,7 @@ var count = 0;
 const buildTopics = async function() {
     // Open a new file with name input.txt and write Simply Easy Learning! to it.
 
-    var data = fs.readFileSync(__dirname + '/import-files/topics_small.json');
+    var data = fs.readFileSync(__dirname + '/import-files/topics.json');
 
     var jsonData = data;
 
@@ -102,6 +131,11 @@ const buildTopics = async function() {
                         return createTopicQuoteChain(topic).
                         then(t =>{
                             resolve(t);
+                        }).
+                        catch(e => {
+                            console.log("createTopicQuoteChain (Normal call): Failure: topic: ");
+                            console.log(topic);
+                            console.log(e);
                         });
                     }
 
@@ -132,3 +166,4 @@ const buildTopics = async function() {
 }
 
 buildTopics();
+console.log("Missed quotes is: " + missedQuotes);

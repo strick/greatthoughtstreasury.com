@@ -50,9 +50,7 @@ var fs = require("fs");
                 }
 
                 if(author != null){
-                   
-                    //console.log(author);
-                    
+  
                     // Only close the connection after everything has processed.
                     var saveFinished = function(){
                         c--;

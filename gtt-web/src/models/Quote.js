@@ -9,6 +9,9 @@ const quoteSchema = new Schema({
     entity_id: {
         type: Number
     },
+    authorNid: {
+        type: Number
+    },
     authorId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,

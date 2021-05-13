@@ -10,6 +10,8 @@ COPY ./src ./src
 
 RUN npm install -g migrate
 CMD cd src && \
+
+# You actually do want to run migrate each time to get new collections added
 #    migrate down && \
  ##   migrate up && \
  ##   node bin/import-data.js && \ 

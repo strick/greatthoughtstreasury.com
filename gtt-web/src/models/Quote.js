@@ -6,11 +6,19 @@ const quoteSchema = new Schema({
         type: String,
         required: true
     },
+    entity_id: {
+        type: Number
+    },
     authorId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Author'
-    }
+    },    
+    topics: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Topic'
+    }]
 });
+
 
 module.exports = mongoose.model('Quote', quoteSchema, 'quotes');

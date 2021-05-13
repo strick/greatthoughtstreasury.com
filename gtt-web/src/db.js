@@ -15,7 +15,7 @@ else {
 }
 
 const DB_URL = URL;
-console.log(process.env.ENV);
+//console.log(DB_URL);
 module.exports = {
     
     connect: () => {
@@ -25,7 +25,10 @@ module.exports = {
         mongoose.set('useFindAndModify', false);
         mongoose.set('useCreateIndex', true);
         mongoose.set('useUnifiedTopology', true);
-        mongoose.connect(DB_URL);
+        //mongoose.set('serverSelectionTimeout', 60000000);
+        mongoose.connect(DB_URL, {
+            serverSelectionTimeoutMS: 600000
+        });
 
         //Log an error if we fail to connect
         mongoose.connection.on('error', err => {

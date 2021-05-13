@@ -131,12 +131,10 @@ function buildAuthors() {
 function buildQuotes(authors)
 {
 
-        // TODO Santaize this.
-        //const data = fs.readFileSync(__dirname + '/import-files/quotes_test.json', 'UTF-8');
         var count = 0; 
         var quotes = [];
 
-        var data = fs.readFileSync(__dirname + '/import-files/quotes_test.json');
+        var data = fs.readFileSync(__dirname + '/import-files/quotes.json');
 
         var jsonData = data;
 
@@ -148,13 +146,13 @@ function buildQuotes(authors)
                 count++;
                 return;
             }
-            //console.log(row);
-            
+
             quotes.push({
                 quote: row.field_quot_value,
                 authorNid: row.field_author_target_id,
-                //quoteNid: row[2],
-                authorId: new mongo.ObjectID
+                authorId: new mongo.ObjectID,
+                //topicId: new mongo.ObjectID,
+                entity_id: row.entity_id
             });
 
             count++;

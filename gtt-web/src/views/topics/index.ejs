@@ -1,0 +1,14 @@
+
+<div class="col-lg-12"><h1><%=title%></h1></div>
+<% topics.forEach(function(topic){ %>
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">       
+          <div class="card-body">          
+            <p class="card-text"><%= topic.topic %></p>
+          </div>
+          <div class="card-footer">
+            <a href="/topics/<=% topic._id %>" class="btn btn-primary">View Quotes</a>
+          </div>
+        </div>
+      </div> 
+    <% }) %>

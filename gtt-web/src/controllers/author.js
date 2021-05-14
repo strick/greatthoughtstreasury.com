@@ -1,8 +1,9 @@
 var Author = require('../models/Author');
 var Quote = require('../models/Quote');
 var db = require('../db');
+const paginate = require('../pagination');
 
-
+/*
 const paginate = async function(perPage, page, res){
 
     Author.find({})
@@ -26,7 +27,7 @@ const paginate = async function(perPage, page, res){
         });
     });
 }
-
+*/
 module.exports = {
 
     test: function(req, res, next) {
@@ -51,21 +52,29 @@ module.exports = {
     },
     
     listAll: function (req, res, next) {
-        db.connect();
+        //db.connect();
 
         var perPage = 10;
         var page = req.params.page || 1;
 
-        paginate(perPage, page, res);
+        let viewObj = {
+            title: 'Author Listing'
+        }
+
+        paginate.paginate(perPage, page, res, Author, viewObj, 'authors/index', 'authors');
     },
 
     listAllPage: function (req, res, next) {
-        db.connect();
+        //db.connect();
 
         var perPage = 10;
         var page = req.params.page || 1;
 
-        paginate(perPage, page, res);
+        let viewObj = {
+            title: 'Author Listing'
+        }
+
+        paginate.paginate(perPage, page, res, Author, viewObj, 'authors/index', 'authors');
     },
 
     getByNid: function (req, res, next) {

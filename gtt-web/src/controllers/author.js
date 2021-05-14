@@ -27,29 +27,21 @@ module.exports = {
     },
     
     listAll: function (req, res, next) {
-        //db.connect();
-
-        var perPage = 25;
-        var page = req.params.page || 1;
-
+ 
         let viewObj = {
             title: 'Author Listing'
         }
 
-        paginate.paginate(perPage, page, res, Author, viewObj, 'authors/index', 'authors');
+        paginate.paginate(req, res, Author, viewObj, 'authors/index', 'authors');
     },
 
     listAllPage: function (req, res, next) {
-        //db.connect();
-
-        var perPage = 25;
-        var page = req.params.page || 1;
 
         let viewObj = {
             title: 'Author Listing'
         }
 
-        paginate.paginate(perPage, page, res, Author, viewObj, 'authors/index', 'authors');
+        paginate.paginate(req, res, Author, viewObj, 'authors/index', 'authors');
     },
 
     getByNid: function (req, res, next) {

@@ -6,29 +6,21 @@ const paginate = require('../pagination');
 module.exports = {
     
     listAll: function (req, res, next) {
-        //db.connect();
-
-        var perPage = 25;
-        var page = req.params.page || 1;
 
         let viewObj = {
             title: 'Topic Listing'
         }
 
-        paginate.paginate(perPage, page, res, Topic, viewObj, 'topics/index', 'topics');
+        paginate.paginate(req, res, Topic, viewObj, 'topics/index', 'topics');
     },
 
     listAllPage: function (req, res, next) {
-        //db.connect();
-
-        var perPage = 25;
-        var page = req.params.page || 1;
 
         let viewObj = {
             title: 'Topic Listing'
         }
 
-        paginate.paginate(perPage, page, res, Topic, viewObj, 'topics/index', 'topics');
+        paginate.paginate(req, res, Topic, viewObj, 'topics/index', 'topics');
     },
     
     getById: function (req, res, next) {

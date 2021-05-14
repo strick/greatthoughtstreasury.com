@@ -6,29 +6,21 @@ const paginate = require('../pagination');
 module.exports = {
     
     listAll: function (req, res, next) {
-        //db.connect();
-
-        var perPage = 25;
-        var page = req.params.page || 1;
 
         let viewObj = {
             title: 'Keyword Listing'
         }
 
-        paginate.paginate(perPage, page, res, Keyword, viewObj, 'keywords/index', 'keywords');
+        paginate.paginate(req, res, Keyword, viewObj, 'keywords/index', 'keywords');
     },
 
     listAllPage: function (req, res, next) {
-        //db.connect();
-
-        var perPage = 25;
-        var page = req.params.page || 1;
 
         let viewObj = {
             title: 'Keyword Listing'
         }
 
-        paginate.paginate(perPage, page, res, Keyword, viewObj, 'keywords/index', 'keywords');
+        paginate.paginate(req, res, Keyword, viewObj, 'keywords/index', 'keywords');
     },
     
     getById: function (req, res, next) {

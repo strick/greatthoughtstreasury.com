@@ -2,9 +2,12 @@ const db = require('./db');
 
 module.exports = {
 
-    paginate: function(perPage, page, res, model, viewObj, viewScript, resultsKey){
+    paginate: function(req, res, model, viewObj, viewScript, resultsKey, perPage, page){
 
         db.connect();
+
+        var perPage = perPage || 25;
+        var page = req.params.page || page || 1;
 
         model.find({})
             .skip((perPage * page) - perPage)

@@ -29,7 +29,7 @@ module.exports = {
     listAll: function (req, res, next) {
         //db.connect();
 
-        var perPage = 10;
+        var perPage = 25;
         var page = req.params.page || 1;
 
         let viewObj = {
@@ -42,7 +42,7 @@ module.exports = {
     listAllPage: function (req, res, next) {
         //db.connect();
 
-        var perPage = 10;
+        var perPage = 25;
         var page = req.params.page || 1;
 
         let viewObj = {

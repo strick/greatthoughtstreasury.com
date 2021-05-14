@@ -3,31 +3,6 @@ var Quote = require('../models/Quote');
 var db = require('../db');
 const paginate = require('../pagination');
 
-/*
-const paginate = async function(perPage, page, res){
-
-    Author.find({})
-        .skip((perPage * page) - perPage)
-        .limit(perPage)
-        .exec(function (err, authors) {
-
-        if (err)
-            return next(err);            
-
-        Author.countDocuments({}).exec((err,count)=>{       
-            
-            db.close();
-
-            res.render('authors/index', { 
-                title: 'Author Listing',
-                current: page,
-                pages: Math.ceil(count / perPage),
-                authors: authors
-            });
-        });
-    });
-}
-*/
 module.exports = {
 
     test: function(req, res, next) {

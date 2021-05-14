@@ -9,8 +9,10 @@
 </div>
 <div class="col-lg-9 col-md-6 mb-4">
 
+    <%- include('../partials/pagination.ejs', {page: 'authors/single/' + author._id}); %>
+
     <div class="row text-center">
-        <%- include('../partials/pagination.ejs', {page: 'authors/single/' + author._id}); %>
+
     <% author.quotes.forEach(function(quote){ %>
         <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">    
@@ -23,6 +25,7 @@
             </div>
         </div>
         <% }) %>    
-        <%- include('../partials/pagination.ejs', {page: 'authors/single/' + author._id}); %>
     </div>
+    <%- include('../partials/pagination.ejs', {page: 'authors/single/' + author._id}); %>
+
 </div>

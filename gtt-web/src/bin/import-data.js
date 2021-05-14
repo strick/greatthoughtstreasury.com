@@ -56,7 +56,7 @@ var fs = require("fs");
                         c--;
 
                         //if(c % 1 == 0){
-                            console.log(c + " quotes remaning");
+                        //    console.log(c + " quotes remaning");
                         //}
 
                         if(c == 1){
@@ -137,7 +137,7 @@ function buildQuotes(authors)
         var count = 0; 
         var quotes = [];
 
-        var data = fs.readFileSync(__dirname + '/import-files/quotes_small.json');
+        var data = fs.readFileSync(__dirname + '/import-files/quotes.json');
 
         var jsonData = data;
 

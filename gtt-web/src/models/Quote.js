@@ -20,6 +20,10 @@ const quoteSchema = new Schema({
     topics: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Topic'
+    }],    
+    keywords: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Keyword'
     }]
 });
 

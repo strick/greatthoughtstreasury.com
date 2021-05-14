@@ -1,22 +1,34 @@
 var Topic = require('../models/Topic');
 var Quote = require('../models/Quote');
 var db = require('../db');
+const paginate = require('../pagination');
 
 module.exports = {
     
     listAll: function (req, res, next) {
-        db.connect();
-        Topic.find({}, function (err, topics) {
-            if (err)
-                return next(err);
-            db.close();
-             
-            res.render('topics/index', { 
-                title: 'Topic Listing',
-                topics: topics
-            });
+        //db.connect();
 
-        });
+        var perPage = 25;
+        var page = req.params.page || 1;
+
+        let viewObj = {
+            title: 'Topic Listing'
+        }
+
+        paginate.paginate(perPage, page, res, Topic, viewObj, 'topics/index', 'topics');
+    },
+
+    listAllPage: function (req, res, next) {
+        //db.connect();
+
+        var perPage = 25;
+        var page = req.params.page || 1;
+
+        let viewObj = {
+            title: 'Topic Listing'
+        }
+
+        paginate.paginate(perPage, page, res, Topic, viewObj, 'topics/index', 'topics');
     },
     
     getById: function (req, res, next) {

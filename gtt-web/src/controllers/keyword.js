@@ -1,22 +1,34 @@
 var Keyword = require('../models/Keyword');
 var Quote = require('../models/Quote');
 var db = require('../db');
+const paginate = require('../pagination');
 
 module.exports = {
     
     listAll: function (req, res, next) {
-        db.connect();
-        Keyword.find({}, function (err, keywords) {
-            if (err)
-                return next(err);
-            db.close();
-             
-            res.render('keywords/index', { 
-                title: 'Keyword Listing',
-                keywords: keywords
-            });
+        //db.connect();
 
-        });
+        var perPage = 25;
+        var page = req.params.page || 1;
+
+        let viewObj = {
+            title: 'Keyword Listing'
+        }
+
+        paginate.paginate(perPage, page, res, Keyword, viewObj, 'keywords/index', 'keywords');
+    },
+
+    listAllPage: function (req, res, next) {
+        //db.connect();
+
+        var perPage = 25;
+        var page = req.params.page || 1;
+
+        let viewObj = {
+            title: 'Keyword Listing'
+        }
+
+        paginate.paginate(perPage, page, res, Keyword, viewObj, 'keywords/index', 'keywords');
     },
     
     getById: function (req, res, next) {

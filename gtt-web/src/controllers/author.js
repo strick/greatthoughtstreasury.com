@@ -45,26 +45,37 @@ module.exports = {
     },
 
     getByNid: function (req, res, next) {
-        db.connect();
-
         
-        Author.findOne({_id: req.params.id}).
-            populate({
-                path: 'quotes',
-                model: 'Quote'
-            }).
-            exec(function (err, author) {
-            if (err)
-                return next(err);
-               
-           // console.log(author);
+        _paginate(req, res, next);
 
-           db.close();
+    },
 
-            res.render('authors/single', { 
-                title: 'Author',
-                author: author
-            });
-        });
+    getByNidPage: function (req, res, next) {
+        
+        _paginate(req, res, next);
+
     }
+}
+
+const _paginate = function(req, res, next) {
+
+    let controllerObj = {
+        res: res,
+        req: req,
+        next: next,
+        model: Author,
+        relateModel: Quote,
+        relateModelField: 'authorId',
+        populate: {
+            path: 'quotes',
+            model: 'Quote'
+        },
+        viewScript: 'authors/single',
+        resultsKey: 'author',
+        viewObj: {
+            title: 'Author'
+        }
+    };
+
+    paginate.paginateSingle(controllerObj);
 }

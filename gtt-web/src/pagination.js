@@ -52,7 +52,7 @@ module.exports = {
 
                 
             let relatedModelObj = {};
-            relatedModelObj["keywords"] = results._id;
+            relatedModelObj[controllerObj.relateModelField] = results._id;
  
             // Get the full count of related docuuments to enable paging to walk over all of them
             controllerObj.relateModel.countDocuments(relatedModelObj).
@@ -69,6 +69,5 @@ module.exports = {
             });
             
         });
-
     }
 }

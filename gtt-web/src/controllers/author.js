@@ -2,6 +2,31 @@ var Author = require('../models/Author');
 var Quote = require('../models/Quote');
 var db = require('../db');
 
+
+const paginate = async function(perPage, page, res){
+
+    Author.find({})
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec(function (err, authors) {
+
+        if (err)
+            return next(err);            
+
+        Author.countDocuments({}).exec((err,count)=>{       
+            
+            db.close();
+
+            res.render('authors/index', { 
+                title: 'Author Listing',
+                current: page,
+                pages: Math.ceil(count / perPage),
+                authors: authors
+            });
+        });
+    });
+}
+
 module.exports = {
 
     test: function(req, res, next) {
@@ -27,18 +52,20 @@ module.exports = {
     
     listAll: function (req, res, next) {
         db.connect();
-        Author.find({}, function (err, authors) {
-            if (err)
-                return next(err);            
 
-            db.close();
-             
-            res.render('authors/index', { 
-                title: 'Author Listing',
-                authors: authors
-            });
+        var perPage = 10;
+        var page = req.params.page || 1;
 
-        });
+        paginate(perPage, page, res);
+    },
+
+    listAllPage: function (req, res, next) {
+        db.connect();
+
+        var perPage = 10;
+        var page = req.params.page || 1;
+
+        paginate(perPage, page, res);
     },
 
     getByNid: function (req, res, next) {

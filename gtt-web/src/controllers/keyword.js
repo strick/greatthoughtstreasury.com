@@ -12,6 +12,7 @@ module.exports = {
         }
 
         paginate.paginate(req, res, Keyword, viewObj, 'keywords/index', 'keywords');
+        //_paginate(req, res);
     },
 
     listAllPage: function (req, res, next) {
@@ -21,25 +22,41 @@ module.exports = {
         }
 
         paginate.paginate(req, res, Keyword, viewObj, 'keywords/index', 'keywords');
+        //_paginate(req, res);
     },
     
     getById: function (req, res, next) {
-        db.connect();
-        Keyword.findOne({_id: req.params.id}).
-            populate({
-                path: 'quotes',
-                model: 'Quote'
-            }).
-            exec(function (err, keyword) {
-            if (err)
-                return next(err);
-            
-            db.close();
+        
+        _paginate(req, res, next);
 
-            res.render('keywords/single', { 
-                title: 'Keyword',
-                keyword: keyword
-            });
-        });
+    },
+
+    getByIdPage: function (req, res, next) {
+        
+        _paginate(req, res, next);
+
     }
+}
+
+const _paginate = function(req, res, next) {
+
+    let controllerObj = {
+        res: res,
+        req: req,
+        next: next,
+        model: Keyword,
+        relateModel: Quote,
+        relateModelField: 'keywords',
+        populate: {
+            path: 'quotes',
+            model: 'Quote'
+        },
+        viewScript: 'keywords/single',
+        resultsKey: 'keyword',
+        viewObj: {
+            title: 'Keyword'
+        }
+    };
+
+    paginate.paginateSingle(controllerObj);
 }

@@ -6,6 +6,7 @@
     </div>
 </div>
 <div class="col-lg-9 col-md-6 mb-4">
+    <%- include('../partials/pagination.ejs', {page: 'keywords/single/' + keyword._id}); %>
     <div class="row text-center">
     <% keyword.quotes.forEach(function(quote){ %>
         <div class="col-lg-4 col-md-6 mb-4">
@@ -17,4 +18,5 @@
         </div>
         <% }) %>    
     </div>
+    <%- include('../partials/pagination.ejs', {page: 'keywords/single/' + keyword._id}); %>
 </div>

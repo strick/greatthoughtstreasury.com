@@ -24,22 +24,37 @@ module.exports = {
     },
     
     getById: function (req, res, next) {
-        db.connect();
-        Topic.findOne({_id: req.params.id}).
-            populate({
-                path: 'quotes',
-                model: 'Quote'
-            }).
-            exec(function (err, topic) {
-            if (err)
-                return next(err);
-            
-            db.close();
+        
+        _paginate(req, res, next);
 
-            res.render('topics/single', { 
-                title: 'Topic',
-                topic: topic
-            });
-        });
+    },
+
+    getByIdPage: function (req, res, next) {
+        
+        _paginate(req, res, next);
+
     }
+}
+
+const _paginate = function(req, res, next) {
+
+    let controllerObj = {
+        res: res,
+        req: req,
+        next: next,
+        model: Topic,
+        relateModel: Quote,
+        relateModelField: 'topics',
+        populate: {
+            path: 'quotes',
+            model: 'Quote'
+        },
+        viewScript: 'topics/single',
+        resultsKey: 'topic',
+        viewObj: {
+            title: 'Topic'
+        }
+    };
+
+    paginate.paginateSingle(controllerObj);
 }

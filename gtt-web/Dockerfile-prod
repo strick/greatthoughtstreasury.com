@@ -15,5 +15,5 @@ CMD cd src && \
 #    migrate down && \
  ##   migrate up && \
  ##   node bin/import-data.js && \ 
-    mirate up && \
+    mirate up &&
     npm start 

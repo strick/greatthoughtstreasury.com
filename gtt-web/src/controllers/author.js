@@ -1,31 +1,7 @@
 var Author = require('../models/Author');
 var Quote = require('../models/Quote');
 var db = require('../db');
-
-
-const paginate = async function(perPage, page, res){
-
-    Author.find({})
-        .skip((perPage * page) - perPage)
-        .limit(perPage)
-        .exec(function (err, authors) {
-
-        if (err)
-            return next(err);            
-
-        Author.countDocuments({}).exec((err,count)=>{       
-            
-            db.close();
-
-            res.render('authors/index', { 
-                title: 'Author Listing',
-                current: page,
-                pages: Math.ceil(count / perPage),
-                authors: authors
-            });
-        });
-    });
-}
+const paginate = require('../pagination');
 
 module.exports = {
 
@@ -51,21 +27,29 @@ module.exports = {
     },
     
     listAll: function (req, res, next) {
-        db.connect();
+        //db.connect();
 
-        var perPage = 10;
+        var perPage = 25;
         var page = req.params.page || 1;
 
-        paginate(perPage, page, res);
+        let viewObj = {
+            title: 'Author Listing'
+        }
+
+        paginate.paginate(perPage, page, res, Author, viewObj, 'authors/index', 'authors');
     },
 
     listAllPage: function (req, res, next) {
-        db.connect();
+        //db.connect();
 
-        var perPage = 10;
+        var perPage = 25;
         var page = req.params.page || 1;
 
-        paginate(perPage, page, res);
+        let viewObj = {
+            title: 'Author Listing'
+        }
+
+        paginate.paginate(perPage, page, res, Author, viewObj, 'authors/index', 'authors');
     },
 
     getByNid: function (req, res, next) {

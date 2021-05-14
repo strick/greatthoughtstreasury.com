@@ -1,21 +1,33 @@
 var Quote = require('../models/Quote');
 var db = require('../db');
+const paginate = require('../pagination');
 
 module.exports = {
     
     listAll: function (req, res, next) {
-        db.connect();
-        Quote.find({}, function (err, quotes) {
-            if (err)
-                return next(err);
-            db.close();
-             
-            res.render('quotes/index', { 
-                title: 'Quote Listing',
-                quotes: quotes
-            });
+        //db.connect();
 
-        });
+        var perPage = 25;
+        var page = req.params.page || 1;
+
+        let viewObj = {
+            title: 'Quotes Listing'
+        }
+
+        paginate.paginate(perPage, page, res, Quote, viewObj, 'quotes/index', 'quotes');
+    },
+
+    listAllPage: function (req, res, next) {
+        //db.connect();
+
+        var perPage = 25;
+        var page = req.params.page || 1;
+
+        let viewObj = {
+            title: 'Quotes Listing'
+        }
+
+        paginate.paginate(perPage, page, res, Quote, viewObj, 'quotes/index', 'quotes');
     },
 
     getByNid: function (req, res, next) {

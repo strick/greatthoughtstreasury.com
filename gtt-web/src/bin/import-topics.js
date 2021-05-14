@@ -35,7 +35,7 @@ const addTopicToQuote = function(topic){
 
         if(quote == null) {
             missedQuotes++;
-            return null;
+            return;
         }
         quote.topics.push(topic._id);
         return quote.save(quote);
@@ -104,15 +104,33 @@ const buildTopics = async function() {
 
     var c = jsonParsed.length;
 
-    console.log("Pasing out " + c );
+
+
+    // Need to introduce Keywords.  Topics are UCase, Keywords are LCase
+    var topics = [];
+    var keywords = [];
 
     jsonParsed.map(function(obj){
-        obj.topic = obj.topic.toLocaleLowerCase().trim();
+
+        // If it's a keyword
+        if(obj.topic === obj.topic.toLocaleLowerCase().trim()){
+            keywords.push(obj);
+        }
+        else {
+            topics.push(obj);
+        }
+        
+        //obj.topic = obj.topic.toLocaleLowerCase().trim();
     });
+
+    c = topics.length;
+    var c2 = keywords.length;
+    console.log("Pasing out " + c  + " topics") ;
+    console.log("Pasing out " + c2 + " keywords");
 
     // BUG FIX NEEDED:   Save quote is added to pics
     db.connect();
-    for (const obj of jsonParsed){
+    for (const obj of topics){
         c--;
         var myPromise = () => {
             return new Promise(async (resolve, reject) => {
@@ -159,6 +177,9 @@ const buildTopics = async function() {
   
         //console.log(obj);
         var r = await myPromise();
+        if(c % 1000 == 0){
+            console.log(c + " topics remaning");
+        }
         if(c == 0) db.close();
 
     }

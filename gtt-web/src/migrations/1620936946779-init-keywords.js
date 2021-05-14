@@ -22,10 +22,10 @@ module.exports.up = next => {
       
       let db = client.db();
       
-      return db.createCollection("topics")
+      return db.createCollection("keywords")
       .then(() => {
          
-        console.log("topics collection is created!");
+        console.log("keywords collection is created!");
         client.close();
 
       });
@@ -48,9 +48,9 @@ module.exports.down = next => {
       let db = client.db();
 
       // create 'users' collection in newdb database
-      return db.dropCollection("topics")
+      return db.dropCollection("keywords")
       .then(() => {
-        console.log("topics collection is Deleted!");
+        console.log("keywords collection is Deleted!");
         client.close();
       });
 s            

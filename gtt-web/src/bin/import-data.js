@@ -50,12 +50,15 @@ var fs = require("fs");
                 }
 
                 if(author != null){
-                   
-                    //console.log(author);
-                    
+  
                     // Only close the connection after everything has processed.
                     var saveFinished = function(){
                         c--;
+
+                        //if(c % 1 == 0){
+                        //    console.log(c + " quotes remaning");
+                        //}
+
                         if(c == 1){
                             console.log("Skipped " + authorsSkipped + " quotes");
                             console.log("Closing connection");
@@ -141,11 +144,6 @@ function buildQuotes(authors)
         var jsonParsed = JSON.parse(jsonData);
 
         jsonParsed.forEach(function(row){
-
-            if(count < 1) {
-                count++;
-                return;
-            }
 
             quotes.push({
                 quote: row.field_quot_value,

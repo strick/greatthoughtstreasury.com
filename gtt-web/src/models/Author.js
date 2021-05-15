@@ -9,6 +9,7 @@ const authorSchema = new Schema({
     death: String,
     image: String,
     nid: Number,
+    popularAuthor: Boolean,
     quotes: [{type: mongoose.Schema.Types.ObjectId, ref: 'Quote'}]
 });
 

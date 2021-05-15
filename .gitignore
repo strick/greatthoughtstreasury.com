@@ -1,4 +1,8 @@
-import-files
+import-files/
+
+# Import data
+data/
+
 # Local .terraform directories
 **/.terraform/*
 

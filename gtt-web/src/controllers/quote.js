@@ -1,6 +1,7 @@
 var Quote = require('../models/Quote');
 var db = require('../db');
 const paginate = require('../pagination');
+const { populate } = require('../models/Quote');
 
 module.exports = {
     
@@ -19,7 +20,12 @@ module.exports = {
             title: 'Quotes Listing'
         }
 
-        paginate.paginate(req, res, Quote, viewObj, 'quotes/index', 'quotes');
+        let populateObj = {
+            path: 'topics',
+            model: 'Topic'
+        }
+
+        paginate.paginate(req, res, Quote, viewObj, 'quotes/index', 'quotes', populateObj);
     },
 
     getByNid: function (req, res, next) {

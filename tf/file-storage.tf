@@ -6,3 +6,9 @@ resource "azurerm_storage_account" "gtt_file_storage" {
   account_replication_type = "GRS"  # $0.02 more than LRS
 
 }
+
+resource "azurerm_storage_container" "gtt_file_storage_container" {
+  name                  = "public-content"
+  storage_account_name  = azurerm_storage_account.gtt_file_storage.name
+  container_access_type = "blob"
+}

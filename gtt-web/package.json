@@ -7,6 +7,7 @@
     "start:dev": "nodemon --legacy-watch ./src/bin/www"
   },
   "dependencies": {
+    "azure-storage": "^2.10.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",

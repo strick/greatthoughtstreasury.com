@@ -4,6 +4,7 @@ resource "azurerm_storage_account" "gtt_file_storage" {
   location                 = azurerm_resource_group.greatthoughtstreasury.location
   account_tier             = "Standard"
   account_replication_type = "GRS"  # $0.02 more than LRS
+  access_tier = "Hot"  # we want fast access
   allow_blob_public_access = true
 
 }

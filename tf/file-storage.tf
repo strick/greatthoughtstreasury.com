@@ -7,15 +7,8 @@ resource "azurerm_storage_account" "gtt_file_storage" {
 
 }
 
-resource "azurerm_storage_container" "gtt_file_storage_conatiner" {
+resource "azurerm_storage_container" "gtt_file_storage_container" {
   name                  = "content"
   storage_account_name  = azurerm_storage_account.gtt_file_storage.name
-  container_access_type = "private"
-}
-
-resource "azurerm_storage_blob" "gtt_image_blob" {
-  name                   = "gttauthorimages"
-  storage_account_name   = azurerm_storage_account.gtt_file_storage.name
-  storage_container_name = azurerm_storage_container.gtt_file_storage_conatiner.name
-  type                   = "Block"
+  container_access_type = "blob"
 }

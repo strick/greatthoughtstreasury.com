@@ -9,6 +9,7 @@ var authorsRouter = require('./routes/authors');
 var quotesRouter = require('./routes/quotes');
 var topicsRouter = require('./routes/topics');
 var keywordsRouter = require('./routes/keywords');
+var searchRouter = require('./routes/search');
 
 
 var app = express();
@@ -32,6 +33,7 @@ app.use('/authors', authorsRouter);
 app.use('/quotes', quotesRouter);
 app.use('/topics', topicsRouter);
 app.use('/keywords', keywordsRouter);
+app.use('/search', searchRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

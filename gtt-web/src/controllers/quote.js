@@ -59,22 +59,18 @@ module.exports = {
                 keywords.push(keyword);
             });
             
-            console.log("{keywords: { $elemMatch: {$in: " + keywords + "}}");
             // Query quotes containing any of the keywords of the given quote.
-            Quote.find({keywords: { $elemMatch: {$in: keywords}}}, function(err, quotes){
+//            console.log("{keywords: { $elemMatch: {$in: " + keywords + "}}");
 
-                if (err){
-                    db.close();
-                    return next(err);
-                }
-                db.close();
+            let viewObj = {
+                title: 'Related Quotes',
+                quoteId: quote._id
+            }
 
-                res.render('quotes/related', { 
-                    title: 'Related Quotes',
-                    quotes: quotes
-                });
-                
-            });            
+            let findQuery = {keywords: { $elemMatch: {$in: keywords}}};
+
+            paginate.paginate(req, res, Quote, viewObj, 'quotes/related', 'quotes', '', 20, 1, findQuery);
+        
         });
     }
 }

@@ -19,7 +19,7 @@ module.exports = {
             if (err)
                 return next(err);            
 
-            model.countDocuments({}).exec((err,count)=>{       
+            model.countDocuments(findQuery).exec((err,count)=>{       
                 
                 db.close();
 

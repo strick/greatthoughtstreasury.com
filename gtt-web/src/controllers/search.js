@@ -16,17 +16,11 @@ module.exports = {
             if (err)
                 return next(err);     
             
-            res.send(results);
+            res.render('search/index', {
+                title: 'Search Results',
+                quotes: results
+            })
 
         });
- 
-            
-
-/*
-        res.send("Hello");
-        res.render('search/results', { 
-            title: 'Search Results'
-        });
-*/
     }
 }

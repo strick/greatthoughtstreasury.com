@@ -4,27 +4,6 @@ var db = require('../db');
 const paginate = require('../pagination');
 
 module.exports = {
-
-    test: function(req, res, next) {
-        db.connect();
-         
-        let authors = [
-            { firstName: "ddddd", bio: "Rabbi of the Jewish Talmu", death: 339, image: "abaye[1].gif"},
-            { firstName: "Fraffffncis", lastName: "Ellington", bio: "Abbot	Theologian, Unitarian Minister", birth: 1836, death: 1903},
-            { firstName: "John", lastName: "Abbott, fully John Stevens Cabot Abbott", bio: "American Historian, Pastor and Pedagogical Writer", birth: 1805, death: 1877, image: "JohnStevens-CabotAbbott-68-s[1].jpg" }
-          ];
-      
-          Author.insertMany(authors).
-          then(() => {
-            db.close();
-             
-            res.render('authors/index', { 
-                title: 'Author Listing',
-                authors: authors
-            });
-          });
-            
-    },
     
     listAll: function (req, res, next) {
  

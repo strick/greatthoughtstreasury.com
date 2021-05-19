@@ -10,16 +10,37 @@ module.exports = {
 
         var search = req.body.q;
 
-        Quote.find({quote: new RegExp(`\\b(${search})\\b`, 'i')}, function(err, results){
+        var all = ['quotes', 'authors'];
+        var results = [];
 
-            db.close();             
-            if (err)
+        Quote.find({quote: new RegExp(`\\b(${search})\\b`, 'i')}, function(err, results){
+          
+            if (err) {                
+                db.close();   
                 return next(err);     
-            
-            res.render('search/index', {
-                title: 'Search Results',
-                quotes: results
-            })
+            }
+
+            Author.aggregate(
+                [
+                    {$project: {fullName:{$concat: ["$firstName", "$lastName"]}}},
+                    {$match:{fullName: new RegExp(`\\b(${search})\\b`, 'i')}}
+                ],
+                function(err, results2){
+ 
+                
+                if (err) {                
+                    db.close();   
+                    return next(err);     
+                }
+
+                //console.log(results.concat(results2));
+
+                res.render('search/index', {
+                    title: 'Search Results',
+                    quotes: results,
+                    authors: results2
+                });
+            });
 
         });
     }

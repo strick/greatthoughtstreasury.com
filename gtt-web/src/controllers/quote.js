@@ -68,8 +68,12 @@ module.exports = {
             }
 
             let findQuery = {keywords: { $elemMatch: {$in: keywords}}};
+            let populateObj = {
+                path: 'topics',
+                model: 'Topic'
+            }
 
-            paginate.paginate(req, res, Quote, viewObj, 'quotes/related', 'quotes', '', 20, 1, findQuery);
+            paginate.paginate(req, res, Quote, viewObj, 'quotes/related', 'quotes', populateObj, 20, 1, findQuery);
         
         });
     }

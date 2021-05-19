@@ -31,9 +31,11 @@ module.exports = {
         });
     },
 
-    paginateSingle: function(controllerObj){
+    paginateSingle: function(controllerObj, findQuery){
        
         db.connect();
+
+        var findQuery = findQuery || {_id: controllerObj.req.params.id};
 
         // Set default paging settings
         var perPage = controllerObj.perPage || 10;
@@ -44,7 +46,7 @@ module.exports = {
         controllerObj.populate.skip = (perPage * page) - perPage;
 
         // Grab the prmimary model and populate with the initial limits of the related model
-        controllerObj.model.findOne({_id: controllerObj.req.params.id}).
+        controllerObj.model.findOne(findQuery).
   
             populate(controllerObj.populate)
             .exec(function (err, results) {

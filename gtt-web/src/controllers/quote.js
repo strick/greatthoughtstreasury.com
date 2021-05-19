@@ -10,8 +10,12 @@ module.exports = {
         let viewObj = {
             title: 'Quotes Listing'
         }
+        let populateObj = {
+            path: 'topics',
+            model: 'Topic'
+        }
 
-        paginate.paginate(req, res, Quote, viewObj, 'quotes/index', 'quotes');
+        paginate.paginate(req, res, Quote, viewObj, 'quotes/index', 'quotes', populateObj);
     },
 
     listAllPage: function (req, res, next) {

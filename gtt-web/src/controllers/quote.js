@@ -40,5 +40,32 @@ module.exports = {
                 quote: quote
             });
         });
+    },
+
+    related: function(req, res, next) {
+
+        // Get quotes with the same keywords
+
+        // Get keywords on this quote
+
+        
+
+        db.connect();
+        Quote.findOne({_id: req.params.id}, function (err, quote) {
+            if (err)
+                return next(err);
+         
+            // Query quotes containing any of the keywords of the given quote.
+            Quote.find({keywords: { $elemMatch: [quote.keywords]}}, function(err, quotes){
+
+                db.close();
+
+                res.render('quotes/related', { 
+                    title: 'Related Quotes',
+                    quotes: quotes
+                });
+                
+            });            
+        });
     }
 }

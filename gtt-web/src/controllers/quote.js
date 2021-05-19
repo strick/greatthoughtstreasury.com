@@ -44,20 +44,29 @@ module.exports = {
 
     related: function(req, res, next) {
 
-        // Get quotes with the same keywords
-
-        // Get keywords on this quote
-
-        
-
         db.connect();
         Quote.findOne({_id: req.params.id}, function (err, quote) {
-            if (err)
+            if (err){
+                db.close();
                 return next(err);
+            }
          
-            // Query quotes containing any of the keywords of the given quote.
-            Quote.find({keywords: { $elemMatch: [quote.keywords]}}, function(err, quotes){
+            console.log(quote.keywords);
 
+            var keywords = [];
+            //Create keyword => ObjectId("keyword") for mongodb query
+            quote.keywords.forEach(function(keyword){
+                keywords.push(keyword);
+            });
+            
+            console.log("{keywords: { $elemMatch: {$in: " + keywords + "}}");
+            // Query quotes containing any of the keywords of the given quote.
+            Quote.find({keywords: { $elemMatch: {$in: keywords}}}, function(err, quotes){
+
+                if (err){
+                    db.close();
+                    return next(err);
+                }
                 db.close();
 
                 res.render('quotes/related', { 

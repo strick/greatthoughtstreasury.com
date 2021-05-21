@@ -6,7 +6,7 @@ dotenv.config();
 
 //const DB_URL = `${process.env.DBHOST}/${process.env.DBNAME}`;
 var URL = "";
-console.log("ENV is : " + process.env.ENV);
+//console.log("ENV is : " + process.env.ENV);
 
 if(process.env.ENV == "dev"){
     URL = `${process.env.DBTYPE}://${process.env.DBHOST}/${process.env.DBNAME}`;//?retryWrites=true&w=majority`

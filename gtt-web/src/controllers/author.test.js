@@ -1,7 +1,3 @@
-//
-// An example of running unit tests against the "metadata" microservice using Jest.
-//
-//require('mongodb');
 const { ExponentialRetryPolicyFilter } = require('azure-storage');
 const request = require('supertest');
 const app = require('../app');

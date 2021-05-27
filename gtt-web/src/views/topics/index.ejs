@@ -8,6 +8,14 @@
             <p class="card-text"><%= topic.topic %></p>
           </div>
           <div class="card-footer">
+            <div class="addthis_toolbox" addthis:url="http://greatthoughtstreausry.com/topics/single/<%= topic._id %>" addthis:title="<%= topic.topic %> Quotes">
+              <a class="addthis_button_twitter"></a>
+              <a class="addthis_button_facebook"></a>
+              <a class="addthis_button_linkedin"></a>
+              <a class="addthis_button_email"></a>
+              <a class="addthis_button_compact">Share</a>
+
+            </div>
             <a href="/topics/single/<%= topic._id %>" class="btn btn-primary">View Quotes</a>
           </div>
         </div>

@@ -6,6 +6,14 @@
         <div class="card h-100">       
           <div class="card-body">          
             <p class="card-text"><%= quote.quote %></p>
+            <div class="addthis_toolbox" addthis:url="http://greatthoughtstreausry.com/quotes/single/<%= quote._id %>">
+              <a class="addthis_button_twitter"></a>
+              <a class="addthis_button_facebook"></a>
+              <a class="addthis_button_linkedin"></a>
+              <a class="addthis_button_email"></a>
+              <a class="addthis_button_compact">Share</a>
+
+            </div>
             <p class="card-text"><% quote.topics.forEach(function(topic) { %><a href="/topics/single/<%=topic._id;%>"><%=topic.topic%></a> | <% });%></p>
           </div>
           <div class="card-footer">

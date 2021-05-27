@@ -3,13 +3,23 @@
 <% authors.forEach(function(author){ %>
     <div class="col-lg-3 col-md-6 mb-4">
         <div class="card h-100">
+
           <img class="card-img-top" src="https://gttfilestorage.blob.core.windows.net/public-content/images/<%=author.image%>" alt="">
+          
           <div class="card-body">
             <h4 class="card-title"><%= author.firstName %> <%= author.lastName %></h4>            
+            <div class="addthis_toolbox" addthis:url="http://greatthoughtstreausry.com/authors/single/<%= author._id %>" addthis:title="<%= author.firstName %> <%= author.lastName %> Quotes">
+              <a class="addthis_button_twitter"></a>
+              <a class="addthis_button_facebook"></a>
+              <a class="addthis_button_linkedin"></a>
+              <a class="addthis_button_email"></a>
+              <a class="addthis_button_compact">Share</a>
+
+            </div>
             <p class="card-text"><%= author.bio %></p>
           </div>
           <div class="card-footer">
-            <div class="addthis_inline_share_toolbox"></div>
+
             <a href="/authors/single/<%= author._id %>" class="btn btn-primary">View Quotes</a>
           </div>
         </div>

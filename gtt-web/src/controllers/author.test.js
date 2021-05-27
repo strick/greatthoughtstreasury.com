@@ -14,7 +14,7 @@ describe('Author controller requests', () => {
     // ToDo - MOCK this database so you can supply the value and confirm the page gives it back
     it('should return one author when existing id supplied', async () => {
         await request(app)
-        .get('/authors/60a2a8757036d21c9f76d024')
+        .get('/authors/single/60a2a8757036d21c9f76d024')
         .expect(200)
         .expect(function(res){
             if(!res.text.includes("John O’Donohue")) throw new Error("Expected to find the author");

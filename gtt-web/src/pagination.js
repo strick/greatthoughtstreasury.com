@@ -56,12 +56,18 @@ module.exports = {
                // console.log(err);
                 if(err instanceof mongoose.Error.CastError){
                     db.close();
-                    controllerObj.res.status(404).send("Not found.");
+                    controllerObj.res.status(404).send();
                 }
                 return controllerObj.next(err);
             }
 
 
+            // If the result is null, then author doesn't exist
+            if(results == null){
+                db.close();
+                controllerObj.res.status(404).send();
+                return controllerObj.next();
+            }
                 
             let relatedModelObj = {};
             relatedModelObj[controllerObj.relateModelField] = results._id;

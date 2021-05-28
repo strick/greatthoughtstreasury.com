@@ -38,6 +38,12 @@ describe('Author controller requests', () => {
         .expect(404);
     });
 
+    it('should return 404 on correct format author that doesnt exist', async () => {
+
+        await request(app)
+        .get('/authors/single/60aaa8757036d21c9f76ac82')
+        .expect(404);
+    });
     
 });
 

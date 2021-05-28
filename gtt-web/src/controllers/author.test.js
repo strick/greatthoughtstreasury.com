@@ -2,6 +2,7 @@ const request = require('supertest');
 const app = require('../app');
 
 describe('Author controller requests', () => {
+
     it('should return author listing page', async () => {
       const res = await request(app)
         .get('/authors')
@@ -21,11 +22,23 @@ describe('Author controller requests', () => {
         });
     });
 
-    it('should return 404 on undefined author', async () => {
+    it('should return 404 on malform author', async () => {
+
+        // Malform address
         await request(app)
         .get('/authors/single/dafsdfsdk3333')
         .expect(404);
-    })
+    });
+
+    it('should return 404 on malform author pages', async () => {
+        
+        // Malform address
+        await request(app)
+        .get('/authors/single/dafsdfsdk3333/2')
+        .expect(404);
+    });
+
+    
 });
 
 afterAll(done => {

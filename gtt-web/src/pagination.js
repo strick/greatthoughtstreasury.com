@@ -1,4 +1,5 @@
 const db = require('./db');
+const mongoose = require('mongoose');
 
 module.exports = {
 
@@ -51,8 +52,15 @@ module.exports = {
   
             populate(controllerObj.populate)
             .exec(function (err, results) {
-            if (err)
+            if (err){
+               // console.log(err);
+                if(err instanceof mongoose.Error.CastError){
+                    db.close();
+                    controllerObj.res.status(404).send("Not found.");
+                }
                 return controllerObj.next(err);
+            }
+
 
                 
             let relatedModelObj = {};

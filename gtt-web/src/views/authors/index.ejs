@@ -9,12 +9,7 @@
           <div class="card-body">
             <h4 class="card-title"><%= author.firstName %> <%= author.lastName %></h4>            
             <div class="addthis_toolbox" addthis:url="http://greatthoughtstreausry.com/authors/single/<%= author._id %>" addthis:title="<%= author.firstName %> <%= author.lastName %> Quotes">
-              <a class="addthis_button_twitter"></a>
-              <a class="addthis_button_facebook"></a>
-              <a class="addthis_button_linkedin"></a>
-              <a class="addthis_button_email"></a>
-              <a class="addthis_button_compact">Share</a>
-
+              <%- include('../partials/addthis.ejs'); %>
             </div>
             <p class="card-text"><%= author.bio %></p>
           </div>

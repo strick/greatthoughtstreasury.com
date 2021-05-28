@@ -16,12 +16,12 @@ else {
 }
 
 const DB_URL = URL;
-console.log(DB_URL);
+//console.log(DB_URL);
 module.exports = {
     
     connect: () => {
 
-        console.log(DB_URL);
+       // console.log(DB_URL);
         mongoose.set('useNewUrlParser', true);
         mongoose.set('useFindAndModify', false);
         mongoose.set('useCreateIndex', true);

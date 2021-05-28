@@ -1,7 +1,6 @@
 var Quote = require('../models/Quote');
 var db = require('../db');
 const paginate = require('../pagination');
-const { populate } = require('../models/Quote');
 
 module.exports = {
     
@@ -34,7 +33,10 @@ module.exports = {
 
     getByNid: function (req, res, next) {
         db.connect();
-        Quote.findOne({nid: req.params.id}, function (err, quote) {
+        Quote.findOne({_id: req.params.id}).populate( {
+            path: 'authorId',
+            model: 'Author'
+        }).populate({ path:'topics', model:'Topic'}).exec(function (err, quote) {
             
             if (err){
                 // console.log(err);
@@ -52,7 +54,7 @@ module.exports = {
                  return;
              }
             
-            console.log(quote);
+            //console.log(quote);
             res.render('quotes/single', { 
                 title: 'Quote',
                 quote: quote

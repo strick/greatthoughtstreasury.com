@@ -13,7 +13,7 @@ module.exports = {
         var all = ['quotes', 'authors'];
         var results = [];
 
-        Quote.find({quote: new RegExp(`\\b(${search})\\b`, 'i')}, function(err, results){
+        Quote.find({quote: new RegExp(`\\b(${search})\\b`, 'i')}).populate({ path:'topics', model:'Topic'}).exec(function(err, results){
           
             if (err) {                
                 db.close();   
@@ -36,7 +36,7 @@ module.exports = {
                 //console.log(results.concat(results2));
 
                 res.render('search/index', {
-                    title: 'Search Results',
+                    title: 'Search Results: ' + search,
                     quotes: results,
                     authors: results2
                 });

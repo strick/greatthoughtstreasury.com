@@ -17,7 +17,11 @@
         <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">    
                 <div class="card-body">
-                    <p class="card-text">"<%=quote.quote%>"</p>                    
+                    <p class="card-text">"<%=quote.quote%>"</p>      
+                    <div class="addthis_toolbox" addthis:url="http://greatthoughtstreasury.com/quotes/single/<%= quote._id %>">
+                        <%- include('../partials/addthis.ejs'); %>
+          
+                      </div>              
                 </div>
                 <div class="card-footer">
                     <a href="/quotes/related/<%= quote._id %>" class="btn btn-primary">View Similar</a>

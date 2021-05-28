@@ -35,10 +35,24 @@ module.exports = {
     getByNid: function (req, res, next) {
         db.connect();
         Quote.findOne({nid: req.params.id}, function (err, quote) {
-            if (err)
-                return next(err);
-            db.close();
-
+            
+            if (err){
+                // console.log(err);
+                 if(err instanceof mongoose.Error.CastError){
+                     db.close();
+                     res.status(404).send();
+                     return;
+                 }
+             }
+ 
+             // If the result is null, then author doesn't exist
+             if(quote == null){
+                 db.close();
+                 res.status(404).send();                
+                 return;
+             }
+            
+            console.log(quote);
             res.render('quotes/single', { 
                 title: 'Quote',
                 quote: quote

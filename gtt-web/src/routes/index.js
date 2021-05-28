@@ -6,4 +6,13 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Great Thoughts Treasury' });
 });
 
+router.get('/ssl1', function(req, res, next) {
+  res.render('index', { title: 'Great Thoughts Treasury' });
+});
+
+router.get('/.well-known/acme-challenge/tHXmQpThj_1BmFfOhTaQKDqIpDMkrtsbdhQujb2mSUk.3DCjAQOmsihzQajSyJD7dF2ol_wTVzRfSeX4NV4p26U', function(req, res, next) {
+  res.set('Content-Type', 'text/plain');
+  res.send("tHXmQpThj_1BmFfOhTaQKDqIpDMkrtsbdhQujb2mSUk.3DCjAQOmsihzQajSyJD7dF2ol_wTVzRfSeX4NV4p26U");
+});
+
 module.exports = router;

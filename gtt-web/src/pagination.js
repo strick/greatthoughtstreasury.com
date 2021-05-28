@@ -7,7 +7,7 @@ module.exports = {
 
         db.connect();
 
-        var perPage = perPage || 25;
+        var perPage = perPage || 50;
         var page = req.params.page || page || 1;
         var findQuery = findQuery || {};
 
@@ -40,7 +40,7 @@ module.exports = {
         var findQuery = findQuery || {_id: controllerObj.req.params.id};
 
         // Set default paging settings
-        var perPage = controllerObj.perPage || 10;
+        var perPage = controllerObj.perPage || 50;
         var page = controllerObj.req.params.page || controllerObj.page || 1;
 
         // Set the limits to the related model to display.
@@ -96,7 +96,7 @@ module.exports = {
         var findQuery = findQuery || {_id: controllerObj.req.params.id};
 
         // Set default paging settings
-        var perPage = controllerObj.perPage || 10;
+        var perPage = controllerObj.perPage || 50;
         var page = controllerObj.req.params.page || controllerObj.page || 1;
 
         // Set the limits to the related model to display.

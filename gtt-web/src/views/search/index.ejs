@@ -6,6 +6,10 @@
       <div class="card h-100">       
         <div class="card-body">          
           <p class="card-text"><%= author.fullName %></p>
+          <div class="addthis_toolbox" addthis:url="http://greatthoughtstreausry.com/authors/single/<%=author._id %>">
+            <%- include('../partials/addthis.ejs'); %>
+
+          </div>
         
         </div>
         <div class="card-footer">
@@ -19,6 +23,10 @@
         <div class="card h-100">       
           <div class="card-body">          
             <p class="card-text"><%= quote.quote %></p>
+            <div class="addthis_toolbox" addthis:url="http://greatthoughtstreausry.com/quotes/single/<%= quote._id %>">
+              <%- include('../partials/addthis.ejs'); %>
+
+            </div>
             <p class="card-text"><% quote.topics.forEach(function(topic) { %><a href="/topics/single/<%=topic._id;%>"><%=topic.topic%></a> | <% });%></p>
           </div>
           <div class="card-footer">

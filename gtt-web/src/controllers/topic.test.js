@@ -12,6 +12,21 @@ describe('Topic controller requests', () => {
       });
     });
 
+    it('should return 404 on malform topic', async () => {
+
+      // Malform address
+      await request(app)
+      .get('/topics/single/dafsdfsdk3333')
+      .expect(404);
+  });
+
+  it('should return 404 on correct format topic that doesnt exist', async () => {
+
+      await request(app)
+      .get('/topics/single/60aaa8757036d21c9f76ac82')
+      .expect(404);
+  });
+
 });
 
 afterAll(done => {

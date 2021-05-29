@@ -22,7 +22,7 @@ module.exports = {
 
             Author.aggregate(
                 [
-                    {$project: {fullName:{$concat: ["$firstName", "$lastName"]}}},
+                    {$project: {fullName:{$concat: ["$firstName", " ", "$lastName"]}}},
                     {$match:{fullName: new RegExp(`\\b(${search})\\b`, 'i')}}
                 ],
                 function(err, results2){

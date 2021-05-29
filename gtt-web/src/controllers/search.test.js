@@ -7,6 +7,26 @@ describe('Search controller requests', () => {
       const res = await request(app)
         .get('/search')
         .expect(404);
+    });
+
+    it('should return a author if only first name is provided', async () => {
+      const res = await request(app)
+        .post('/search')
+        .send({q: "abaye"})
+        .expect(200)
+        .expect(function(res){        
+            if(!res.text.includes("Abaye NULL")) throw new Error("First name not found");     
+        });
+    })
+
+    it('should return a author if only last name is provided', async () => {
+      const res = await request(app)
+      .post('/search')
+      .send({q: "Feltham"})
+      .expect(200)
+      .expect(function(res){        
+          if(!res.text.includes("Owen Feltham")) throw new Error("Last name not found");     
+      });
     })
 
     it('should return search results on a search', async () => {

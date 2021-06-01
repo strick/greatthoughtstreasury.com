@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "mongoose-url-slugs": "^1.0.2"
+    "mongoose-slug-generator": "^1.0.4"
   }
 }

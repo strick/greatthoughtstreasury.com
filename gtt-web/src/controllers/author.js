@@ -23,6 +23,10 @@ module.exports = {
         paginate.paginate(req, res, Author, viewObj, 'authors/index', 'authors');
     },
 
+    getBySlug: function(req, res, next) {
+        res.send("Hello there");
+    },
+
     getByNid: function (req, res, next) {
         
         _paginate(req, res, next);

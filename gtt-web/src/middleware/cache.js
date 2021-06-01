@@ -8,6 +8,7 @@ const cache = function(duration){
         let cachedBody = mcache.get(key);
 
         if(cachedBody){
+            console.log("USING CACHE");
             res.send(cachedBody);
             return;
         }
@@ -17,13 +18,15 @@ const cache = function(duration){
             res.send = (body) => {
 
                 if(res.status(200)){
-                    
+                    console.log("CACHING");
                     if(duration)
                         mcache.put(key, body, duration * 1000);
                     else
                         mcache.put(key, body);
+                        res.sendResponse(body);
+                    
                 }
-                res.sendResponse(body);
+                
             }
         }
         next();

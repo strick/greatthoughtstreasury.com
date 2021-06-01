@@ -4,7 +4,7 @@ const app = require('../app');
 describe('Author controller requests', () => {
 
     //http://www.greatthoughtstreasury.com/author/clara-lucas-balfour
-    it('should return Clara Lucas Balfour when using a slug url', async () => {
+    it('should return author when slug is provided in url', async () => {
         const res = await request(app)
             .get('/author/clara-lucas-balfour')
             .expect(200)

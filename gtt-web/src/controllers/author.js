@@ -25,22 +25,8 @@ module.exports = {
 
     getBySlug: function(req, res, next) {
 
-        db.connect();
-        Author.find({slug: req.params.slug}, function(err, author){
-            if(err){
+        _paginate(req,res,next,{slug: req.params.slug});
 
-                console.error(err);
-                db.close();
-                res.status(404).send();
-                return;//return next(err);
-            }
-
-            console.log(author);
-            res.send(author);
-
-            db.close();
-        })
-                
     },
 
     getByNid: function (req, res, next) {
@@ -56,7 +42,7 @@ module.exports = {
     }
 }
 
-const _paginate = function(req, res, next) {
+const _paginate = function(req, res, next, findQuery) {
 
     let controllerObj = {
         res: res,
@@ -76,5 +62,5 @@ const _paginate = function(req, res, next) {
         }
     };
 
-    paginate.paginateSingle(controllerObj);
+    paginate.paginateSingle(controllerObj, findQuery);
 }

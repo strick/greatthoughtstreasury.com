@@ -70,17 +70,12 @@ module.exports = {
                 db.close();
                 return next(err);
             }
-         
-            console.log(quote.keywords);
 
             var keywords = [];
             //Create keyword => ObjectId("keyword") for mongodb query
             quote.keywords.forEach(function(keyword){
                 keywords.push(keyword);
             });
-            
-            // Query quotes containing any of the keywords of the given quote.
-//            console.log("{keywords: { $elemMatch: {$in: " + keywords + "}}");
 
             let viewObj = {
                 title: 'Related Quotes',

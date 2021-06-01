@@ -1,6 +1,6 @@
 const Author = require('../models/Author');
 var db = require('../db');
-const slugify = require('slugify');
+const slugify = require('slugify')
 
 db.connect();
 Author.find({},function(err, authors){
@@ -13,27 +13,40 @@ Author.find({},function(err, authors){
 
     var updateObj = [];
     // Create a slug and _id object for each author
-    authors.forEach(function(author){
 
-        // Create author fullnam
-        let fullname = author.firstName + " " + author.lastName;
+    var count = authors.length;
 
-        // Create slug
+    authors.forEach(async function(author){
 
-        let slug = slugify(fullname, {
-            replacement: '-',
-            lower: true
-        });
-        
-        if(slug == 'clara-lucas-balfour')
-            console.log(slug);
-        
+        count--;
 
+         // Create author fullnam
+         let fullname = author.firstName + " " + author.lastName;
+
+         // Create slug
+         let slug = slugify(fullname, {
+             replacement: '-',
+             lower: true
+         });
+
+        var myPromise = () => {
+
+            return new Promise(async(resolve, reject) => {
+                
+                await Author.updateOne({_id: author._id},{slug: slug}, function(err, author){
+                    console.log("Updated ONNNN");
+                }).
+                then(t => {
+                    resolve(t);
+                });
+
+            });
+        }
+
+        var r = await myPromise();
+  
+        if(count == 0)
+            db.close();
     });
-
-    db.close();
-
-
-    // Update them all
 
 });

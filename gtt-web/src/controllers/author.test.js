@@ -3,6 +3,16 @@ const app = require('../app');
 
 describe('Author controller requests', () => {
 
+    //http://www.greatthoughtstreasury.com/author/clara-lucas-balfour
+    it('should return Clara Lucas Balfour when using a slug url', async () => {
+        const res = await request(app)
+            .get('/author/clara-lucas-balfour')
+            .expect(200)
+            .expect(function(res){
+                if(!res.text.includes("Clara") throw Error("Clasra Lucas Balfour not returned");                
+            });
+    });
+
     it('should return author listing page', async () => {
       const res = await request(app)
         .get('/authors')

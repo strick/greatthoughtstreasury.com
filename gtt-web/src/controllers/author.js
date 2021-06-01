@@ -24,7 +24,23 @@ module.exports = {
     },
 
     getBySlug: function(req, res, next) {
-        res.send("Hello there");
+
+        db.connect();
+        Author.find({slug: req.params.slug}, function(err, author){
+            if(err){
+
+                console.error(err);
+                db.close();
+                res.status(404).send();
+                return;//return next(err);
+            }
+
+            console.log(author);
+            res.send(author);
+
+            db.close();
+        })
+                
     },
 
     getByNid: function (req, res, next) {

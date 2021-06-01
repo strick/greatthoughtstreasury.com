@@ -21,7 +21,9 @@ Author.find({},function(err, authors){
         count--;
 
          // Create author fullnam
-         let fullname = author.firstName + " " + author.lastName;
+         let firstName = author.firstName == "NULL" ? "" : author.firstName;
+         let lastName = author.lastName == "NULL" ? "" : author.lastName;
+         let fullname = firstName + " " + lastName;
 
          // Create slug
          let slug = slugify(fullname, {
@@ -33,12 +35,7 @@ Author.find({},function(err, authors){
 
             return new Promise(async(resolve, reject) => {
                 
-                await Author.updateOne({_id: author._id},{slug: slug}, function(err, author){
-                    console.log("Updated ONNNN");
-                }).
-                then(t => {
-                    resolve(t);
-                });
+                await Author.updateOne({_id: author._id},{slug: slug});
 
             });
         }

@@ -3,6 +3,38 @@ const mongoose = require('mongoose');
 
 module.exports = {
 
+    // Need to refactor, but used this for two populate objtse
+    paginate2: function(req, res, model, viewObj, viewScript, resultsKey, populateObj, populateObj2, perPage, page, findQuery){
+
+        db.connect();
+
+        var perPage = perPage || 50;
+        var page = req.params.page || page || 1;
+        var findQuery = findQuery || {};
+
+        model.find(findQuery)
+            .skip((perPage * page) - perPage)
+            .limit(perPage)
+            .populate(populateObj)
+            .populate(populateObj2)
+            .exec(function (err, results) {
+
+            if (err)
+                return next(err);            
+
+            model.countDocuments(findQuery).exec((err,count)=>{       
+                
+                db.close();
+
+                viewObj.current = page;
+                viewObj.pages = Math.ceil(count / perPage)
+                viewObj[resultsKey] = results;
+
+                res.render(viewScript, viewObj);
+            });
+        });
+    },
+
     paginate: function(req, res, model, viewObj, viewScript, resultsKey, populateObj, perPage, page, findQuery){
 
         db.connect();

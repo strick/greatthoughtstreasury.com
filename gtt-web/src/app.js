@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var authorsRouter = require('./routes/authors');
+var authorRouter = require('./routes/author');
 var quotesRouter = require('./routes/quotes');
 var topicsRouter = require('./routes/topics');
 var keywordsRouter = require('./routes/keywords');
@@ -29,6 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/author', authorRouter);
 app.use('/authors', authorsRouter);
 app.use('/quotes', quotesRouter);
 app.use('/topics', topicsRouter);

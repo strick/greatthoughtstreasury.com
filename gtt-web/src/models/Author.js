@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
+const slug = require('mongoose-slug-generator');
 const Schema = mongoose.Schema;
+
+mongoose.plugin(slug);
 
 const authorSchema = new Schema({
     firstName: String,
@@ -10,7 +13,8 @@ const authorSchema = new Schema({
     image: String,
     nid: Number,
     popularAuthor: Boolean,
-    quotes: [{type: mongoose.Schema.Types.ObjectId, ref: 'Quote'}]
+    quotes: [{type: mongoose.Schema.Types.ObjectId, ref: 'Quote'}],
+    slug: {type: String, slug: ["firstName", "lastName"]}
 });
 
 /*

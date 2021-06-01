@@ -8,16 +8,15 @@ const cache = function(duration){
         let cachedBody = mcache.get(key);
 
         if(cachedBody){
-            //console.log('CACHED');
             res.send(cachedBody);
             return;
         }
         else {
-            //console.log("NOT CACHEC");
+
             res.sendResponse = res.send;
             res.send = (body) => {
 
-                if(res.statusCode != 500){
+                if(res.status(200)){
                     
                     if(duration)
                         mcache.put(key, body, duration * 1000);

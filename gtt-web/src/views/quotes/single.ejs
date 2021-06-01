@@ -3,7 +3,7 @@
        
         <div class="card-body">
             <img class="card-img-top" width="200px" src="https://gttfilestorage.blob.core.windows.net/public-content/images/<%=quote.authorId.image%>" alt="">
-            <h4 class="card-title"><%= quote.authorId.firstName %> <%= quote.authorId.lastName%></h4>            
+            <p class="card-text"><a href="/author/<%= quote.authorId.slug %>"><h4><%= quote.authorId.firstName + " " + quote.authorId.lastName %></h4></a></p>         
             <p class="card-text"><%= quote.quote %></p>
             <p class="card-text"><% quote.topics.forEach(function(topic) { %><a href="/topics/single/<%=topic._id;%>"><%=topic.topic%></a> | <% });%></p>
         </div>

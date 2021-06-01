@@ -8,14 +8,14 @@
           
           <div class="card-body">
             <h4 class="card-title"><%= author.firstName %> <%= author.lastName %></h4>            
-            <div class="addthis_toolbox" addthis:url="http://greatthoughtstreasury.com/authors/single/<%= author.slug %>" addthis:title="<%= author.firstName %> <%= author.lastName %> Quotes">
+            <div class="addthis_toolbox" addthis:url="http://greatthoughtstreasury.com/author/<%= author.slug %>" addthis:title="<%= author.firstName %> <%= author.lastName %> Quotes">
               <%- include('../partials/addthis.ejs'); %>
             </div>
             <p class="card-text"><%= author.bio %></p>
           </div>
           <div class="card-footer">
 
-            <a href="/authors/single/<%= author._id %>" class="btn btn-primary">View Quotes</a>
+            <a href="/author/<%= author.slug %>" class="btn btn-primary">View Quotes</a>
           </div>
         </div>
       </div> 

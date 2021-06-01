@@ -16,10 +16,14 @@ const cache = function(duration){
             //console.log("NOT CACHEC");
             res.sendResponse = res.send;
             res.send = (body) => {
-                if(duration)
-                    mcache.put(key, body, duration * 1000);
-                else
-                    mcache.put(key, body);
+
+                if(res.statusCode != 500){
+                    
+                    if(duration)
+                        mcache.put(key, body, duration * 1000);
+                    else
+                        mcache.put(key, body);
+                }
                 res.sendResponse(body);
             }
         }

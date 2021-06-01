@@ -9,7 +9,7 @@ describe('Author controller requests', () => {
             .get('/author/clara-lucas-balfour')
             .expect(200)
             .expect(function(res){
-                if(!res.text.includes("Clara") throw Error("Clasra Lucas Balfour not returned");                
+                if(!res.text.includes("Clara")) throw Error("Clasra Lucas Balfour not returned");                
             });
     });
 

@@ -28,7 +28,8 @@ Author.find({},function(err, authors){
          // Create slug
          let slug = slugify(fullname, {
              replacement: '-',
-             lower: true
+             lower: true,
+             strict: true
          });
 
         var myPromise = () => {

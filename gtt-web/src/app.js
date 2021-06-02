@@ -24,10 +24,13 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // Cache Setup
-var redis = require("redis");
-var cacheConnection = redis.createClient(6380, process.env.REDISCACHEHOSTNAME,
-    {auth_pass: process.env.REDISCACHEKEY, tls: {servername: process.env.REDISCACHEKEY}});
-app.set('cache', cacheConnection);
+var cache = require("express-redis-cache")({
+  host: process.env.REDISCACHEHOSTNAME,
+  port: process.env.REDISCACHEPORT,
+  auth_pass: process.env.REDISCACHEKEY
+});
+
+app.set('cache', cache);
 
 
 app.use(logger('dev'));

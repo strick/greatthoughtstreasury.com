@@ -21,6 +21,7 @@
     "mongodb": "^3.6.6",
     "mongoose": "^5.12.7",
     "morgan": "~1.9.1",
+    "redis": "^3.1.2",
     "slugify": "^1.5.3"
   },
   "devDependencies": {

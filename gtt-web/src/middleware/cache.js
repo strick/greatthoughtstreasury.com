@@ -13,9 +13,6 @@ const cache = function(duration){
             return;
         }
         else {
-
-            
-
             res.sendResponse = res.send;
             res.send = (body) => {
 

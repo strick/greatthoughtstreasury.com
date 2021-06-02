@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
 var indexRouter = require('./routes/index');
 var authorsRouter = require('./routes/authors');
 var authorRouter = require('./routes/author');
@@ -21,6 +22,12 @@ app.use(expressLayouts)
 app.set('layout', './layouts/full-width')
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// Cache Setup
+var redis = require("redis");
+var cacheConnection = redis.createClient(6380, process.env.REDISCACHEHOSTNAME,
+    {auth_pass: process.env.REDISCACHEKEY, tls: {servername: process.env.REDISCACHEKEY}});
+app.set('cache', cacheConnection);
 
 
 app.use(logger('dev'));

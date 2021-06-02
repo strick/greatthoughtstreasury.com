@@ -14,7 +14,11 @@ eval "sed -i 's/MONGODB_HOST/$MONGODB_HOST/' ../docker-compose.yaml"
 eval "sed -i 's/MONGODB_USER/$MONGODB_USER/' ../docker-compose.yaml"
 eval "sed -i 's/MONGODB_PASSWORD/$MONGODB_PASSWORD/' ../docker-compose.yaml"
 eval "sed -i 's,MONGODB_TYPE,$MONGODB_TYPE,' ../docker-compose.yaml"  # escapse the / in keys
-#
+
+# Redis
+eval "sed -i 's/REDIS_CACHE_HOSTNAME/$REDISCACHEHOSTNAME/' ../docker-compose.yaml"
+eval "sed -i 's/REDIS_CACHE_PORT/$REDISCACHEPORT/' ../docker-compose.yaml"
+eval "sed -i 's/REDIS_CACHE_KEY/$REDISCACHEKEY/' ../docker-compose.yaml"
 
 cat ../docker-compose.yaml
 echo  

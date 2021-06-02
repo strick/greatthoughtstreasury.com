@@ -31,6 +31,9 @@ services:
       - DBPASS=MONGODB_PASSWORD
       - DBNAME=gtt
       - DBTYPE=MONGODB_TYPE
+      - REDISCACHEHOSTNAME=REDIS_CACHE_HOSTNAME
+      - REDISCACHEPORT=REDIS_CACHE_PORT
+      - REDISCACHEKEY=REDIS_CACHE_KEY
     #depends_on:
     #  - gtt-db
     restart: "no"

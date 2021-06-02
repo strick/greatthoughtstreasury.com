@@ -14,12 +14,12 @@ module.exports = {
             model: 'Topic'
         }
 
-        //paginate.paginate(req, res, Quote, viewObj, 'quotes/index', 'quotes', populateObj);
+        paginate.paginate(req, res, Quote, viewObj, 'quotes/index', 'quotes', populateObj);
 
-        paginate.paginate2(req, res, Quote, viewObj, 'quotes/index', 'quotes',  {
+        /*paginate.paginate2(req, res, Quote, viewObj, 'quotes/index', 'quotes',  {
             path: 'authorId',
             model: 'Author'
-        }, populateObj);
+        }, populateObj);*/
     },
 
     listAllPage: function (req, res, next) {
@@ -33,12 +33,12 @@ module.exports = {
             model: 'Topic'
         }
 
-        //paginate.paginate(req, res, Quote, viewObj, 'quotes/index', 'quotes', populateObj);
+        paginate.paginate(req, res, Quote, viewObj, 'quotes/index', 'quotes', populateObj);
 
-        paginate.paginate2(req, res, Quote, viewObj, 'quotes/index', 'quotes',  {
+       /* paginate.paginate2(req, res, Quote, viewObj, 'quotes/index', 'quotes',  {
             path: 'authorId',
             model: 'Author'
-        }, populateObj);
+        }, populateObj);*/
     },
 
     getByNid: function (req, res, next) {

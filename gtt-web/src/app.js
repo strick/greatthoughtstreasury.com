@@ -23,16 +23,6 @@ app.set('layout', './layouts/full-width')
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// Cache Setup
-var cache = require("express-redis-cache")({
-  host: process.env.REDISCACHEHOSTNAME,
-  port: process.env.REDISCACHEPORT,
-  auth_pass: process.env.REDISCACHEKEY
-});
-
-app.set('cache', cache);
-
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

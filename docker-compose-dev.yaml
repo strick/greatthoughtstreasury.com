@@ -13,6 +13,17 @@ services:
       - "3001:27017"
     restart: always
 
+  gtt-cache:
+    image: redis:latest
+    container_name: gtt-cache
+    volumes:
+      - type: volume
+        source: redis_data_volume
+        target: /data/redis
+    ports:
+      - "3002:6379"
+    restart: always
+
   gtt-web:
     image: "greatthoughtstreasury.azurecr.io/gtt-web:latest"   # MY_VERION is replaced in terraform asp.tf script
     #image: "greatthoughtstreasury.azurecr.io/gtt-web:latest"
@@ -32,11 +43,16 @@ services:
       - DBPASS=$DBPASS
       - DBUSER=$DBUSER
       - DBTYPE=$DBTYPE
+      - REDISCACHEHOSTNAME=$REDISCACHEHOSTNAME
+      - REDISCACHEPORT=$REDISCACHEPORT
       - ENV=dev
     depends_on:
       - gtt-db
+      - gtt-cache
     restart: "no"
 
 volumes:
   mongodb_data_volume:
     external: true
+  redis_data_volume:
+    external: false

@@ -16,7 +16,7 @@
               <%- include('../partials/addthis.ejs'); %>
 
             </div>
-            <p class="card-text"><% quote.topics.forEach(function(topic) { console.log(quote.authorId)%><a href="/topics/single/<%=topic._id;%>"><%=topic.topic%></a> | <% });%></p>
+            <p class="card-text"><% quote.topics.forEach(function(topic) { %><a href="/topics/single/<%=topic._id;%>"><%=topic.topic%></a> | <% });%></p>
           </div>
           <div class="card-footer">
             <a href="/author/<%= quote.authorId.slug %>" class="btn btn-primary">View Author</a>

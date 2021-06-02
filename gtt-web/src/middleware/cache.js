@@ -21,7 +21,7 @@ const cache = function(duration){
 
                 if(res.status(200)){
                     console.log("CACHING");
-                    console.log(res);
+                    //console.log(res);
                     if(duration)
                         mcache.put(key, body, duration * 1000);
                     else

@@ -1,12 +1,49 @@
 //const mcache = require('memory-cache');
 
 // Cache Setup
-var cache = require("express-redis-cache")({
+const client = require("express-redis-cache")({
     host: process.env.REDISCACHEHOSTNAME, 
     port: process.env.REDISCACHEPORT,
     auth_pass: process.env.REDISCACHEKEY
   });
   
+
+const cache = function(){
+
+    return (req, res, next) => {
+
+        let key = '__express__' + req.originalUrl || req.url;               
+
+        // If cache exist, just return that
+        client.get(function(error, entries){
+
+            if (error) next(error);
+
+            if(entries.length > 0){
+                client.route(key);
+                console.log("Cache is here, using it: " + key);
+            }
+            else {
+
+                res.sendResponse = res.send;
+                res.send = (body) => {
+
+                    if(res.statusCode != 500){
+                        console.log("No error");
+                        client.route(key);       
+                    }
+                    else {
+                        console.log("Error");
+                    }
+
+                    res.sendResponse(body);        
+                }
+            }            
+        });
+        
+       next();
+    }
+}
 
 /*
 const cache = function(duration){

@@ -99,7 +99,7 @@ module.exports = {
                 model: 'Topic'
             }
 
-            paginate.paginate2(req, res, Quote, viewObj, 'quotes/related', 'quotes',  {
+            paginate.paginate2(req, res, next, Quote, viewObj, 'quotes/related', 'quotes',  {
                 path: 'authorId',
                 model: 'Author'
             }, populateObj, 20, 1, findQuery);

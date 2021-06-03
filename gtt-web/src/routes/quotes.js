@@ -11,10 +11,10 @@ router.route('/single/:id').get(controller.getByNid);
 router.route('/related/:id').get(controller.related);
 router.route('/related/:id/:page').get(controller.related);
 */
-router.route('/').get(cache.route(), controller.listAllPage);
-router.route('/:page').get(cache.route(), controller.listAll);
-router.route('/single/:id').get(cache.route(), controller.getByNid);
-router.route('/related/:id').get(cache.route(), controller.related);
-router.route('/related/:id/:page').get(cache.route(), controller.related);
+router.route('/').get(cache(), controller.listAllPage);
+router.route('/:page').get(cache(), controller.listAll);
+router.route('/single/:id').get(cache(), controller.getByNid);
+router.route('/related/:id').get(cache(), controller.related);
+router.route('/related/:id/:page').get(cache(), controller.related);
 
 module.exports = router;

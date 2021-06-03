@@ -20,7 +20,7 @@ module.exports = {
             .exec(function (err, results) {
 
             if (err){
-                console.log(err)
+                //console.log(err)
                 //throw Exception(err);
                 next(err);
             }
@@ -39,7 +39,7 @@ module.exports = {
         });
     },
 
-    paginate: function(req, res, model, viewObj, viewScript, resultsKey, populateObj, perPage, page, findQuery){
+    paginate: function(req, res, next, model, viewObj, viewScript, resultsKey, populateObj, perPage, page, findQuery){
 
         db.connect();
 
@@ -54,7 +54,7 @@ module.exports = {
             .exec(function (err, results) {
 
             if (err)
-                throw Error(err);            
+                next(err);            
 
             model.countDocuments(findQuery).exec((err,count)=>{       
                 

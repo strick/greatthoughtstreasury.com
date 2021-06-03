@@ -20,7 +20,7 @@ process.on('uncaughtException', function (err) {
   try {
       console.log(err);
       mongoDal.log(err.message, err);
-      res.status(500).send(err.message);
+      //res.status(500).send(err.message);
       //return res.status(500).send("Something Broke!");
   } catch (err) {
 

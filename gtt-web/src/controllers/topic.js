@@ -11,7 +11,7 @@ module.exports = {
             title: 'Topic Listing'
         }
 
-        paginate.paginate(req, res, Topic, viewObj, 'topics/index', 'topics', null, 2000);
+        paginate.paginate(req, res, next, Topic, viewObj, 'topics/index', 'topics', null, 2000);
     },
 
     listAllPage: function (req, res, next) {
@@ -20,7 +20,7 @@ module.exports = {
             title: 'Topic Listing'
         }
      
-        paginate.paginate(req, res, Topic, viewObj, 'topics/index', 'topics', null, 2000);
+        paginate.paginate(req, res, next, Topic, viewObj, 'topics/index', 'topics', null, 2000);
     },
     
     getById: function (req, res, next) {

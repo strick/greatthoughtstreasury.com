@@ -11,7 +11,7 @@ module.exports = {
             title: 'Author Listing'
         }
 
-        paginate.paginate(req, res, Author, viewObj, 'authors/index', 'authors');
+        paginate.paginate(req, res, next, Author, viewObj, 'authors/index', 'authors');
     },
 
     listAllPage: function (req, res, next) {
@@ -20,7 +20,7 @@ module.exports = {
             title: 'Author Listing'
         }
 
-        paginate.paginate(req, res, Author, viewObj, 'authors/index', 'authors');
+        paginate.paginate(req, res, next, Author, viewObj, 'authors/index', 'authors');
     },
 
     getBySlug: function(req, res, next) {

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 module.exports = {
 
     // Need to refactor, but used this for two populate objtse
-    paginate2: function(req, res, model, viewObj, viewScript, resultsKey, populateObj, populateObj2, perPage, page, findQuery){
+    paginate2: function(req, res, next, model, viewObj, viewScript, resultsKey, populateObj, populateObj2, perPage, page, findQuery){
 
         db.connect();
 
@@ -19,8 +19,12 @@ module.exports = {
             .populate(populateObj2)
             .exec(function (err, results) {
 
-            if (err)
-                throw Error(err);
+            if (err){
+                console.log(err)
+                //throw Exception(err);
+                next(err);
+            }
+                
 
             model.countDocuments(findQuery).exec((err,count)=>{       
                 

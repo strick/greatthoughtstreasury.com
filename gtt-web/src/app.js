@@ -15,7 +15,7 @@ var searchRouter = require('./routes/search');
 
 
 var app = express();
-
+/*
 process.on('uncaughtException', function (err) {
   try {
       console.log(err);
@@ -25,7 +25,7 @@ process.on('uncaughtException', function (err) {
   } catch (err) {
 
   }
-});
+});*/
 
 // view engine setup
 const expressLayouts = require('express-ejs-layouts')

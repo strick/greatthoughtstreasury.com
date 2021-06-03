@@ -15,16 +15,11 @@ module.exports = {
         }
 
         //paginate.paginate(req, res, Quote, viewObj, 'quotes/index', 'quotes', populateObj);
-        try {
-            paginate.paginate2(req, res, Quote, viewObj, 'quotes/index', 'quotes',  {
-                path: 'authorId',
-                model: 'Author'
-            }, populateObj);
-        }
-        catch(err){
-            next(err);
-        }
         
+        paginate.paginate2(req, res, next, Quote, viewObj, 'quotes/index', 'quotes',  {
+            path: 'authorId',
+            model: 'Author'
+        }, populateObj);
     },
 
     listAllPage: function (req, res, next) {
@@ -39,15 +34,12 @@ module.exports = {
         }
 
         //paginate.paginate(req, res, Quote, viewObj, 'quotes/index', 'quotes', populateObj);
-        try {
-            paginate.paginate2(req, res, Quote, viewObj, 'quotes/index', 'quotes',  {
-                path: 'authorId',
-                model: 'Author'
-            }, populateObj);
-        }
-        catch(err){
-            next(err);
-        }
+
+        paginate.paginate2(req, res, next, Quote, viewObj, 'quotes/index', 'quotes',  {
+            path: 'authorId',
+            model: 'Author'
+        }, populateObj);
+     
     },
 
     getByNid: function (req, res, next) {

@@ -1,4 +1,4 @@
-const mcache = require('memory-cache');
+//const mcache = require('memory-cache');
 
 // Cache Setup
 var cache = require("express-redis-cache")({
@@ -6,6 +6,7 @@ var cache = require("express-redis-cache")({
     port: process.env.REDISCACHEPORT,
     auth_pass: process.env.REDISCACHEKEY
   });
+  
 
 /*
 const cache = function(duration){

@@ -1,24 +1,27 @@
 //const mcache = require('memory-cache');
 
 // Cache Setup
+/*
 const client = require("express-redis-cache")({
     host: process.env.REDISCACHEHOSTNAME, 
     port: process.env.REDISCACHEPORT,
     auth_pass: process.env.REDISCACHEKEY
-  });
+  });*/
   
 
 const cache = function(){
 
-    return (req, res, next) => {
+    return async (req, res, next) => {
+        next();
+    }/*
 
         let key = '__express__' + req.originalUrl || req.url;               
 
         // If cache exist, just return that
-        client.get(function(error, entries){
+        await client.get(key, function(error, entries){
 
             if (error) next(error);
-
+            console.log(entries);
             if(entries.length > 0){
                 client.route(key);
                 console.log("Cache is here, using it: " + key);
@@ -29,7 +32,8 @@ const cache = function(){
                 res.send = (body) => {
 
                     if(res.statusCode != 500){
-                        console.log("No error");
+                        console.log("No error");                                 
+                        res.sendResponse(body);    
                         client.route(key);       
                     }
                     else {
@@ -42,7 +46,7 @@ const cache = function(){
         });
         
        next();
-    }
+    }*/
 }
 
 /*

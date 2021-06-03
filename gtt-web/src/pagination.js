@@ -54,7 +54,14 @@ module.exports = {
             .exec(function (err, results) {
 
             if (err)
-                next(err);            
+                next(err);     
+            
+            if(results == null){
+                db.close();
+                //controllerObj.res.status(404).send();
+                controllerObj.res.status(404);
+                return controllerObj.next();
+            }
 
             model.countDocuments(findQuery).exec((err,count)=>{       
                 
@@ -92,16 +99,18 @@ module.exports = {
                // console.log(err);
                 if(err instanceof mongoose.Error.CastError){
                     db.close();
-                    controllerObj.res.status(404).send();
+                    //controllerObj.res.status(404).send();
+                    controllerObj.res.status(404);
+                    return controllerObj.next();
                 }
                 return controllerObj.next(err);
             }
 
-
             // If the result is null, then author doesn't exist
             if(results == null){
                 db.close();
-                controllerObj.res.status(404).send();
+                //controllerObj.res.status(404).send();
+                controllerObj.res.status(404);
                 return controllerObj.next();
             }
                 

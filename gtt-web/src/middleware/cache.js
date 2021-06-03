@@ -1,6 +1,13 @@
 const mcache = require('memory-cache');
 
+// Cache Setup
+var cache = require("express-redis-cache")({
+    host: process.env.REDISCACHEHOSTNAME, 
+    port: process.env.REDISCACHEPORT,
+    auth_pass: process.env.REDISCACHEKEY
+  });
 
+/*
 const cache = function(duration){
 
     return (req, res, next) => {
@@ -17,7 +24,7 @@ const cache = function(duration){
             res.send = (body) => {
 
                 if(res.status(200)){
-                    console.log("CACHING");
+                   console.log("CACHING");
                     //console.log(res);
                     if(duration)
                         mcache.put(key, body, duration * 1000);
@@ -32,5 +39,5 @@ const cache = function(duration){
         next();
     }
 }
-
+*/
 module.exports = cache;

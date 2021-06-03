@@ -4,13 +4,6 @@ var cache = require('../middleware/cache');
 var handleErrors = require('../middleware/errorHandler');
 var router = express.Router();
 
-// Cache Setup
-var cache = require("express-redis-cache")({
-    host: process.env.REDISCACHEHOSTNAME, 
-    port: process.env.REDISCACHEPORT,
-    auth_pass: process.env.REDISCACHEKEY
-  });
-
   /*
 router.route('/').get(controller.listAllPage);
 router.route('/:page').get(controller.listAll);

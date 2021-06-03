@@ -20,7 +20,7 @@ module.exports = {
             .exec(function (err, results) {
 
             if (err)
-                return next(err);            
+                throw Error(err);
 
             model.countDocuments(findQuery).exec((err,count)=>{       
                 
@@ -50,7 +50,7 @@ module.exports = {
             .exec(function (err, results) {
 
             if (err)
-                return next(err);            
+                throw Error(err);            
 
             model.countDocuments(findQuery).exec((err,count)=>{       
                 

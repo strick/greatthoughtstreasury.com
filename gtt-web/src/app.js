@@ -16,6 +16,17 @@ var searchRouter = require('./routes/search');
 
 var app = express();
 
+process.on('uncaughtException', function (err) {
+  try {
+      console.log(err);
+      mongoDal.log(err.message, err);
+      res.status(500).send(err.message);
+      //return res.status(500).send("Something Broke!");
+  } catch (err) {
+
+  }
+});
+
 // view engine setup
 const expressLayouts = require('express-ejs-layouts')
 app.use(expressLayouts)

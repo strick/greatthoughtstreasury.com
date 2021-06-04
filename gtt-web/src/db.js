@@ -33,7 +33,7 @@ module.exports = {
             useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true
         })
         .then(x => {
-            console.log( `Connected to dB: "${x.connections[0].name}"`);
+            console.log( `Connected to dB: "${x.connections[0].host}"`);
             app.emit('ready');
         })
         .catch(err => {

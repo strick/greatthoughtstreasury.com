@@ -6,7 +6,7 @@ module.exports = {
     // Need to refactor, but used this for two populate objtse
     paginate2: function(req, res, next, model, viewObj, viewScript, resultsKey, populateObj, populateObj2, perPage, page, findQuery){
 
-        db.connect();
+        //db.connect();
 
         var perPage = perPage || 50;
         var page = req.params.page || page || 1;
@@ -54,8 +54,8 @@ module.exports = {
 
     paginate: function(req, res, next, model, viewObj, viewScript, resultsKey, populateObj, perPage, page, findQuery){
 
-        db.connect();
-
+        //db.connect();
+        console.log("BOO");
         var perPage = perPage || 50;
         var page = req.params.page || page || 1;
         var findQuery = findQuery || {};
@@ -74,8 +74,8 @@ module.exports = {
             if(results == null){
                 db.close();
                 //controllerObj.res.status(404).send();
-                controllerObj.res.status(404);
-                return controllerObj.next();
+                res.status(404);
+                return next();
             }
 
             model.countDocuments(findQuery).exec((err,count)=>{       
@@ -98,7 +98,7 @@ module.exports = {
 
     paginateSingle: function(controllerObj, findQuery){
        
-        db.connect();
+        //db.connect();
 
         var findQuery = findQuery || {_id: controllerObj.req.params.id};
 
@@ -162,7 +162,7 @@ module.exports = {
 
     paginateSingleNoPopulate: function(controllerObj, findQuery){
        
-        db.connect();
+        //db.connect();
 
         var findQuery = findQuery || {_id: controllerObj.req.params.id};
 

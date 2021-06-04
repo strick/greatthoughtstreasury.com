@@ -6,7 +6,7 @@ module.exports = {
     
     search: function (req, res, next){
         
-        db.connect();
+        //db.connect();
 
         var search = req.body.q;
 

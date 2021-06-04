@@ -24,6 +24,13 @@ module.exports = {
                 //throw Exception(err);
                 next(err);
             }
+
+            if(results == null){
+                db.close();
+                //controllerObj.res.status(404).send();
+                controllerObj.res.status(500);
+                return controllerObj.next();
+            }
                 
 
             model.countDocuments(findQuery).exec((err,count)=>{       
@@ -34,7 +41,9 @@ module.exports = {
                 viewObj.pages = Math.ceil(count / perPage)
                 viewObj[resultsKey] = results;
 
-                res.render(viewScript, viewObj);
+                res.render(viewScript, viewObj, function(err, html){
+                    if(err) next(err);
+                });
             });
         });
     },
@@ -71,7 +80,9 @@ module.exports = {
                 viewObj.pages = Math.ceil(count / perPage)
                 viewObj[resultsKey] = results;
 
-                res.render(viewScript, viewObj);
+                res.render(viewScript, viewOb, function(err, html){
+                    if(err) next(err);
+                });
             });
         });
     },
@@ -126,7 +137,9 @@ module.exports = {
                 controllerObj.viewObj.pages = Math.ceil(count / perPage);
                 controllerObj.viewObj[controllerObj.resultsKey] = results;
     
-                controllerObj.res.render(controllerObj.viewScript, controllerObj.viewObj);
+                controllerObj.res.render(controllerObj.viewScript, controllerObj.viewObj, function(err, html){
+                    if(err) next(err);
+                });
 
                 db.close();
             });
@@ -169,7 +182,9 @@ module.exports = {
                 controllerObj.viewObj.pages = Math.ceil(count / perPage);
                 controllerObj.viewObj[controllerObj.resultsKey] = results;
     
-                controllerObj.res.render(controllerObj.viewScript, controllerObj.viewObj);
+                controllerObj.res.render(controllerObj.viewScript, controllerObj.viewObj, function(err, html){
+                    if(err) next(err);
+                });
 
                 db.close();
             });

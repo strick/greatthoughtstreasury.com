@@ -31,26 +31,20 @@ module.exports = {
         mongoose.set('useCreateIndex', true);
         mongoose.set('useUnifiedTopology', true);
         //mongoose.set('serverSelectionTimeout', 60000000);
+
         mongoose.connect(DB_URL, {
             serverSelectionTimeoutMS: 300000,
             useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true
-        });
+        })
+        .then(x => {
+            console.log( `Connected to dB: "${x.connections[0].name}"`);
+            app.emit('ready');
+        })
+        .catch(err => {
 
-        //Log an error if we fail to connect
-        mongoose.connection.on('error', err => {
-            console.error(err);
-            console.log(
-               'MongoDB connection failed: ' + DB_URL
-            );
+            console.error("Error to db", err);
             process.exit();
         });
-
-        mongoose.connection.on('open', function (ref) {
-            console.log('CONNECTED TO MONGO SERVER.');
-            app.emit('ready');
-        });
-
-        //while(!connectionReady) ;
     },
 
     //close the connection

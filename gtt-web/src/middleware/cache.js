@@ -66,9 +66,9 @@ const cache = function () {
                 client.set(key, body, function(err, reply){
                     
                     if(err) next(err);
-                });
-                res.sendResponse(body);  
+                });                
             }
+            res.sendResponse(body);  
         }   
 
         next();

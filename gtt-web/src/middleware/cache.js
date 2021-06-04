@@ -10,12 +10,12 @@ if(process.env.ENV == 'dev'){
     authObj = {auth_pass: process.env.REDISCACHEKEY};
 
     
-console.log(`Connection to Redis with: ${parseInt(process.env.REDISCACHEPORT)} and ${process.env.REDISCACHEHOSTNAME} and ${process.env.REDISCACHEKEY}`);
+    //console.log(`Connection to Redis with: ${parseInt(process.env.REDISCACHEPORT)} and ${process.env.REDISCACHEHOSTNAME} and ${process.env.REDISCACHEKEY}`);
 }
 else {
     authObj = {auth_pass: process.env.REDISCACHEKEY, tls: {servername: process.env.REDISCACHEHOSTNAME}};
     
-console.log(`Connection to Redis with: ${parseInt(process.env.REDISCACHEPORT)} and ${process.env.REDISCACHEHOSTNAME} and ${process.env.REDISCACHEKEY} and servname: `);
+    //console.log(`Connection to Redis with: ${parseInt(process.env.REDISCACHEPORT)} and ${process.env.REDISCACHEHOSTNAME} and ${process.env.REDISCACHEKEY} and servname: `);
 }
 
 const client = redis.createClient(parseInt(process.env.REDISCACHEPORT), process.env.REDISCACHEHOSTNAME, authObj); 

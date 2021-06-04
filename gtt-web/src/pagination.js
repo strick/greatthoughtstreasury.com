@@ -29,8 +29,8 @@ module.exports = {
             if(results == null){
                 db.close();
                 //controllerObj.res.status(404).send();
-                controllerObj.res.status(500);
-                return controllerObj.next();
+                res.status(500);
+                return next();
             }
                 
 

@@ -23,13 +23,13 @@ module.exports = {
                 //console.log(err)
                 //throw Exception(err);
                 db.close();
-                next(err);
+                return next(err);
             }
 
             if(results == null){
                 db.close();
                 //controllerObj.res.status(404).send();
-                res.status(500);
+                res.status(500).send();
                 return next();
             }
                 

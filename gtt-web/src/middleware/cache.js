@@ -42,7 +42,7 @@ client.on('ready', function() {
 const cache = function () {
     
     return async (req, res, next) => {
-    
+    /*
  
         let key = '__express__' + req.originalUrl || req.url; 
 
@@ -70,7 +70,7 @@ const cache = function () {
                 res.sendResponse(body);  
             }
         }   
-
+*/
         next();
     }
 } 

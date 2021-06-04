@@ -16,7 +16,7 @@ else {
 }
 
 const DB_URL = URL;
-console.log(DB_URL);
+//console.log(DB_URL);
 module.exports = {
     
     connect: () => {
@@ -28,18 +28,20 @@ module.exports = {
         mongoose.set('useUnifiedTopology', true);
         //mongoose.set('serverSelectionTimeout', 60000000);
         mongoose.connect(DB_URL, {
-            serverSelectionTimeoutMS: 600000
+            serverSelectionTimeoutMS: 300000
         });
 
         //Log an error if we fail to connect
         mongoose.connection.on('error', err => {
             console.error(err);
             console.log(
-            'MongoDB connection failed: ' + DB_URL
-        );
+               'MongoDB connection failed: ' + DB_URL
+            );
+            process.exit();
+        });
 
-        process.exit();
-
+        mongoose.connection.on('open', function (ref) {
+            console.log('CONNECTED TO MONGO SERVER.');
         });
     },
 

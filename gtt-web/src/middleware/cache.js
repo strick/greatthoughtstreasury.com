@@ -7,6 +7,22 @@ promisifyAll(redis);
 
 const client = redis.createClient(process.env.REDISCACHEPORT, process.env.REDISCACHEHOSTNAME, 
     {auth_pass: process.env.REDISCACHEKEY});
+/*
+const { promisify } = require("util");
+const getAsync = promisify(client.get).bind(client);
+const setAsync = promisify(client.set).bind(client);
+*/
+
+var redisIsReady = false;
+client.on('error', function(err) {
+    redisIsReady = false;
+    console.log('redis is not running');
+    console.log(err);
+});
+client.on('ready', function() {
+    redisIsReady = true; 
+    console.log('REDIS IS RUNNING');
+});
 
 const cache = function () {
     

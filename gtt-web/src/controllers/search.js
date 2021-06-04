@@ -16,7 +16,7 @@ module.exports = {
         Quote.find({quote: new RegExp(`\\b(${search})\\b`, 'i')}).populate({ path:'topics', model:'Topic'}).exec(function(err, results){
           
             if (err) {                
-                db.close();   
+                //db.close();   
                 return next(err);     
             }
 
@@ -29,7 +29,7 @@ module.exports = {
  
                 
                 if (err) {                
-                    db.close();   
+                    //db.close();   
                     return next(err);     
                 }
 

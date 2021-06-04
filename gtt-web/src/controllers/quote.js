@@ -40,10 +40,11 @@ module.exports = {
             model: 'Author'
         }, populateObj);
      
+
     },
 
     getByNid: function (req, res, next) {
-        db.connect();
+        //db.connect();
         Quote.findOne({_id: req.params.id}).populate( {
             path: 'authorId',
             model: 'Author'
@@ -52,7 +53,7 @@ module.exports = {
             if (err){
                 // console.log(err);
                  if(err instanceof mongoose.Error.CastError){
-                     db.close();
+                     //db.close();
                      res.status(404).send();
                      return;
                  }
@@ -60,7 +61,7 @@ module.exports = {
  
              // If the result is null, then author doesn't exist
              if(quote == null){
-                 db.close();
+                 //db.close();
                  res.status(404).send();                
                  return;
              }
@@ -75,10 +76,10 @@ module.exports = {
 
     related: function(req, res, next) {
 
-        db.connect();
+        //db.connect();
         Quote.findOne({_id: req.params.id}, function (err, quote) {
             if (err){
-                db.close();
+                //db.close();
                 return next(err);
             }
 

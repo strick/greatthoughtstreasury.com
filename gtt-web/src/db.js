@@ -10,17 +10,13 @@ var URL = "";
 
 if(process.env.ENV == "dev"){
     URL = `${process.env.DBTYPE}://${process.env.DBHOST}/${process.env.DBNAME}`;//?retryWrites=true&w=majority`
-    URL = `${process.env.DBTYPE}://${process.env.DBUSER}:${process.env.DBPASS}@${process.env.DBHOST}/${process.env.DBNAME}?retryWrites=true&w=majority`;
-
-
+    //URL = `${process.env.DBTYPE}://${process.env.DBUSER}:${process.env.DBPASS}@${process.env.DBHOST}/${process.env.DBNAME}?retryWrites=true&w=majority`;
 }
 else {
     URL = `${process.env.DBTYPE}://${process.env.DBUSER}:${process.env.DBPASS}@${process.env.DBHOST}/${process.env.DBNAME}?retryWrites=true&w=majority`;
 }
 
 const DB_URL = URL;
-var connectionReady = false;
-//console.log(DB_URL);
 module.exports = {
 
     connect: (app) => {
@@ -32,7 +28,7 @@ module.exports = {
         mongoose.set('useUnifiedTopology', true);
         //mongoose.set('serverSelectionTimeout', 60000000);
 
-        mongoose.connect(DB_URL, {
+        return mongoose.connect(DB_URL, {
             serverSelectionTimeoutMS: 300000,
             useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true
         })

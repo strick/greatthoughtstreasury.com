@@ -27,6 +27,7 @@ var server = http.createServer(app);
  */
 
 db.connect(app);
+
 app.on('ready', function(){
   server.listen(port);
   server.on('error', onError);
@@ -40,7 +41,8 @@ app.on('ready', function(){
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  
+  var port = parseInt(val, 10); 
 
   if (isNaN(port)) {
     // named pipe

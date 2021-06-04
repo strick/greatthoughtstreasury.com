@@ -22,12 +22,12 @@ module.exports = {
             if (err){
                 //console.log(err)
                 //throw Exception(err);
-                db.close();
+                //db.close();
                 return next(err);
             }
 
             if(results == null){
-                db.close();
+                //db.close();
                 //controllerObj.res.status(404).send();
                 res.status(500).send();
                 return next();
@@ -36,7 +36,7 @@ module.exports = {
 
             model.countDocuments(findQuery).exec((err,count)=>{       
                 
-                db.close();
+                //db.close();
 
                 viewObj.current = page;
                 viewObj.pages = Math.ceil(count / perPage)
@@ -44,7 +44,7 @@ module.exports = {
 
                 res.render(viewScript, viewObj, function(err, html){
                     if(err) {
-                        db.close();
+                        //db.close();
                         next(err);
                     }
                 });
@@ -54,33 +54,38 @@ module.exports = {
 
     paginate: function(req, res, next, model, viewObj, viewScript, resultsKey, populateObj, perPage, page, findQuery){
 
-        //db.connect();
-        console.log("BOO");
         var perPage = perPage || 50;
         var page = req.params.page || page || 1;
         var findQuery = findQuery || {};
 
+        //console.log(model);
         model.find(findQuery)
             .skip((perPage * page) - perPage)
             .limit(perPage)
             .populate(populateObj)
             .exec(function (err, results) {
 
+                //console.log("fond");
             if (err){
-                db.close();
+                //db.close();
                 next(err); 
             }    
             
             if(results == null){
-                db.close();
+                //db.close();
                 //controllerObj.res.status(404).send();
                 res.status(404);
                 return next();
             }
 
             model.countDocuments(findQuery).exec((err,count)=>{       
-                
-                db.close();
+                        
+             //   console.log("counting");
+                if (err){
+                    //db.close();
+                    next(err); 
+                } 
+                //db.close();
 
                 viewObj.current = page;
                 viewObj.pages = Math.ceil(count / perPage)
@@ -88,9 +93,10 @@ module.exports = {
 
                 res.render(viewScript, viewObj, function(err, html){
                     if(err) {
-                        db.close();
+                        //db.close();
                         next(err);
                     }
+                    res.send(html);
                 });
             });
         });
@@ -118,7 +124,7 @@ module.exports = {
             if (err){
                // console.log(err);
                 if(err instanceof mongoose.Error.CastError){
-                    db.close();
+                    //db.close();
                     //controllerObj.res.status(404).send();
                     controllerObj.res.status(404);
                     return controllerObj.next();
@@ -128,7 +134,7 @@ module.exports = {
 
             // If the result is null, then author doesn't exist
             if(results == null){
-                db.close();
+                //db.close();
                 //controllerObj.res.status(404).send();
                 controllerObj.res.status(404);
                 return controllerObj.next();
@@ -149,12 +155,12 @@ module.exports = {
                 controllerObj.res.render(controllerObj.viewScript, controllerObj.viewObj, function(err, html){
 
                     if(err) {
-                        db.close();
+                        //db.close();
                         next(err);
                     }
                 });
 
-                db.close();
+                //db.close();
             });
             
         });
@@ -180,7 +186,7 @@ module.exports = {
             populate(controllerObj.populate)
             .exec(function (err, results) {
             if (err){
-                db.close();
+                //db.close();
                 return controllerObj.next(err);
             }
 
@@ -199,12 +205,12 @@ module.exports = {
     
                 controllerObj.res.render(controllerObj.viewScript, controllerObj.viewObj, function(err, html){
                     if(err) {
-                        db.close();
+                        //db.close();
                         next(err);
                     }
                 });
 
-                db.close();
+                //db.close();
             });
             
         });

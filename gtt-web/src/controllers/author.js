@@ -12,6 +12,7 @@ module.exports = {
         }
 
         paginate.paginate(req, res, next, Author, viewObj, 'authors/index', 'authors');
+      //  next();
     },
 
     listAllPage: function (req, res, next) {
@@ -21,6 +22,7 @@ module.exports = {
         }
 
         paginate.paginate(req, res, next, Author, viewObj, 'authors/index', 'authors');
+        //next();
     },
 
     getBySlug: function(req, res, next) {

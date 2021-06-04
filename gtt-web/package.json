@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "azure-storage": "^2.10.3",
+    "bluebird": "^3.5.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",

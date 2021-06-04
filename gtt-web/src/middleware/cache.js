@@ -1,4 +1,5 @@
 //const mcache = require('memory-cache');
+const redis = require('redis');
 
 // Cache Setup
 /*
@@ -7,6 +8,10 @@ const client = require("express-redis-cache")({
     port: process.env.REDISCACHEPORT,
     auth_pass: process.env.REDISCACHEKEY
   });*/
+
+  var cacheConnection = redis.createClient(6380, process.env.REDISCACHEHOSTNAME, 
+    {auth_pass: process.env.REDISCACHEKEY, tls: {servername: process.env.REDISCACHEHOSTNAME}});
+   
   
 
 const cache = function(){

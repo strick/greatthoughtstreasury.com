@@ -22,6 +22,7 @@ module.exports = {
             if (err){
                 //console.log(err)
                 //throw Exception(err);
+                db.close();
                 next(err);
             }
 
@@ -42,7 +43,10 @@ module.exports = {
                 viewObj[resultsKey] = results;
 
                 res.render(viewScript, viewObj, function(err, html){
-                    if(err) next(err);
+                    if(err) {
+                        db.close();
+                        next(err);
+                    }
                 });
             });
         });
@@ -62,8 +66,10 @@ module.exports = {
             .populate(populateObj)
             .exec(function (err, results) {
 
-            if (err)
-                next(err);     
+            if (err){
+                db.close();
+                next(err); 
+            }    
             
             if(results == null){
                 db.close();
@@ -81,7 +87,10 @@ module.exports = {
                 viewObj[resultsKey] = results;
 
                 res.render(viewScript, viewOb, function(err, html){
-                    if(err) next(err);
+                    if(err) {
+                        db.close();
+                        next(err);
+                    }
                 });
             });
         });
@@ -138,7 +147,11 @@ module.exports = {
                 controllerObj.viewObj[controllerObj.resultsKey] = results;
     
                 controllerObj.res.render(controllerObj.viewScript, controllerObj.viewObj, function(err, html){
-                    if(err) next(err);
+
+                    if(err) {
+                        db.close();
+                        next(err);
+                    }
                 });
 
                 db.close();
@@ -166,8 +179,10 @@ module.exports = {
   
             populate(controllerObj.populate)
             .exec(function (err, results) {
-            if (err)
+            if (err){
+                db.close();
                 return controllerObj.next(err);
+            }
 
                 
             let relatedModelObj = {};
@@ -183,7 +198,10 @@ module.exports = {
                 controllerObj.viewObj[controllerObj.resultsKey] = results;
     
                 controllerObj.res.render(controllerObj.viewScript, controllerObj.viewObj, function(err, html){
-                    if(err) next(err);
+                    if(err) {
+                        db.close();
+                        next(err);
+                    }
                 });
 
                 db.close();

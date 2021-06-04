@@ -5,11 +5,20 @@ const { promisifyAll } = require('bluebird');
 promisifyAll(redis);
 
 
+if(process.env.ENV == 'dev'){
 const client = redis.createClient(parseInt(process.env.REDISCACHEPORT), process.env.REDISCACHEHOSTNAME, 
-    {auth_pass: process.env.REDISCACHEKEY});
-
-
+    {auth_pass: process.env.REDISCACHEKEY}); 
+    
 console.log(`Connection to Redis with: ${parseInt(process.env.REDISCACHEPORT)} and ${process.env.REDISCACHEHOSTNAME} and ${process.env.REDISCACHEKEY}`);
+}
+else {
+    const client = redis.createClient(parseInt(process.env.REDISCACHEPORT), process.env.REDISCACHEHOSTNAME, 
+    {auth_pass: process.env.REDISCACHEKEY, tls: {servername: process.env.REDISCACHEHOSTNAME}});
+    
+console.log(`Connection to Redis with: ${parseInt(process.env.REDISCACHEPORT)} and ${process.env.REDISCACHEHOSTNAME} and ${process.env.REDISCACHEKEY} and servname: `);
+}
+
+
 /*
 
 const { promisify } = require("util");

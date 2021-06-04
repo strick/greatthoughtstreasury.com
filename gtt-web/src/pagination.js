@@ -47,6 +47,7 @@ module.exports = {
                         //db.close();
                         next(err);
                     }
+                    res.send(html);
                 });
             });
         });
@@ -156,8 +157,9 @@ module.exports = {
 
                     if(err) {
                         //db.close();
-                        next(err);
+                        controllerObj.next(err);
                     }
+                    controllerObj.res.send(html);
                 });
 
                 //db.close();
@@ -206,8 +208,9 @@ module.exports = {
                 controllerObj.res.render(controllerObj.viewScript, controllerObj.viewObj, function(err, html){
                     if(err) {
                         //db.close();
-                        next(err);
+                        controllerObj.next(err);
                     }
+                    controllerObj.res.send(html);
                 });
 
                 //db.close();

@@ -7,6 +7,9 @@ promisifyAll(redis);
 
 const client = redis.createClient(process.env.REDISCACHEPORT, process.env.REDISCACHEHOSTNAME, 
     {auth_pass: process.env.REDISCACHEKEY});
+
+
+console.log(`Connection to Redis with: ${process.env.REDISCACHEPORT} and ${process.env.REDISCACHEHOSTNAME} and ${process.env.REDISCACHEKEY}`);
 /*
 const { promisify } = require("util");
 const getAsync = promisify(client.get).bind(client);

@@ -86,7 +86,7 @@ module.exports = {
                 viewObj.pages = Math.ceil(count / perPage)
                 viewObj[resultsKey] = results;
 
-                res.render(viewScript, viewOb, function(err, html){
+                res.render(viewScript, viewObj, function(err, html){
                     if(err) {
                         db.close();
                         next(err);

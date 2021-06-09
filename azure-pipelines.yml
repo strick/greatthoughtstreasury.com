@@ -30,6 +30,12 @@ steps:
     Dockerfile: ./gtt-web/Dockerfile-prod
     containerRegistry: 'GTT'
     repository: 'gtt-web'
+    arguments: |
+      --build-arg DBHOST=$(DBHOST) 
+      --build-arg DBUSER=$(DBUSER) 
+      --build-arg DBPASS=$(DBPASS) 
+      --build-arg DBTYPE=$(DBTYPE) 
+      --build-arg DBNAME=$(DBNAME) 
     tags: |
       $(VERSION)
       latest

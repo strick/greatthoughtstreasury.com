@@ -27,7 +27,7 @@ steps:
   displayName: Build and Push
   inputs:
     command: buildAndPush
-    Dockerfile: ./gtt-web/Docker-prod
+    Dockerfile: ./gtt-web/Dockerfile-prod
     tags: |
       greatthoughtstreasury.azurecr.io/gtt-web:${VERSION}
       greatthoughtstreasury.azurecr.io/gtt-web:latest

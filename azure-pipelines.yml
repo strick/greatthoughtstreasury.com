@@ -31,7 +31,7 @@ steps:
     containerRegistry: 'Brian Docker'
     repository: 'greatthoughtstreasury.azurecr.io/gtt-web'
     tags: |
-      ${VERSION}
+      $(VERSION)
       gtt-web:latest
 
 - task: Docker@2

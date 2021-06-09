@@ -58,14 +58,3 @@ steps:
   inputs:
     command: logout
     containerRegistry: 'GTT'
-
-- task: TerraformInstaller@0
-  inputs:
-    terraformVersion: '0.15.1'
-  displayName: 'Install Terraform'
-
-- task: Bash@3
-  displayName: 'Terrafrom Apply'
-  inputs:
-    targetType: filePath
-    filePath: ./scripts/deploy.sh

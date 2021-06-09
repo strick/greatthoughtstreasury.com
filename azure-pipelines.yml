@@ -21,7 +21,7 @@ steps:
   displayName: Login to ACR
   inputs:
     command: login
-    containerRegistry: greatthoughtstreasury.azurecr.io
+    containerRegistry: 'Brian Docker'
 
 - task: Docker@2
   displayName: Build and Push
@@ -29,6 +29,7 @@ steps:
     command: buildAndPush
     Dockerfile: ./gtt-web/Dockerfile-prod
     containerRegistry: 'Brian Docker'
+    repository: 'gtt-web'
     tags: |
       greatthoughtstreasury.azurecr.io/gtt-web:${VERSION}
       greatthoughtstreasury.azurecr.io/gtt-web:latest

@@ -36,6 +36,9 @@ steps:
       --build-arg DBPASS=$(DBPASS) 
       --build-arg DBTYPE=$(DBTYPE) 
       --build-arg DBNAME=$(DBNAME) 
+      --build-arg REDISCACHEPORT=$(REDISCACHEPORT) 
+      --build-arg REDISCACHEHOSTNAME=$(REDISCACHEHOSTNAME) 
+      --build-arg REDISCACHEKEY=$(REDISCACHEKEY) 
     tags: |
       $(VERSION)
       latest

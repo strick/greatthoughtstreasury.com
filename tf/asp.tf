@@ -95,7 +95,8 @@ resource "azurerm_app_service" "asp" {
 
   site_config {
     app_command_line = ""
-    linux_fx_version = "COMPOSE|${filebase64("../docker-compose.yaml")}"
+    //linux_fx_version = "COMPOSE|${filebase64("../docker-compose.yaml")}"
+    linux_fx_version = "DOCKER|greatthoughtstreasury.azurecr.io/gtt-web:latest"
   }
 
   app_settings = {

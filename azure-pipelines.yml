@@ -29,10 +29,10 @@ steps:
     command: buildAndPush
     Dockerfile: ./gtt-web/Dockerfile-prod
     containerRegistry: 'Brian Docker'
-    repository: 'gtt-web'
+    repository: 'greatthoughtstreasury.azurecr.io/gtt-web'
     tags: |
-      greatthoughtstreasury.azurecr.io/gtt-web:${VERSION}
-      greatthoughtstreasury.azurecr.io/gtt-web:latest
+      ${VERSION}
+      gtt-web:latest
 
 - task: Docker@2
   displayName: Logout of ACR

@@ -19,7 +19,7 @@ resource "azurerm_app_service_plan" "asp" {
    size     = "B1"
  }
 }
-
+/*
 resource "null_resource" "docker_build_latest" {
 
     triggers = {
@@ -83,10 +83,10 @@ resource "null_resource" "docker_push_latest" {
         command = "docker push ${local.latest_image_tag}"
     }
 }
-
+*/
 resource "azurerm_app_service" "asp" {
 
-  depends_on = [ null_resource.docker_push ]
+ // depends_on = [ null_resource.docker_push ]
 
   name                = "alansmolowe-apps-appservice"
   location            = "${azurerm_resource_group.greatthoughtstreasury.location}"

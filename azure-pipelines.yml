@@ -21,7 +21,7 @@ steps:
   displayName: Login to ACR
   inputs:
     command: login
-    containerRegistry: 'Brian Docker'
+    containerRegistry: greatthoughtstreasury.azurecr.io
 
 - task: Docker@2
   displayName: Build and Push

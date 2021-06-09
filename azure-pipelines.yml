@@ -28,6 +28,7 @@ steps:
   inputs:
     command: buildAndPush
     Dockerfile: ./gtt-web/Dockerfile-prod
+    containerRegistry: 'Brian Docker'
     tags: |
       greatthoughtstreasury.azurecr.io/gtt-web:${VERSION}
       greatthoughtstreasury.azurecr.io/gtt-web:latest

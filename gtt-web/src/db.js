@@ -13,7 +13,9 @@ if(process.env.ENV == "dev"){
     //URL = `${process.env.DBTYPE}://${process.env.DBUSER}:${process.env.DBPASS}@${process.env.DBHOST}/${process.env.DBNAME}?retryWrites=true&w=majority`;
 }
 else {
+    
     URL = `${process.env.DBTYPE}://${process.env.DBUSER}:${process.env.DBPASS}@${process.env.DBHOST}/${process.env.DBNAME}?retryWrites=true&w=majority`;
+    console.log(URL);
 }
 
 const DB_URL = URL;

@@ -15,7 +15,7 @@ if(process.env.ENV == "dev"){
 else {
     
     URL = `${process.env.DBTYPE}://${process.env.DBUSER}:${process.env.DBPASS}@${process.env.DBHOST}/${process.env.DBNAME}?retryWrites=true&w=majority`;
-    console.log(URL);
+    //console.log(URL);
 }
 
 const DB_URL = URL;

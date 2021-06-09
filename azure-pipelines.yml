@@ -32,7 +32,7 @@ steps:
     repository: 'greatthoughtstreasury.azurecr.io/gtt-web'
     tags: |
       $(VERSION)
-      gtt-web:latest
+      latest
 
 - task: Docker@2
   displayName: Logout of ACR

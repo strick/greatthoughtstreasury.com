@@ -24,9 +24,9 @@ steps:
     containerRegistry: 'GTT'
 
 - task: Docker@2
-  displayName: Build and Push
+  displayName: Build
   inputs:
-    command: buildAndPush
+    command: build
     Dockerfile: ./gtt-web/Dockerfile-prod
     containerRegistry: 'GTT'
     repository: 'gtt-web'
@@ -36,6 +36,16 @@ steps:
       --build-arg DBPASS=$(DBPASS) 
       --build-arg DBTYPE=$(DBTYPE) 
       --build-arg DBNAME=$(DBNAME) 
+    tags: |
+      $(VERSION)
+      latest
+
+- task: Docker@2
+  displayName: Push
+  inputs:
+    command: push
+    containerRegistry: 'GTT'
+    repository: 'gtt-web'
     tags: |
       $(VERSION)
       latest

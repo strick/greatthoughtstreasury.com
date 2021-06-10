@@ -1,1 +1,0 @@
-# Greatthoughtstreasury.com

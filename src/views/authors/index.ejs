@@ -1,0 +1,23 @@
+<div class="col-lg-12"><h1><%=title%></h1></div>
+<%- include('../partials/pagination.ejs', {page: 'authors'}); %>
+<% authors.forEach(function(author){ %>
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+
+          <img class="card-img-top" src="https://gttfilestorage.blob.core.windows.net/public-content/images/<%=author.image%>" alt="">
+          
+          <div class="card-body">
+            <h4 class="card-title"><%= author.firstName %> <%= author.lastName %></h4>            
+            <div class="addthis_toolbox" addthis:url="http://greatthoughtstreasury.com/author/<%= author.slug %>" addthis:title="<%= author.firstName %> <%= author.lastName %> Quotes">
+              <%- include('../partials/addthis.ejs'); %>
+            </div>
+            <p class="card-text"><%= author.bio %></p>
+          </div>
+          <div class="card-footer">
+
+            <a href="/author/<%= author.slug %>" class="btn btn-primary">View Quotes</a>
+          </div>
+        </div>
+      </div> 
+    <% }) %>
+    <%- include('../partials/pagination.ejs', {page: 'authors'}); %>

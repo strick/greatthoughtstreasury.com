@@ -1,0 +1,58 @@
+version: '3'
+services:
+
+  # MOVE THE PROD DATABASE to its own area.   Then create a d-compose dev and prod file
+  gtt-db:
+    image: mongo:4.2.8
+    container_name: gtt-db    
+    volumes:
+      - type: volume
+        source: mongodb_data_volume
+        target: /data/db      
+    ports:
+      - "3001:27017"
+    restart: always
+
+  gtt-cache:
+    image: redis:latest
+    container_name: gtt-cache
+    volumes:
+      - type: volume
+        source: redis_data_volume
+        target: /data/redis
+    ports:
+      - "3002:6379"
+    restart: always
+
+  gtt-web:
+    image: "greatthoughtstreasury.azurecr.io/gtt-web:latest"   # MY_VERION is replaced in terraform asp.tf script
+    #image: "greatthoughtstreasury.azurecr.io/gtt-web:latest"
+    build: 
+      context: ./gtt-web
+      dockerfile: Dockerfile-dev
+    container_name: gtt-web
+    volumes: 
+        - /tmp/gtt-web/npm-cache:/root/.npm:z
+        - ./gtt-web/src:/usr/src/app/src:z
+    ports:
+      - "3000:80"
+    environment:
+      - PORT=80
+      - DBHOST=$DBHOST
+      - DBNAME=$DBNAME
+      - DBPASS=$DBPASS
+      - DBUSER=$DBUSER
+      - DBTYPE=$DBTYPE
+      - REDISCACHEHOSTNAME=$REDISCACHEHOSTNAME
+      - REDISCACHEPORT=$REDISCACHEPORT
+      - ENV=dev
+    depends_on:
+      - gtt-db
+      - gtt-cache
+    restart: "no"
+
+volumes:
+  mongodb_data_volume:
+    external: true
+  redis_data_volume:
+    external: false

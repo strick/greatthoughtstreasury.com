@@ -28,7 +28,7 @@ steps:
   displayName: Build
   inputs:
     command: build
-    Dockerfile: ./gtt-web/Dockerfile-prod
+    Dockerfile: ./Dockerfile-prod
     containerRegistry: 'GTT'
     repository: 'gtt-web'
     arguments: |

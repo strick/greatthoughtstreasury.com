@@ -28,12 +28,12 @@ services:
     image: "greatthoughtstreasury.azurecr.io/gtt-web:latest"   # MY_VERION is replaced in terraform asp.tf script
     #image: "greatthoughtstreasury.azurecr.io/gtt-web:latest"
     build: 
-      context: ./gtt-web
+      context: ../gtt-web
       dockerfile: Dockerfile-dev
     container_name: gtt-web
     volumes: 
         - /tmp/gtt-web/npm-cache:/root/.npm:z
-        - ./gtt-web/src:/usr/src/app/src:z
+        - ../gtt-web/src:/usr/src/app/src:z
     ports:
       - "3000:80"
     environment:

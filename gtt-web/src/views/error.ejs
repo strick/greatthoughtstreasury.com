@@ -1,0 +1,5 @@
+<h1><%= message %></h1>
+<h2><%= error.status %></h2>
+<% if(process.env.ENV === 'dev') { %>
+<pre><%= error.stack %></pre>
+<% } %>

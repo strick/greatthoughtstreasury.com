@@ -1,0 +1,12 @@
+
+<div class="col-lg-12"><h1><%=title%></h1></div>
+<%- include('../partials/pagination.ejs', {page: 'topics'}); %>
+
+<% let count = topics.length; %>
+<% topics.forEach(function(topic){ %>
+
+       <a style="width:inherit !important;" href="/topics/single/<%= topic._id %>"><%= topic.topic %></a>
+
+<% }) %>
+
+    <%- include('../partials/pagination.ejs', {page: 'topics'}); %>

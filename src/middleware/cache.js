@@ -43,6 +43,11 @@ const cache = function () {
     
     return async (req, res, next) => {
     
+        // Don't cache in DEV
+        if(process.env.ENV == 'dev') {
+            next();
+            return;
+        }
  
         let key = '__express__' + req.originalUrl || req.url; 
 

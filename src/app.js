@@ -10,6 +10,7 @@ var authorsRouter = require('./routes/authors');
 var authorRouter = require('./routes/author');
 var quotesRouter = require('./routes/quotes');
 var topicsRouter = require('./routes/topics');
+var topicRouter = require('./routes/topic');
 var keywordsRouter = require('./routes/keywords');
 var searchRouter = require('./routes/search');
 
@@ -44,6 +45,7 @@ app.use('/', indexRouter);
 app.use('/author', authorRouter);
 app.use('/authors', authorsRouter);
 app.use('/quotes', quotesRouter);
+app.use('/topic', topicRouter);
 app.use('/topics', topicsRouter);
 app.use('/keywords', keywordsRouter);
 app.use('/search', searchRouter);

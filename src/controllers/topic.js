@@ -29,6 +29,13 @@ module.exports = {
 
     },
 
+    getBySlug: function(req, res, next) {
+
+        console.log(req.params.slug);
+        _paginate(req,res,next,{slug: req.params.slug.toLowerCase()});
+
+    },
+
     getByIdPage: function (req, res, next) {
         
         _paginate(req, res, next);
@@ -36,7 +43,7 @@ module.exports = {
     }
 }
 
-const _paginate = function(req, res, next) {
+const _paginate = function(req, res, next, findQuery) {
 
     let controllerObj = {
         res: res,
@@ -56,5 +63,5 @@ const _paginate = function(req, res, next) {
         }
     };
 
-    paginate.paginateSingle(controllerObj);
+    paginate.paginateSingle(controllerObj, findQuery);
 }

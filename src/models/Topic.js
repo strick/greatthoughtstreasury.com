@@ -14,7 +14,8 @@ const topicSchema = new Schema({
         required: true,
         ref: 'Quote'
     },
-    quotes: [{type: mongoose.Schema.Types.ObjectId, ref: 'Quote'}]
+    quotes: [{type: mongoose.Schema.Types.ObjectId, ref: 'Quote'}],
+    slug: {type: String, slug: ["topic"]}
 });
 
 module.exports = mongoose.model('Topic', topicSchema, "topics");

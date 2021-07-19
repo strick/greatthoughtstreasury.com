@@ -8,7 +8,7 @@ dotenv.config();
 var URL = "";
 //console.log("ENV is : " + process.env.ENV);
 
-if(process.env.ENV == "dev"){
+if(process.env.ENV === "dev" || process.env.ENV === 'test'){
     URL = `${process.env.DBTYPE}://${process.env.DBHOST}/${process.env.DBNAME}`;//?retryWrites=true&w=majority`
     //URL = `${process.env.DBTYPE}://${process.env.DBUSER}:${process.env.DBPASS}@${process.env.DBHOST}/${process.env.DBNAME}?retryWrites=true&w=majority`;
 }

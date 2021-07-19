@@ -22,8 +22,7 @@ const DB_URL = URL;
 module.exports = {
 
     connect: (app) => {
-
-       // console.log(DB_URL);
+        
         mongoose.set('useNewUrlParser', true);
         mongoose.set('useFindAndModify', false);
         mongoose.set('useCreateIndex', true);
@@ -39,9 +38,8 @@ module.exports = {
             app.emit('ready');
         })
         .catch(err => {
-
             console.error("Error to db", err);
-            process.exit();
+            process.exit(1);
         });
     },
 

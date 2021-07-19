@@ -1,16 +1,23 @@
 const request = require('supertest');
 const app = require('../app');
+const db = require('../db');
+const { deleteOne } = require('../models/Author');
 
 describe('Author controller requests', () => {
 
     //http://www.greatthoughtstreasury.com/author/clara-lucas-balfour
     it('should return author when slug is provided in url', async () => {
+        
+     
         const res = await request(app)
             .get('/author/clara-lucas-balfour')
             .expect(200)
             .expect(function(res){
                 if(!res.text.includes("Clara")) throw Error("Clasra Lucas Balfour not returned");                
             });
+
+
+            
     });
 
     it('should return author listing page', async () => {
@@ -57,8 +64,17 @@ describe('Author controller requests', () => {
     
 });
 
-afterAll(done => {
+beforeAll(() => {
+    return  db.connect(app);
+});
+
+
+afterAll(async done => {
     // Closing the DB connection allows Jest to exit successfully.
     mongoose.connection.close()
+    //done()
+    await new Promise(resolve => setTimeout(() =>  resolve(), 500)); // avoid jest open handle error
     done()
-  })
+
+
+  });

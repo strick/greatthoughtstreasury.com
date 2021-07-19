@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./src/bin/www",
     "start:dev": "nodemon --legacy-watch ./src/bin/www",
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   },
   "dependencies": {
     "azure-storage": "^2.10.3",

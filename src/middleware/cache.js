@@ -38,7 +38,7 @@ const cache = function () {
     return async (req, res, next) => {
     
         // Don't cache in DEV
-        if(process.env.ENV == 'dev') {
+        if(process.env.ENV === 'dev' || process.env.ENV === 'test') {
             next();
             return;
         }

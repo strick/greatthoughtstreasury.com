@@ -1,5 +1,6 @@
 const request = require('supertest');
 const app = require('../app');
+const db = require('../db');
 
 describe('Quote controller requests', () => {
 
@@ -30,8 +31,17 @@ describe('Quote controller requests', () => {
     
 });
 
-afterAll(done => {
-    // Closing the DB connection allows Jest to exit successfully.
-    mongoose.connection.close()
-    done()
-  })
+beforeAll(() => {
+  return  db.connect(app);
+});
+
+
+afterAll(async done => {
+  // Closing the DB connection allows Jest to exit successfully.
+  mongoose.connection.close()
+  //done()
+  await new Promise(resolve => setTimeout(() =>  resolve(), 500)); // avoid jest open handle error
+  done()
+
+
+});

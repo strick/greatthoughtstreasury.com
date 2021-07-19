@@ -5,6 +5,7 @@ process.env.DBNAME="gtt"
 process.env.DBTYPE="mongodb"
 
 process.env.ENV="test"
+process.env.PORT="3015"
 
 process.env.REDISCACHEHOSTNAME="localhost"
 process.env.REDISCACHEPORT="3002"

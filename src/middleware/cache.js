@@ -20,12 +20,6 @@ else {
 
 const client = redis.createClient(parseInt(process.env.REDISCACHEPORT), process.env.REDISCACHEHOSTNAME, authObj); 
 
-/*
-
-const { promisify } = require("util");
-const getAsync = promisify(client.get).bind(client);
-const setAsync = promisify(client.set).bind(client);
-*/
 var redisIsReady = false;
 client.on('error', function(err) {
     redisIsReady = false;

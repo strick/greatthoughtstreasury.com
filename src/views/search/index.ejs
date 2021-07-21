@@ -6,14 +6,14 @@
       <div class="card h-100">       
         <div class="card-body">          
           <p class="card-text"><%= author.fullName %> </p>
-          <div class="addthis_toolbox" addthis:url="http://greatthoughtstreasury.com/authors/single/<%=author._id %>">
+          <div class="addthis_toolbox" addthis:url="http://greatthoughtstreasury.com/author/<%= author.slug %>">
             <%- include('../partials/addthis.ejs'); %>
 
           </div>
         
         </div>
         <div class="card-footer">
-          <a href="/authors/single/<%= author._id %>" class="btn btn-primary">View Author</a>
+          <a href="/author/<%= author.slug %>" class="btn btn-primary">View Author</a>
         </div>
       </div>
     </div> 
@@ -30,7 +30,7 @@
             <p class="card-text"><% quote.topics.forEach(function(topic) { %><a href="/topics/single/<%=topic._id;%>"><%=topic.topic%></a> | <% });%></p>
           </div>
           <div class="card-footer">
-            <a href="/authors/single/<%= quote.authorId %>" class="btn btn-primary">View Author</a>
+            <a href="/author/<%= quote.authorId.slug %>" class="btn btn-primary"><%=quote.authorId.firstName + ' ' + quote.authorId.lastName;%></a>
           </div>
         </div>
       </div> 

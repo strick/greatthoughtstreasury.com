@@ -19,7 +19,14 @@ describe('Topic controller requests', () => {
       await request(app)
       .get('/topics/single/dafsdfsdk3333')
       .expect(404);
-  });
+    });
+
+    it('should return a 200 success on a single topic', async () => {
+
+      await request(app)
+      .get('/topics/cheerfulness')
+      .expect(200)
+    });
 
   /* This is broken */
   /*

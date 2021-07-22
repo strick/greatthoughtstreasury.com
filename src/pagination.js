@@ -53,18 +53,30 @@ module.exports = {
         });
     },
 
-    paginate: function(req, res, next, model, viewObj, viewScript, resultsKey, populateObj, perPage, page, findQuery){
+    // Use to to maniputate the model object if needed (i.e. more populate calls)
+    createModelObject: function(req, model, populateObj, perPage, page, findQuery){
 
         var perPage = perPage || 50;
         var page = req.params.page || page || 1;
         var findQuery = findQuery || {};
 
-        //console.log(model);
-        model.find(findQuery)
-            .skip((perPage * page) - perPage)
-            .limit(perPage)
-            .populate(populateObj)
-            .exec(function (err, results) {
+        return model.find(findQuery)
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .populate(populateObj);
+
+    },
+
+    paginate: function(req, res, next, model, viewObj, viewScript, resultsKey, populateObj, perPage, page, findQuery, modelObject){
+
+        var perPage = perPage || 50;
+        var page = req.params.page || page || 1;
+        var findQuery = findQuery || {};
+
+        var modelObject = modelObject || this.createModelObject(req, model, populateObj, perPage, page, findQuery);
+
+      
+        modelObject.exec(function (err, results) {
 
                 //console.log("fond");
             if (err){

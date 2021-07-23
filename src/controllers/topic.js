@@ -1,5 +1,6 @@
 var Topic = require('../models/Topic');
 var Quote = require('../models/Quote');
+var Author = require('../models/Author');
 var db = require('../db');
 const paginate = require('../pagination');
 
@@ -31,8 +32,19 @@ module.exports = {
 
     getBySlug: function(req, res, next) {
 
-        console.log(req.params.slug);
-        _paginate(req,res,next,{slug: req.params.slug.toLowerCase()});
+        //console.log(req.params.slug);
+       // var modelObject = paginate.createModelObject(req, model, populateObj, perPage, page, findQuery);
+       var controllerObj = getControllerObj(req, res, next);
+       controllerObj.populate = {
+
+            path: 'quotes',
+            populate: {
+                path: 'authors',
+                model: 'Author'
+            },
+            model: 'Quote'
+        };
+        _paginate(req,res,next,{slug: req.params.slug.toLowerCase()}, controllerObj);
 
     },
 
@@ -43,9 +55,18 @@ module.exports = {
     }
 }
 
-const _paginate = function(req, res, next, findQuery) {
+const _paginate = function(req, res, next, findQuery, controllerObj) {
 
-    let controllerObj = {
+    var controllerObj = controllerObj || getControllerObj(req, res, next);
+
+  //  console.log(controllerObj);
+
+    paginate.paginateSingle(controllerObj, findQuery);
+}
+
+const getControllerObj = function(req, res, next) {
+
+    return {
         res: res,
         req: req,
         next: next,
@@ -59,9 +80,8 @@ const _paginate = function(req, res, next, findQuery) {
         viewScript: 'topics/single',
         resultsKey: 'topic',
         viewObj: {
-            title: 'Topic'
+            title: 'Topic',
+            authorModel: Author
         }
-    };
-
-    paginate.paginateSingle(controllerObj, findQuery);
+    }
 }

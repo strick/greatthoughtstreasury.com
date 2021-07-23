@@ -1,5 +1,6 @@
 const db = require('./db');
 const mongoose = require('mongoose');
+const Author = require('./models/Author');
 
 module.exports = {
 
@@ -155,6 +156,38 @@ module.exports = {
                 
             let relatedModelObj = {};
             relatedModelObj[controllerObj.relateModelField] = results._id;
+
+            //console.log(results.quotes);
+            
+if(controllerObj.viewObj.title === 'Topic'){
+            var f = async () => {
+                await results.quotes.forEach(function(quote){
+                          
+                var author = "";
+                Author.find({'_id': quote.authorId}).exec(function (err, data) {
+                    if(err){
+                        next();
+                    }
+
+                    if(data[0] != undefined)
+                    {var firstname = data[0].firstName || '';
+                    var lastname = data[0].lastName || '';
+                    var slug = data[0].slug || '';
+                  //  console.log(firstname + ' ' + lastname);
+                    author = firstname + ' ' + lastname;}
+
+                    results.quotes.map(q => {
+                        if(q._id === quote._id){
+                            q['authorName'] = author;
+                            q['authorSlug'] = slug;
+                        }
+                    });
+                    
+                });
+            })
+        };
+ f();
+    }
  
             // Get the full count of related docuuments to enable paging to walk over all of them
             controllerObj.relateModel.countDocuments(relatedModelObj).
@@ -176,8 +209,9 @@ module.exports = {
 
                 //db.close();
             });
-            
         });
+            
+    
     },
 
     paginateSingleNoPopulate: function(controllerObj, findQuery){

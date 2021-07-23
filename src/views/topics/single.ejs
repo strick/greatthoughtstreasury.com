@@ -8,14 +8,14 @@
 <div class="col-lg-9 col-md-6 mb-4">
     <%- include('../partials/pagination.ejs', {page: 'topics/single/' + topic._id}); %>        
     <div class="row text-center">
+      
     <% topic.quotes.forEach(function(quote){ %>
         <div class="col-lg-12 col-md-12 mb-12">
             <div class="card h-100">    
                 <div class="card-body">
-                    <p class="card-text">"<%=quote.quote%>"</p>     
+                    <p class="card-text">"<%=quote.quote%>" - <a href="/author/<%=quote.authorSlug%>"><%=quote.authorName%></a></p>     
                     <div class="addthis_toolbox" addthis:url="http://greatthoughtstreasury.com/quotes/single/<%= quote._id %>">
                         <%- include('../partials/addthis.ejs'); %>
-          
                       </div>               
                 </div>        
                 <div class="card-footer">

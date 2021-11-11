@@ -13,32 +13,42 @@ module.exports = {
         var all = ['quotes', 'authors'];
         var results = [];
 
-        Quote.find({quote: new RegExp(`\\b(${search})\\b`, 'i')}).populate({ path:'topics', model:'Topic'}).populate({path:'authorId', model:'Author'}).exec(function(err, results){
-          
-            if (err) {                
-                //db.close();   
-                return next(err);     
-            }
+        var perPage = perPage || 50;
+        var page = req.params.page || page || 1;
+        var findQuery = findQuery || {};
+        
 
-            Author.aggregate(
-                [
-                    {$project: {fullName:{$concat: ["$firstName", " ", "$lastName"]}, slug:'$slug'}},
-                    {$match:{fullName: new RegExp(`\\b(${search})\\b`, 'i')}}
-                ],
-                function(err, results2){
- 
+        Quote.find({quote: new RegExp(`\\b(${search})\\b`, 'i')})
+            .skip((perPage * page) - perPage)
+            .limit(perPage)
+            .populate({ path:'topics', model:'Topic'})
+            .populate({path:'authorId', model:'Author'})
+            .exec(function(err, results){
+          
                 if (err) {                
                     //db.close();   
                     return next(err);     
                 }
 
-                res.render('search/index', {
-                    title: 'Search Results: ' + search,
-                    quotes: results,
-                    authors: results2
-                });
-            });
+                Author.aggregate(
+                    [
+                        {$project: {fullName:{$concat: ["$firstName", " ", "$lastName"]}, slug:'$slug'}},
+                        {$match:{fullName: new RegExp(`\\b(${search})\\b`, 'i')}}
+                    ],
+                    function(err, results2){
 
-        });
+                    if (err) {                
+                        //db.close();   
+                        return next(err);     
+                    }
+
+                    res.render('search/index', {
+                        title: 'Search Results: ' + search,
+                        quotes: results,
+                        authors: results2
+                    });
+                });
+
+            });
     }
 }

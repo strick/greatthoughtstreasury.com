@@ -4,6 +4,9 @@
 # https://aka.ms/yaml
 
 # Test a change
+pool:
+  vmImage: 'ubuntu-latest'
+
 trigger:
 - main
 

@@ -19,7 +19,8 @@ module.exports = {
         
 
         //Quote.find({quote: new RegExp(`\\b(${search})\\b`, 'i')})
-        Quote.find({$text: {$search: new RegExp(`\\b(${search})\\b`, 'i')}})
+        //Quote.find({$text: {$search: new RegExp(`\\b(${search})\\b`, 'i')}})
+        Quote.find({$text: {$search: search}})
             .skip((perPage * page) - perPage)
             .limit(perPage)
             .populate({ path:'topics', model:'Topic'})

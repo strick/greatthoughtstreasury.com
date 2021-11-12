@@ -30,7 +30,7 @@
             <p class="card-text"><% quote.topics.forEach(function(topic) { %><a href="/topic/<%=topic.slug;%>"><%=topic.topic%></a> | <% });%></p>
           </div>
           <div class="card-footer">
-            <a href="/author/<%= quote.authorId.slug %>" class="btn btn-primary"><%=quote.authorId.firstName + ' ' + quote.authorId.lastName;%></a>
+            <%- //<a href="/author/ quote.authorId.slug>" class="btn btn-primary">=quote.authorId.firstName + ' ' + quote.authorId.lastName;</a>%>
           </div>
         </div>
       </div> 

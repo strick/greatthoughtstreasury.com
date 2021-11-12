@@ -18,12 +18,12 @@ module.exports = {
         var findQuery = findQuery || {};
         
 
-        Quote.find({quote: new RegExp(`\\b(${search})\\b`, 'i')})
+        //Quote.find({quote: new RegExp(`\\b(${search})\\b`, 'i')})
+        Quote.find({$text: {$search: new RegExp(`\\b(${search})\\b`, 'i')}})
             .skip((perPage * page) - perPage)
             .limit(perPage)
             .populate({ path:'topics', model:'Topic'})
             .populate({path:'authorId', model:'Author'})
-            .sort({ "_id": 1 })
             .exec(function(err, results){
           
                 if (err) {                

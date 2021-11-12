@@ -20,8 +20,8 @@ module.exports = {
 
         //Quote.find({quote: new RegExp(`\\b(${search})\\b`, 'i')})
         Quote.find({$text: {$search: new RegExp(`\\b(${search})\\b`, 'i')}})
-            .skip((perPage * page) - perPage)
-            .limit(perPage)
+        //    .skip((perPage * page) - perPage)
+        //    .limit(perPage)
             .populate({ path:'topics', model:'Topic'})
             .populate({path:'authorId', model:'Author'})
             .exec(function(err, results){

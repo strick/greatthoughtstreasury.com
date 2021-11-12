@@ -23,6 +23,7 @@ module.exports = {
             .limit(perPage)
             .populate({ path:'topics', model:'Topic'})
             .populate({path:'authorId', model:'Author'})
+            .sort({ "_id": 1 })
             .exec(function(err, results){
           
                 if (err) {                

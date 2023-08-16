@@ -25,14 +25,14 @@ steps:
   displayName: Login to ACR
   inputs:
     command: login
-    containerRegistry: 'GTT'
+    containerRegistry: 'GTT New'
 
 - task: Docker@2
   displayName: Build
   inputs:
     command: build
     Dockerfile: ./Dockerfile-prod
-    containerRegistry: 'GTT'
+    containerRegistry: 'GTT New'
     repository: 'gtt-web'
     arguments: |
       --build-arg DBHOST=$(DBHOST) 
@@ -51,7 +51,7 @@ steps:
   displayName: Push
   inputs:
     command: push
-    containerRegistry: 'GTT'
+    containerRegistry: 'GTT New'
     repository: 'gtt-web'
     tags: |
       $(VERSION)
@@ -61,4 +61,4 @@ steps:
   displayName: Logout of ACR
   inputs:
     command: logout
-    containerRegistry: 'GTT'
+    containerRegistry: 'GTT New'
